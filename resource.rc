@@ -1,0 +1,17 @@
+APP_ICON        ICON    "Images/Icons/icon.ico"
+
+OPENED_VALVE    BITMAP  "Images/Site/opened_valve.bmp"
+CLOSED_VALVE    BITMAP  "Images/Site/closed_valve.bmp"
+
+TANK_TOP        BITMAP  "Images/Site/tank_top.bmp"
+TANK_BOTTOM     BITMAP  "Images/Site/tank_bottom.bmp"
+TANK_LEFT       BITMAP  "Images/Site/tank_left.bmp"
+TANK_RIGHT      BITMAP  "Images/Site/tank_right.bmp"
+
+CURVE_90        BITMAP  "Images/Site/curve_90.bmp"
+PIPE_LEFT       BITMAP  "Images/Site/pipe_left.bmp"
+PIPE_RIGHT      BITMAP  "Images/Site/pipe_right.bmp"
+TEE             BITMAP  "Images/Site/tee.bmp"
+
+
+#include "wx/msw/wx.rc"

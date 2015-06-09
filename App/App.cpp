@@ -1,0 +1,72 @@
+#include "Includes.h"
+#include "App.h"
+
+#include "Site.h"
+
+IMPLEMENT_APP(App)
+
+bool App::OnInit()
+{
+    this->SetLocale(this->LoadLang());
+
+    this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
+
+    return true;
+
+    /*
+    SplashScreen *splash = new SplashScreen();
+    splash->LoadImage(wxBITMAP(SPLBMP));
+    splash->SetTime(2000);
+    splash->Show();
+
+    // Tela de login
+    LoginScreen *login = new LoginScreen(_("Login"), this);
+
+    login->SetIcon(wxICON(LOGIN_IC));
+    login->Show(TRUE);
+
+    SetTopWindow(login);
+
+    return true;
+    */
+}
+
+long App::LoadLang()
+{
+    wxConfig config(GetAppName());
+    long language;
+    if(!config.Read(wxT("wxTranslation_Language"), &language, wxLANGUAGE_PORTUGUESE))
+    {
+        language = wxLANGUAGE_PORTUGUESE;
+    }
+    return language;
+}
+
+bool App::SetLocale(long lang)
+{
+    // A  internacionalização só irá funcionar se a pasta ./Languages estiver no
+    // mesmo  diretório  que  o executável. Nos testes, o executável se encontra
+    // em ./Output/MingW
+    this->locale = new wxLocale(lang);
+
+    // Busca pelos arquivos de tradução nos diretórios abaixo.
+    this->locale->AddCatalogLookupPathPrefix(wxT("./Languages"));
+    this->locale->AddCatalogLookupPathPrefix(wxT("../../Languages"));
+
+    this->locale->AddCatalog(wxT("App"));
+
+    return this->locale->IsOk();
+}
+
+bool App::OpenFrame(std::string uid, long lang)
+{
+    this->SetLocale(lang);
+
+    Site *frame = new Site(_("ColorMixer"), this, uid);
+    frame->SetIcon(wxICON(APP_ICON));
+    frame->Show(TRUE);
+
+    SetTopWindow(frame);
+
+    return true;
+}

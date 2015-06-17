@@ -65,6 +65,7 @@ bool App::OpenFrame(std::string uid, long lang)
     Site *frame = new Site(_("ColorMixer"), this, uid);
     frame->SetIcon(wxICON(APP_ICON));
     frame->Show(TRUE);
+    frame->Maximize();
 
     SetTopWindow(frame);
 

@@ -3,11 +3,13 @@
 
 #include "../Controls/Valve.h"
 #include "../Controls/Tank.h"
+#include "../Modulos/Taskbar/Taskbar.h"
 
 class Site : public wxFrame
 {
 private:
     float flow;
+    TaskBar *taskbar;
     /*float vio[5] = {0, 0, 0, 0, 0};
     float v100 = 10;
     float max1 = 100, max2 = 100, max3 = 200;
@@ -49,6 +51,8 @@ public:
 		~Site();
 
 		void OnAdvanceTime(wxCommandEvent& event);
+		void OnExit(wxCloseEvent& event);
+		bool CloseFrame();
 
 		enum {
             ADVANCE

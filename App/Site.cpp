@@ -4,6 +4,7 @@
 
 BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_BUTTON(ADVANCE, Site::OnAdvanceTime)
+    EVT_CLOSE(Site::OnExit)
 END_EVENT_TABLE()
 
 void Site::OnAdvanceTime(wxCommandEvent& event)
@@ -69,6 +70,7 @@ void Site::OnAdvanceTime(wxCommandEvent& event)
 Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& pos, const wxSize& size, long style):
     wxFrame((wxFrame*) NULL, wxID_ANY, title, pos, size, style)
 {
+    taskbar = new TaskBar(this);
     this->flow = 10;
 
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
@@ -137,3 +139,48 @@ Site::~Site()
 {
 }
 
+void Site::OnExit(wxCloseEvent& event)
+{
+    if (this->CloseFrame())
+    {
+        this->taskbar->Destroy();
+        Destroy();
+        event.Skip();
+    }
+}
+
+bool Site::CloseFrame()
+{
+    wxMessageDialog dlg(this, _("Do you really want to close the app?"), _("Confirmation"), wxYES_NO | wxCANCEL);
+
+    dlg.SetYesNoCancelLabels(_("Close"), _("Minimize"), _("Cancel"));
+
+    int answer = dlg.ShowModal();
+
+    if (answer != wxID_CANCEL)
+    {
+        /*
+        MyApp *app = (MyApp*)this->app;
+        app->SetExitOnFrameDelete(bool(answer == wxID_YES));
+        */
+        if (answer == wxID_NO)
+        {
+            // Só esconde o frame para não ter de criá-lo novamente
+            this->Hide();
+            this->taskbar->SetIcon(wxICON(APP_ICON), _("Color Mixer"));
+        }
+        else
+        {
+            /*
+            // Salva ultimo idioma utilizado pelo usuário
+            wxConfig config(app->GetAppName());
+            long language = (app->locale->GetLanguage());
+            config.Write(wxT("wxTranslation_Language"), language);
+            config.Flush();
+            */
+            return true;
+        }
+    }
+
+    return false;
+}

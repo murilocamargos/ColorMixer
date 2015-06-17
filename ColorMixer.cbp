@@ -51,6 +51,8 @@
 		<Unit filename="Controls/Tank.h" />
 		<Unit filename="Controls/Valve.cpp" />
 		<Unit filename="Controls/Valve.h" />
+		<Unit filename="Modulos/TaskBar/TaskBar.cpp" />
+		<Unit filename="Modulos/TaskBar/TaskBar.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

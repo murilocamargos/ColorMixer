@@ -9,8 +9,8 @@ Divisão do Trabalho
 |-------------------------|-------------|----------------------------------|--------|-------------------------|--------|
 | Planta funcional        | Murilo      | Tanques e controles funcionais   | ok     |                         |        |
 | Configurações da planta | Murilo      | Unidades da planta               |        | Salvar/recuperar confs. |        |
-| Sistema de log          |             | Verificação e exportação de logs |        |                         |        |
-| Sistema de usuários     |             | Listagem, edição e exclusão      |        |                         |        |
+| Sistema de log          | Luana       | Verificação e exportação de logs |        |                         |        |
+| Sistema de usuários     | Luana       | Listagem, edição e exclusão      |        |                         |        |
 
 Obs: No item "Configurações da planta" vamos usar validators e wxFileDialog para salvar arquivos de configuração.
 
@@ -19,11 +19,11 @@ Reutilização do TPII
 
 | Funcionalidade      | Responsável | Status | Extras | Status |
 |---------------------|-------------|--------|--------|--------|
-| Splashscreen        |             |        |        |        |
-| Menu                |             |        |        |        |
-| Ícone na janela     |             |        |        |        |
-| Internacionalização |             |        |        |        |
-| Tela de login       |             |        |        |        |
-| Ícone na taskbar    |             |        |        |        |
-| Banco de Dados      |             |        |        |        |
-| Ajuda               |             |        |        |        |
+| Splashscreen        | Luana       |        |        |        |
+| Menu                | Luana       |        |        |        |
+| Ícone na janela     | Murilo      |        |        |        |
+| Internacionalização | Murilo      |        |        |        |
+| Tela de login       | Luana       |        |        |        |
+| Ícone na taskbar    | Luana       |   ok   |        |        |
+| Banco de Dados      | Murilo      |        |        |        |
+| Ajuda               | Mur/Lu      |        |        |        |

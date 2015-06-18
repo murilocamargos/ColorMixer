@@ -17,6 +17,12 @@ public:
     //! o último idioma utilizado na aplicação e abre o formulário de login.
     virtual bool OnInit();
 
+    //! \brief Método chamado sempre que a aplicação é destruída.
+    //! \details Caso o usuário escolha fechar completamente a aplicação,
+    //! este método irá salvar no registro do windows o idioma utilizado pelo
+    //! usuário, para que na próxima vez que ele abrir a aplicação, o idioma se preserve.
+    virtual int OnExit();
+
     //! \brief Carrega o último idioma usado na aplicação.
     //! \return Uma constante inteira que representa o idioma.
     //! \details Esta função faz uso da biblioteca wxConfig para procurar o

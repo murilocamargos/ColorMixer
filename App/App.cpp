@@ -3,6 +3,8 @@
 
 #include "Site.h"
 
+#include "../Modulos/Configs/SiteConfig.h"
+
 IMPLEMENT_APP(App)
 
 bool App::OnInit()
@@ -29,6 +31,17 @@ bool App::OnInit()
 
     return true;
     */
+}
+
+int App::OnExit()
+{
+    // Salva ultimo idioma utilizado pelo usuário
+    /*wxConfig config(GetAppName());
+    long language = (this->locale->GetLanguage());
+    config.Write(wxT("wxTranslation_Language"), language);
+    config.Flush();
+    */
+    return 1;
 }
 
 long App::LoadLang()

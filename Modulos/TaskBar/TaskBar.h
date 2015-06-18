@@ -14,6 +14,7 @@ private:
     wxIcon icone;
     wxWindow *parent;
     wxMenu *menu;
+
 public:
     //! \brief Construtor.
     //! \param parent* Ponteiro para a janela 'pai'.
@@ -38,6 +39,16 @@ public:
     //! \brief Mostra novamente a aplicação na tela.
     //! \param event Evento que ocorre quando se clica num `wxMenu`.
     void Open(wxCommandEvent& event);
+
+    //! \brief Exibe uma confimação para fechar ou não a aplicação.
+    //! \details O usuário possui três opções, pode fechar a aplicação completamente,
+    //! pode cancelar a caixa de diálog aberta e pode minimizar a aplicação para a
+    //! barra de tarefas do windows.
+    //!
+    //! Caso ele queira apenas minimizar a aplicação, o método irá <b>esconder</b> o
+    //! frame principal e criará um ícone da aplicação na barra de tarefas. Ao clicar
+    //! neste ícone, o usuário irá restaurar o frame.
+    void CloseParent();
 
     /// Constantes que ligam os menusda taskbar às suas ações.
     enum

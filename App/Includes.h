@@ -21,5 +21,7 @@
 #include <wx/splash.h>
 #include <wx/taskbar.h>
 
+#include "Config.h"
+
 #endif
 

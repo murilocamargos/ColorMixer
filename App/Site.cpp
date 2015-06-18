@@ -32,38 +32,6 @@ void Site::OnAdvanceTime(wxCommandEvent& event)
         float tinta2 = this->t3->Cont2() * this->vout3->value/100 * this->flow;
         this->t3->SetLevel((-1)*MIN(this->t3->lvl_c1, tinta1), (-1)*MIN(this->t3->lvl_c2, tinta2));
     }
-
-    /*
-
-    float perc = this->vol1/this->max1;
-    wxPoint pos = this->nivel1 + wxPoint(0, (-183) * perc);
-    this->btn_nivel1->SetSize(wxSize(26, 183 * perc));
-    this->btn_nivel1->SetPosition(pos);
-    this->lbl_nivel1->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
-
-    perc = this->vol2/this->max2;
-    pos = this->nivel2 + wxPoint(0, (-183) * perc);
-    this->btn_nivel2->SetSize(wxSize(26, 183 * perc));
-    this->btn_nivel2->SetPosition(pos);
-    this->lbl_nivel2->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
-
-    perc = (this->vol3_1 + this->vol3_2)/this->max3;
-    pos = this->nivel3 + wxPoint(0, (-183) * perc);
-    this->btn_nivel3->SetSize(wxSize(26, 183 * perc));
-    this->btn_nivel3->SetPosition(pos);
-    this->lbl_nivel3->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
-
-    // Mistura
-    int r = (this->vol3_1*this->c1.Red() + this->vol3_2*this->c2.Red())/(this->vol3_1 + this->vol3_2);
-    int g = (this->vol3_1*this->c1.Green() + this->vol3_2*this->c2.Green())/(this->vol3_1 + this->vol3_2);
-    int b = (this->vol3_1*this->c1.Blue() + this->vol3_2*this->c2.Blue())/(this->vol3_1 + this->vol3_2);
-    wxColour c3(r,g,b);
-    this->btn_rgb3->SetLabel(this->GetRGB(c3));
-    this->btn_rgb3->SetBackgroundColour(c3);
-    this->btn_nivel3->SetBackgroundColour(c3);
-
-    Refresh();
-    */
 }
 
 
@@ -141,46 +109,12 @@ Site::~Site()
 
 void Site::OnExit(wxCloseEvent& event)
 {
-    if (this->CloseFrame())
-    {
-        this->taskbar->Destroy();
-        Destroy();
-        event.Skip();
-    }
+    this->taskbar->CloseParent();
 }
 
-bool Site::CloseFrame()
+/*
+void LibraryScreen::OnMenuFileQuit(wxCommandEvent& event)
 {
-    wxMessageDialog dlg(this, _("Do you really want to close the app?"), _("Confirmation"), wxYES_NO | wxCANCEL);
-
-    dlg.SetYesNoCancelLabels(_("Close"), _("Minimize"), _("Cancel"));
-
-    int answer = dlg.ShowModal();
-
-    if (answer != wxID_CANCEL)
-    {
-        /*
-        MyApp *app = (MyApp*)this->app;
-        app->SetExitOnFrameDelete(bool(answer == wxID_YES));
-        */
-        if (answer == wxID_NO)
-        {
-            // Só esconde o frame para não ter de criá-lo novamente
-            this->Hide();
-            this->taskbar->SetIcon(wxICON(APP_ICON), _("Color Mixer"));
-        }
-        else
-        {
-            /*
-            // Salva ultimo idioma utilizado pelo usuário
-            wxConfig config(app->GetAppName());
-            long language = (app->locale->GetLanguage());
-            config.Write(wxT("wxTranslation_Language"), language);
-            config.Flush();
-            */
-            return true;
-        }
-    }
-
-    return false;
+    this->taskbar->CloseParent();
 }
+*/

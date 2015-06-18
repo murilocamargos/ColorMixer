@@ -10,13 +10,6 @@ class Site : public wxFrame
 private:
     float flow;
     TaskBar *taskbar;
-    /*float vio[5] = {0, 0, 0, 0, 0};
-    float v100 = 10;
-    float max1 = 100, max2 = 100, max3 = 200;
-    float vol1 = 0, vol2 = 0, vol3_1 = 0, vol3_2 = 0;
-    wxPoint nivel1, nivel2, nivel3;
-    wxColour c1, c2, c3;
-    */
 
 protected:
     wxStaticBitmap *leftPipe_valvIn1;

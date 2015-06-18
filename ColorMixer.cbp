@@ -44,13 +44,21 @@
 		</Linker>
 		<Unit filename="App/App.cpp" />
 		<Unit filename="App/App.h" />
+		<Unit filename="App/Config.cpp" />
+		<Unit filename="App/Config.h" />
 		<Unit filename="App/Includes.h" />
 		<Unit filename="App/Site.cpp" />
 		<Unit filename="App/Site.h" />
+		<Unit filename="Controls/ColorSelect.cpp" />
+		<Unit filename="Controls/ColorSelect.h" />
+		<Unit filename="Controls/DirSelect.cpp" />
+		<Unit filename="Controls/DirSelect.h" />
 		<Unit filename="Controls/Tank.cpp" />
 		<Unit filename="Controls/Tank.h" />
 		<Unit filename="Controls/Valve.cpp" />
 		<Unit filename="Controls/Valve.h" />
+		<Unit filename="Modulos/Configs/SiteConfig.cpp" />
+		<Unit filename="Modulos/Configs/SiteConfig.h" />
 		<Unit filename="Modulos/TaskBar/TaskBar.cpp" />
 		<Unit filename="Modulos/TaskBar/TaskBar.h" />
 		<Unit filename="resource.rc">

@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="resource.rc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="App\Site.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="210" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="Modulos\TaskBar\TaskBar.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="639" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="App\App.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="App\App.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1622" topLine="57" />
-		</Cursor>
-	</File>
-	<File name="App\Includes.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="480" topLine="0" />
+			<Cursor1 position="1259" topLine="36" />
 		</Cursor>
 	</File>
 	<File name="Controls\Valve.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -36,9 +11,49 @@
 			<Cursor1 position="420" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Controls\Tank.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="resource.rc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="299" topLine="0" />
+			<Cursor1 position="93" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Controls\Tank.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="527" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="Modulos\Configs\SiteConfig.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6725" topLine="147" />
+		</Cursor>
+	</File>
+	<File name="App\Includes.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="480" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="App\Config.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2434" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Controls\Tank.cpp" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4117" topLine="103" />
+		</Cursor>
+	</File>
+	<File name="App\Site.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="975" topLine="43" />
+		</Cursor>
+	</File>
+	<File name="Controls\ColorSelect.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1882" topLine="55" />
+		</Cursor>
+	</File>
+	<File name="Modulos\Configs\SiteConfig.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1333" topLine="38" />
 		</Cursor>
 	</File>
 	<File name="Controls\Valve.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -46,14 +61,24 @@
 			<Cursor1 position="185" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Controls\Tank.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="App\Site.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4125" topLine="17" />
+			<Cursor1 position="7228" topLine="160" />
 		</Cursor>
 	</File>
-	<File name="App\Site.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="App\App.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7341" topLine="162" />
+			<Cursor1 position="1903" topLine="64" />
+		</Cursor>
+	</File>
+	<File name="App\App.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Controls\ColorSelect.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="469" topLine="6" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

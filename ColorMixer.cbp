@@ -59,6 +59,8 @@
 		<Unit filename="Controls/Valve.h" />
 		<Unit filename="Modulos/Configs/SiteConfig.cpp" />
 		<Unit filename="Modulos/Configs/SiteConfig.h" />
+		<Unit filename="Modulos/Menu/MyMenu.cpp" />
+		<Unit filename="Modulos/Menu/MyMenu.h" />
 		<Unit filename="Modulos/TaskBar/TaskBar.cpp" />
 		<Unit filename="Modulos/TaskBar/TaskBar.h" />
 		<Unit filename="resource.rc">

@@ -5,12 +5,13 @@
 #include "../Controls/Tank.h"
 #include "../Modulos/Taskbar/Taskbar.h"
 
+#include "../Modulos/Menu/MyMenu.h"
 class Site : public wxFrame
 {
 private:
     float flow;
     TaskBar *taskbar;
-
+    MyMenu *menu;
 protected:
     wxStaticBitmap *leftPipe_valvIn1;
     wxStaticBitmap *rightPipe_valvIn1;
@@ -47,8 +48,23 @@ public:
 		void OnExit(wxCloseEvent& event);
 		bool CloseFrame();
 
+		///Metódos do Menu
+		void OnMenuFileNew(wxCommandEvent& event);
+        void OnMenuFileSave(wxCommandEvent& event);
+        void OnMenuFileOpen(wxCommandEvent& event);
+        void OnMenuFileQuit(wxCommandEvent& event);
+        void OnMenuHelp(wxCommandEvent& event);
+        void OnMenuHelpAbout(wxCommandEvent & event);
+		//************************
+
 		enum {
-            ADVANCE
+            ADVANCE,
+            MENU_FILE_NEW,
+            MENU_FILE_SAVE,
+            MENU_FILE_OPEN,
+            MENU_FILE_QUIT,
+            MENU_HELP,
+            MENU_HELP_ABOUT
 		};
 
 		DECLARE_EVENT_TABLE()

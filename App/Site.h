@@ -3,15 +3,20 @@
 
 #include "../Controls/Valve.h"
 #include "../Controls/Tank.h"
-#include "../Modulos/Taskbar/Taskbar.h"
 
+#include "../Modulos/Taskbar/Taskbar.h"
 #include "../Modulos/Menu/MyMenu.h"
+
+#include "Config.h"
+
 class Site : public wxFrame
 {
 private:
-    float flow;
     TaskBar *taskbar;
     MyMenu *menu;
+    wxApp *app;
+    Config *cnf;
+
 protected:
     wxStaticBitmap *leftPipe_valvIn1;
     wxStaticBitmap *rightPipe_valvIn1;
@@ -26,13 +31,14 @@ protected:
     wxStaticBitmap *rightPipe_valvOut3;
 
     wxButton* btnAdvance;
+    wxButton* btnInitOpr;
 
 	Valve *vin1, *vout1, *vin2, *vout2, *vout3;
     Tank *t1, *t2;
     TankMix *t3;
 
 public:
-
+    bool operation;
 		Site(
             const wxString& title,
             wxApp* app,
@@ -45,6 +51,9 @@ public:
 		~Site();
 
 		void OnAdvanceTime(wxCommandEvent& event);
+		void OnInitOperation(wxCommandEvent& event);
+
+		void Reload();
 		void OnExit(wxCloseEvent& event);
 		bool CloseFrame();
 
@@ -54,17 +63,20 @@ public:
         void OnMenuFileOpen(wxCommandEvent& event);
         void OnMenuFileQuit(wxCommandEvent& event);
         void OnMenuHelp(wxCommandEvent& event);
-        void OnMenuHelpAbout(wxCommandEvent & event);
+        void OnMenuHelpAbout(wxCommandEvent& event);
+        void OnMenuSettingsPlant(wxCommandEvent& event);
 		//************************
 
 		enum {
             ADVANCE,
+            INITOPR,
             MENU_FILE_NEW,
             MENU_FILE_SAVE,
             MENU_FILE_OPEN,
             MENU_FILE_QUIT,
             MENU_HELP,
-            MENU_HELP_ABOUT
+            MENU_HELP_ABOUT,
+            MENU_SETTINGS_CONFIG
 		};
 
 		DECLARE_EVENT_TABLE()

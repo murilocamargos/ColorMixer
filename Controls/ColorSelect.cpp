@@ -12,13 +12,10 @@ END_EVENT_TABLE()
 ColorSelect::ColorSelect(wxWindow *parent, wxSize defSize, wxColour defColour, long style)
     :wxPanel(parent)
 {
-    this->color = defColour;
-
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-    this->button = new wxButton(this, CHOOSE_COLOR, this->GetRGB(), wxDefaultPosition, defSize, style);
-    this->button->SetBackgroundColour(this->color);
-    this->button->SetForegroundColour(this->GetDiff());
+    this->button = new wxButton(this, CHOOSE_COLOR, wxEmptyString, wxDefaultPosition, defSize, style);
+    this->SetColor(defColour);
 
     sizer->Add(this->button, 0, wxALL, 0);
 
@@ -29,9 +26,18 @@ ColorSelect::ColorSelect(wxWindow *parent, wxSize defSize, wxColour defColour, l
 void ColorSelect::SetColor(wxColour color)
 {
     this->color = color;
-    this->button->SetBackgroundColour(this->color);
-    this->button->SetForegroundColour(this->GetDiff());
-    this->button->SetLabel(this->GetRGB());
+    if (color == wxNullColour)
+    {
+        this->button->SetBackgroundColour(wxColour(255, 255, 255));
+        this->button->SetForegroundColour(wxColour(0, 0, 0));
+        this->button->SetLabel(_("None"));
+    }
+    else
+    {
+        this->button->SetBackgroundColour(this->color);
+        this->button->SetForegroundColour(this->GetDiff());
+        this->button->SetLabel(this->GetRGB());
+    }
 }
 
 wxColour* ColorSelect::GetPtr()

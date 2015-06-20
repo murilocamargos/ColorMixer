@@ -1,11 +1,13 @@
 #ifndef _TANK_H
 #define _TANK_H
 
+#include "ColorSelect.h"
+
 class Tank : public wxPanel
 {
 protected:
     wxPoint levelIniPos;
-    wxButton *btnColor, *btnLevel;
+    wxButton *btnLevel;
     wxStaticText *lblLevel;
 
     wxStaticBitmap *tankTop;
@@ -15,19 +17,13 @@ protected:
 
 public:
     float level, maxLevel;
-    wxColor color;
+    ColorSelect *btnColor;
 
     Tank(wxWindow *parent, wxColour color, float level, float maxLevel);
 
-    enum {
-        CHOOSE_COLOR
-    };
+    void Reset(float maxLevel = 0, wxColour color = wxNullColour);
 
     void SetLevel(float qty);
-    wxString GetRGB();
-    void ChooseColor(wxCommandEvent &event);
-
-    DECLARE_EVENT_TABLE();
 };
 
 
@@ -41,8 +37,7 @@ public:
 
     TankMix(wxWindow *parent, Tank *t1, Tank *t2, float level, float maxLevel);
     void SetLevel(float qty_c1, float qty_c2);
-    float Cont1();
-    float Cont2();
+    float Percent(int ink);
     void MixColors();
 };
 

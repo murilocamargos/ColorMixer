@@ -1,12 +1,14 @@
 #include "../../App/Includes.h"
 
 #include "SiteConfig.h"
+#include "../../App/Site.h"
 
 BEGIN_EVENT_TABLE(SiteConfig, wxDialog)
     EVT_BUTTON(SAVE, SiteConfig::Save)
     EVT_BUTTON(IMPORT, SiteConfig::Import)
     EVT_BUTTON(EXPORT, SiteConfig::Export)
     EVT_CHOICE(CHANGE_UNIT, SiteConfig::ChangeUnit)
+    EVT_CLOSE(SiteConfig::OnExit)
 END_EVENT_TABLE()
 
 wxStaticText* SiteConfig::Title(wxString title, wxString suf)
@@ -17,11 +19,11 @@ wxStaticText* SiteConfig::Title(wxString title, wxString suf)
 	return label;
 }
 
-SiteConfig::SiteConfig(const wxString& title, wxApp* app, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)
+SiteConfig::SiteConfig(const wxString& title, wxWindow* parent, wxString uid, Config *cnf, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)
     : wxDialog((wxFrame*) NULL, id, title, pos, size, style)
 {
-    this->app = app;
-    this->cnf = new Config(app);
+    this->parent = parent;
+    this->cnf = cnf;
 
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
@@ -139,7 +141,10 @@ SiteConfig::SiteConfig(const wxString& title, wxApp* app, wxWindowID id, const w
 
 	sizer1->Add(sizerBtn, 1, wxALIGN_RIGHT, 5);
 
-	this->SetSizer(sizer1);
+    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    sizer->Add(sizer1, 0, wxALL|wxEXPAND, 10);
+
+	this->SetSizer(sizer);
 	this->Layout();
 
 	this->Centre(wxBOTH);
@@ -149,6 +154,17 @@ SiteConfig::SiteConfig(const wxString& title, wxApp* app, wxWindowID id, const w
 
 SiteConfig::~SiteConfig()
 {
+}
+
+void SiteConfig::OnExit(wxCloseEvent& event)
+{
+    Site *prt = ((Site*)this->parent);
+    if (!prt->operation)
+    {
+        prt->Reload();
+    }
+
+    Destroy();
 }
 
 void SiteConfig::ReloadLabels()
@@ -173,12 +189,7 @@ void SiteConfig::LoadInfo()
     this->ReloadLabels();
 }
 
-void SiteConfig::ChangeUnit(wxCommandEvent &event)
-{
-    this->ReloadLabels();
-}
-
-void SiteConfig::Save(wxCommandEvent &event)
+void SiteConfig::PutInfo()
 {
     this->cnf->volumeUnit   = this->units->GetSelection();
     this->cnf->valveMaxFlow = this->flow->GetValue();
@@ -187,11 +198,35 @@ void SiteConfig::Save(wxCommandEvent &event)
     this->cnf->tank3MaxVol  = this->volMaxT3->GetValue();
     this->cnf->tank1Color   = this->colorTank1->GetColor();
     this->cnf->tank2Color   = this->colorTank2->GetColor();
+}
 
-    this->cnf->Save();
+void SiteConfig::ChangeUnit(wxCommandEvent &event)
+{
+    this->ReloadLabels();
+}
 
-    wxMessageDialog dlg(this, _("The configuration was saved!"), _("Success"), wxICON_INFORMATION);
-    dlg.ShowModal();
+void SiteConfig::Save(wxCommandEvent &event)
+{
+    if (((Site*)this->parent)->operation)
+    {
+        wxMessageDialog dlg(this, _("You can not make any changes with the plant operating!"), _("Error"), wxICON_WARNING);
+        dlg.ShowModal();
+    }
+    else
+    {
+        wxMessageDialog dlg(this, _("Do you really want to apply those changes?"), _("Confirmation"), wxYES_NO);
+        dlg.SetYesNoLabels(_("Yes"), _("No"));
+        int answer = dlg.ShowModal();
+
+        if (answer == wxID_YES)
+        {
+            this->PutInfo();
+            this->cnf->Save();
+
+            wxMessageDialog dlg(this, _("The configuration was saved!"), _("Success"), wxICON_INFORMATION);
+            dlg.ShowModal();
+        }
+    }
 }
 
 void SiteConfig::Import(wxCommandEvent &event)
@@ -216,6 +251,7 @@ void SiteConfig::Import(wxCommandEvent &event)
 
 void SiteConfig::Export(wxCommandEvent &event)
 {
+    this->PutInfo();
     wxString path = DirSelect::PathDlg();
 
     if (path == "")

@@ -8,7 +8,12 @@ private:
     wxButton *button;
 
 public:
-    ColorSelect(wxWindow *parent, wxSize defSize = wxSize(-1, -1), wxColour defColour = *wxBLACK, long style = 0 | wxNO_BORDER);
+    ColorSelect(
+        wxWindow *parent,
+        wxSize defSize = wxSize(-1, -1),
+        wxColour defColour = wxNullColour,
+        long style = 0 | wxNO_BORDER
+    );
 
     wxString GetRGB();
     wxColour GetColor();
@@ -17,13 +22,13 @@ public:
 
     void SetColor(wxColour color);
 
+    void ChooseColor(wxCommandEvent &event);
+
     ~ColorSelect(){}
 
     enum {
         CHOOSE_COLOR
     };
-
-    void ChooseColor(wxCommandEvent &event);
 
     DECLARE_EVENT_TABLE();
 };

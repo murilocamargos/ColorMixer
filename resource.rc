@@ -1,4 +1,5 @@
 APP_ICON        ICON    "Images/Icons/icon.ico"
+CONFIG          ICON    "Images/Icons/config.ico"
 
 OPENED_VALVE    BITMAP  "Images/Site/opened_valve.bmp"
 CLOSED_VALVE    BITMAP  "Images/Site/closed_valve.bmp"

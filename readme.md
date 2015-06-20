@@ -8,7 +8,7 @@ Divisão do Trabalho
 | Funcionalidade          | Responsável | Descrição                        | Status | Extras                  | Status |
 |-------------------------|-------------|----------------------------------|--------|-------------------------|--------|
 | Planta funcional        | Murilo      | Tanques e controles funcionais   | ok     |                         |        |
-| Configurações da planta | Murilo      | Unidades da planta               |        | Salvar/recuperar confs. |        |
+| Configurações da planta | Murilo      | Unidades da planta               | ok     | Salvar/recuperar confs. | ok     |
 | Sistema de log          | Luana       | Verificação e exportação de logs |        |                         |        |
 | Sistema de usuários     | Luana       | Listagem, edição e exclusão      |        |                         |        |
 

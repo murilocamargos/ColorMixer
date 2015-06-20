@@ -12,7 +12,7 @@
 class SiteConfig : public wxDialog
 {
 private:
-    wxApp *app;
+    wxWindow *parent;
     Config *cnf;
 
 protected:
@@ -42,7 +42,9 @@ protected:
 public:
     SiteConfig(
         const wxString& title,
-        wxApp* app,
+        wxWindow* parent,
+        wxString uid,
+        Config *cnf,
         wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxSize(450, 520),
@@ -54,12 +56,14 @@ public:
     wxStaticText* Title(wxString title, wxString suf = ":");
 
     void LoadInfo();
+    void PutInfo();
     void ReloadLabels();
 
     void Save(wxCommandEvent& event);
     void Import(wxCommandEvent& event);
     void Export(wxCommandEvent& event);
     void ChangeUnit(wxCommandEvent& event);
+    void OnExit(wxCloseEvent& event);
 
     enum {
         SAVE,

@@ -4,10 +4,6 @@
 #include <wx/colourdata.h>
 #include <wx/colordlg.h>
 
-BEGIN_EVENT_TABLE(Tank, wxPanel)
-    EVT_BUTTON(CHOOSE_COLOR, Tank::ChooseColor)
-END_EVENT_TABLE()
-
 TankMix::TankMix(wxWindow *parent, Tank *t1, Tank *t2, float level, float maxLevel)
     : Tank(parent, wxNullColour, level, maxLevel)
 {
@@ -28,43 +24,48 @@ void TankMix::SetLevel(float qty_c1, float qty_c2)
     this->btnLevel->SetPosition(levelIniPos + wxPoint(0, 183 - this->btnLevel->GetSize().GetHeight()));
     this->lblLevel->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
 
-
     this->MixColors();
-    this->btnColor->SetBackgroundColour(this->color);
-    this->btnLevel->SetBackgroundColour(this->color);
-    this->btnColor->SetLabel(this->GetRGB());
+    this->btnLevel->SetBackgroundColour(this->btnColor->GetColor());
 }
 
 void TankMix::MixColors()
 {
-    int r = this->Cont1() * this->t1->color.Red()   + this->Cont2() * this->t2->color.Red();
-    int g = this->Cont1() * this->t1->color.Green() + this->Cont2() * this->t2->color.Green();
-    int b = this->Cont1() * this->t1->color.Blue()  + this->Cont2() * this->t2->color.Blue();
-    this->color = wxColour(r, g, b);
+    wxColour c1 = this->t1->btnColor->GetColor();
+    wxColour c2 = this->t2->btnColor->GetColor();
+
+    int r = this->Percent(1) * c1.Red()   + this->Percent(2) * c2.Red();
+    int g = this->Percent(1) * c1.Green() + this->Percent(2) * c2.Green();
+    int b = this->Percent(1) * c1.Blue()  + this->Percent(2) * c2.Blue();
+
+    if (this->lvl_c1 + this->lvl_c2 != 0)
+    {
+        this->btnColor->SetColor(wxColour(r, g, b));
+    }
 }
 
-float TankMix::Cont1()
+float TankMix::Percent(int ink)
 {
-    return this->lvl_c1/(this->lvl_c1 + this->lvl_c2);
-}
-
-float TankMix::Cont2()
-{
-    return this->lvl_c2/(this->lvl_c1 + this->lvl_c2);
+    if (ink == 1)
+    {
+        return this->lvl_c1/(this->lvl_c1 + this->lvl_c2);
+    }
+    if (ink == 2)
+    {
+        return this->lvl_c2/(this->lvl_c1 + this->lvl_c2);
+    }
+    return -1;
 }
 
 Tank::Tank(wxWindow *parent, wxColour color, float level, float maxLevel) : wxPanel(parent)
 {
-    this->color = color;
     this->level = level;
     this->maxLevel = maxLevel;
 
-	this->btnColor = new wxButton(this, CHOOSE_COLOR, this->GetRGB(), wxDefaultPosition, wxSize(115, -1), 0 | wxNO_BORDER);
-	this->btnColor->SetBackgroundColour(this->color);
+    this->btnColor = new ColorSelect(this, wxSize(115, -1), color);
 
 	this->btnLevel = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 | wxNO_BORDER);
 	this->btnLevel->SetMinSize(wxSize(26, 0));
-	this->btnLevel->SetBackgroundColour(this->color);
+	this->btnLevel->SetBackgroundColour(color);
 
 	this->lblLevel = new wxStaticText(this, wxID_ANY, _("Nível:") + " 0.00%", wxDefaultPosition, wxSize(105, -1), 5);
 
@@ -102,9 +103,11 @@ Tank::Tank(wxWindow *parent, wxColour color, float level, float maxLevel) : wxPa
     this->levelIniPos = this->btnLevel->GetPosition();
 }
 
-wxString Tank::GetRGB()
+void Tank::Reset(float maxLevel, wxColour color)
 {
-    return wxString::Format("RGB (%i, %i, %i)", this->color.Red(), this->color.Green(), this->color.Blue());
+    this->btnColor->SetColor(color);
+    this->maxLevel = maxLevel;
+    this->SetLevel(-this->level);
 }
 
 void Tank::SetLevel(float qty)
@@ -112,24 +115,9 @@ void Tank::SetLevel(float qty)
     this->level += qty;
     float perc = this->level/this->maxLevel;
 
+    this->btnLevel->SetBackgroundColour(this->btnColor->GetColor());
+
     this->btnLevel->SetSize(wxSize(26, 183 * perc));
     this->btnLevel->SetPosition(levelIniPos + wxPoint(0, 183 - this->btnLevel->GetSize().GetHeight()));
     this->lblLevel->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
-}
-
-void Tank::ChooseColor(wxCommandEvent &event) {
-    wxColourData data;
-    data.SetChooseFull(true);
-    data.SetColour(this->color);
-
-    wxColourDialog dialog(this, &data);
-
-    if (dialog.ShowModal() == wxID_OK)
-    {
-        wxColour c = dialog.GetColourData().GetColour();
-        this->color = c;
-        this->btnColor->SetBackgroundColour(c);
-        this->btnColor->SetLabel(this->GetRGB());
-        this->btnLevel->SetBackgroundColour(c);
-    }
 }

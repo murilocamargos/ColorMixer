@@ -3,8 +3,6 @@
 
 #include "Site.h"
 
-#include "../Modulos/Configs/SiteConfig.h"
-
 IMPLEMENT_APP(App)
 
 bool App::OnInit()

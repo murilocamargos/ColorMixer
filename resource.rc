@@ -14,5 +14,6 @@ PIPE_LEFT       BITMAP  "Images/Site/pipe_left.bmp"
 PIPE_RIGHT      BITMAP  "Images/Site/pipe_right.bmp"
 TEE             BITMAP  "Images/Site/tee.bmp"
 
+SPLBMP          BITMAP  "Images/Icons/splash.bmp"
 
 #include "wx/msw/wx.rc"

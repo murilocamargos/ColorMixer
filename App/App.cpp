@@ -1,6 +1,7 @@
 #include "Includes.h"
 #include "App.h"
-
+#include "../Modulos/SplashScreen/SplashScreen.h"
+#include "../Modulos/Log/LoginScreen.h"
 #include "Site.h"
 
 IMPLEMENT_APP(App)
@@ -9,26 +10,26 @@ bool App::OnInit()
 {
     this->SetLocale(this->LoadLang());
 
-    this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
-
-    return true;
-
     /*
+    ///SplashScreen
     SplashScreen *splash = new SplashScreen();
     splash->LoadImage(wxBITMAP(SPLBMP));
     splash->SetTime(2000);
     splash->Show();
-
-    // Tela de login
+    */
+    /*
+    /// Tela de login
     LoginScreen *login = new LoginScreen(_("Login"), this);
 
     login->SetIcon(wxICON(LOGIN_IC));
     login->Show(TRUE);
 
     SetTopWindow(login);
+    */
+    this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
 
     return true;
-    */
+
 }
 
 int App::OnExit()

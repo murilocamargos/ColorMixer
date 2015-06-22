@@ -19,11 +19,11 @@ Reutilização do TPII
 
 | Funcionalidade      | Responsável | Status | Extras | Status |
 |---------------------|-------------|--------|--------|--------|
-| Splashscreen        | Luana       |        |        |        |
+| Splashscreen        | Luana       |  ok    |        |        |
 | Menu                | Luana       |  ok    |        |        |
 | Ícone na janela     | Murilo      |  ok    |        |        |
 | Internacionalização | Murilo      |        |        |        |
-| Tela de login       | Luana       |        |        |        |
+| Tela de login       | Luana       |  ok    |        |        |
 | Ícone na taskbar    | Luana       |  ok    |        |        |
 | Banco de Dados      | Murilo      |        |        |        |
 | Ajuda               | Mur/Lu      |        |        |        |

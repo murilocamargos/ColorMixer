@@ -14,6 +14,7 @@ class SiteConfig : public wxDialog
 private:
     wxWindow *parent;
     Config *cnf;
+    std::string uid;
 
 protected:
     wxStaticText* lblUnits;
@@ -43,7 +44,7 @@ public:
     SiteConfig(
         const wxString& title,
         wxWindow* parent,
-        wxString uid,
+        std::string uid,
         Config *cnf,
         wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition,
@@ -58,6 +59,7 @@ public:
     void LoadInfo();
     void PutInfo();
     void ReloadLabels();
+    void InsertLog();
 
     void Save(wxCommandEvent& event);
     void Import(wxCommandEvent& event);

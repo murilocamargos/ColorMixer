@@ -2,6 +2,7 @@
 
 #include "SiteConfig.h"
 #include "../../App/Site.h"
+#include "../Log/Log.h"
 
 BEGIN_EVENT_TABLE(SiteConfig, wxDialog)
     EVT_BUTTON(SAVE, SiteConfig::Save)
@@ -19,11 +20,12 @@ wxStaticText* SiteConfig::Title(wxString title, wxString suf)
 	return label;
 }
 
-SiteConfig::SiteConfig(const wxString& title, wxWindow* parent, wxString uid, Config *cnf, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)
+SiteConfig::SiteConfig(const wxString& title, wxWindow* parent, std::string uid, Config *cnf, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)
     : wxDialog((wxFrame*) NULL, id, title, pos, size, style)
 {
     this->parent = parent;
     this->cnf = cnf;
+    this->uid = uid;
 
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
@@ -200,6 +202,63 @@ void SiteConfig::PutInfo()
     this->cnf->tank2Color   = this->colorTank2->GetColor();
 }
 
+void SiteConfig::InsertLog()
+{
+    if (this->cnf->volumeUnit   != this->units->GetSelection())
+    {
+        wxString unitBef = this->units->GetString(this->cnf->volumeUnit),
+                 unitAft = this->units->GetString(this->units->GetSelection());
+        unitBef.Replace("³", "3");
+        unitAft.Replace("³", "3");
+        wxString desc = unitBef + " -> " + unitAft;
+        Log("14", this->uid, std::string(desc.mb_str()));
+    }
+    if (this->cnf->valveMaxFlow != this->flow->GetValue())
+    {
+        // 10l -> 200ml
+        wxString desc = wxString::Format("%i", this->cnf->valveMaxFlow)
+                      + "[u] -> "
+                      + wxString::Format("%i", this->flow->GetValue()) + "[u]";
+        Log("15", this->uid, std::string(desc.mb_str()));
+    }
+    if (this->cnf->tank1MaxVol  != this->volMaxT1->GetValue())
+    {
+        wxString desc = wxString::Format("%i", this->cnf->tank1MaxVol)
+                      + "[u] -> "
+                      + wxString::Format("%i", this->volMaxT1->GetValue()) + "[u]";
+        Log("11", this->uid, std::string(desc.mb_str()));
+    }
+    if (this->cnf->tank2MaxVol  != this->volMaxT2->GetValue())
+    {
+        wxString desc = wxString::Format("%i", this->cnf->tank2MaxVol)
+                      + "[u] -> "
+                      + wxString::Format("%i", this->volMaxT2->GetValue()) + "[u]";
+        Log("12", this->uid, std::string(desc.mb_str()));
+    }
+    if (this->cnf->tank3MaxVol  != this->volMaxT3->GetValue())
+    {
+        wxString desc = wxString::Format("%i", this->cnf->tank3MaxVol)
+                      + "[u] -> "
+                      + wxString::Format("%i", this->volMaxT3->GetValue()) + "[u]";
+        Log("13", this->uid, std::string(desc.mb_str()));
+    }
+    if (this->cnf->tank1Color   != this->colorTank1->GetColor())
+    {
+        wxString desc = this->cnf->tank1Color.GetAsString(wxC2S_CSS_SYNTAX)
+                      + " -> "
+                      + this->colorTank1->GetColor().GetAsString(wxC2S_CSS_SYNTAX);
+        Log("4", this->uid, std::string(desc.mb_str()));
+    }
+    if (this->cnf->tank2Color   != this->colorTank2->GetColor())
+    {
+        wxString desc = this->cnf->tank2Color.GetAsString(wxC2S_CSS_SYNTAX)
+                      + " -> "
+                      + this->colorTank2->GetColor().GetAsString(wxC2S_CSS_SYNTAX);
+        Log("5", this->uid, std::string(desc.mb_str()));
+    }
+
+}
+
 void SiteConfig::ChangeUnit(wxCommandEvent &event)
 {
     this->ReloadLabels();
@@ -220,6 +279,7 @@ void SiteConfig::Save(wxCommandEvent &event)
 
         if (answer == wxID_YES)
         {
+            this->InsertLog();
             this->PutInfo();
             this->cnf->Save();
 

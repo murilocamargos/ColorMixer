@@ -16,6 +16,7 @@ private:
     MyMenu *menu;
     wxApp *app;
     Config *cnf;
+    std::string uid;
 
 protected:
     wxStaticBitmap *leftPipe_valvIn1;
@@ -55,6 +56,7 @@ public:
 
 		void Reload();
 		void OnExit(wxCloseEvent& event);
+		void SaveValves();
 		bool CloseFrame();
 
 		///Metódos do Menu

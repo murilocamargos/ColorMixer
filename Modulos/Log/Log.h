@@ -18,9 +18,10 @@ public:
     //! \brief Construtor da classe.
     //! \param log_id ID da mensagem de log no banco de dados.
     //! \param user_id ID do usuário responsável pelo log.
+    //! \param desc Descrição mais detalhada do log.
     //! \details O construtor da classe já recebe os valores do <b>log_id</b>
     //! e do <b>user_id</b> e salva a ocorrência no banco de dados.
-    Log(std::string log_id, std::string user_id);
+    Log(std::string log_id, std::string user_id, std::string desc = "");
 
     //! \brief Retorna o instante atual em formato UNIX.
     //! \return Uma string contendo o inteiro que representa o instante atual em formato UNIX.

@@ -25,5 +25,5 @@ Reutilização do TPII
 | Internacionalização | Murilo      |        |        |        |
 | Tela de login       | Luana       |  ok    |        |        |
 | Ícone na taskbar    | Luana       |  ok    |        |        |
-| Banco de Dados      | Murilo      |        |        |        |
+| Banco de Dados      | Murilo      |  ok    |        |        |
 | Ajuda               | Mur/Lu      |        |        |        |

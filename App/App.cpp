@@ -1,7 +1,7 @@
 #include "Includes.h"
 #include "App.h"
 #include "../Modulos/SplashScreen/SplashScreen.h"
-#include "../Modulos/Log/LoginScreen.h"
+#include "../Modulos/Login/LoginScreen.h"
 #include "Site.h"
 
 IMPLEMENT_APP(App)

@@ -59,11 +59,20 @@
 		<Unit filename="Controls/Valve.h" />
 		<Unit filename="Modulos/Configs/SiteConfig.cpp" />
 		<Unit filename="Modulos/Configs/SiteConfig.h" />
+		<Unit filename="Modulos/Database/SQLiteHandler.cpp" />
+		<Unit filename="Modulos/Database/SQLiteHandler.h" />
+		<Unit filename="Modulos/Database/SqlHandler.cpp" />
+		<Unit filename="Modulos/Database/SqlHandler.h" />
+		<Unit filename="Modulos/Database/sqlite3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Modulos/Database/sqlite3.h" />
+		<Unit filename="Modulos/Encryption/SHA256.cpp" />
+		<Unit filename="Modulos/Encryption/SHA256.h" />
 		<Unit filename="Modulos/Log/Log.cpp" />
 		<Unit filename="Modulos/Log/Log.h" />
-		<Unit filename="Modulos/Log/LoginScreen.cpp" />
-		<Unit filename="Modulos/Log/LoginScreen.fbp" />
-		<Unit filename="Modulos/Log/LoginScreen.h" />
+		<Unit filename="Modulos/Login/LoginScreen.cpp" />
+		<Unit filename="Modulos/Login/LoginScreen.h" />
 		<Unit filename="Modulos/Menu/MyMenu.cpp" />
 		<Unit filename="Modulos/Menu/MyMenu.h" />
 		<Unit filename="Modulos/SplashScreen/SplashScreen.cpp" />

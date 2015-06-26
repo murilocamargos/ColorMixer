@@ -12,6 +12,11 @@ BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_MENU(MENU_FILE_SAVE, Site::OnMenuFileSave)
     EVT_MENU(MENU_FILE_OPEN, Site::OnMenuFileOpen)
     EVT_MENU(MENU_FILE_QUIT, Site::OnMenuFileQuit)
+    EVT_MENU(MENU_USER_NEW, Site::OnMenuUserNew)
+    EVT_MENU(MENU_USER_EDIT, Site::OnMenuUserEdit)
+    EVT_MENU(MENU_USER_ERASE, Site::OnMenuUserErase)
+    EVT_MENU(MENU_USER_SEARCH, Site::OnMenuUserSearch)
+    EVT_MENU(MENU_LOG_VIEW, Site::OnMenuLogView)
     EVT_MENU(MENU_HELP, Site::OnMenuHelp)
     EVT_MENU(MENU_HELP_ABOUT, Site::OnMenuHelpAbout)
     EVT_MENU(MENU_SETTINGS_CONFIG, Site::OnMenuSettingsPlant)
@@ -75,6 +80,8 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
 	///Menu
     menu = new MyMenu();
     wxString file = _("File"),
+             logs = _("Logs"),
+             user = _("User"),
              help = _("Help"),
              settings = _("Settings");
 
@@ -92,6 +99,16 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     this->menu->AddSubMenu(help, MENU_HELP_ABOUT, _("About\tF2"), _("Get to know us better!"));
 
     this->menu->AddSubMenu(settings, MENU_SETTINGS_CONFIG, _("Plant Config.\tf10"), _("Configure the plant variables."));
+    //if usuario atual for gerente
+    //{
+    this->menu->AddMenu(user);
+    this->menu->AddSubMenu(user, MENU_USER_NEW, _("Add User"), _("Add a new user."));
+    this->menu->AddSubMenu(user, MENU_USER_EDIT, _("Edit User"), _("Edit an user."));
+    this->menu->AddSubMenu(user, MENU_USER_ERASE, _("Delete User"), _("Delete an user."));
+    this->menu->AddSubMenu(user, MENU_USER_SEARCH, _("Search User"), _("Search for user."));
+    //}
+    this->menu->AddMenu(logs);
+    this->menu->AddSubMenu(logs,MENU_LOG_VIEW, _("View Logs"), _("View users logs"));
 
     SetMenuBar(this->menu);
 	//**********
@@ -244,4 +261,26 @@ void Site::OnMenuHelpAbout(wxCommandEvent & event)
 {
     wxMessageDialog dlg(this, _("Developed by Luana Michelly and Murilo Camargos\nComputer Aided Project\nUNIMONTES"), _("About"), wxICON_QUESTION);
     dlg.ShowModal();
+}
+void Site::OnMenuUserNew(wxCommandEvent& event)
+{
+    InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"), this);
+    ins->SetIcon(wxICON(ADDUS_IC));
+    ins->Show(TRUE);
+}
+void Site::OnMenuUserEdit(wxCommandEvent& event)
+{
+
+}
+void Site::OnMenuUserErase(wxCommandEvent& event)
+{
+
+}
+void Site::OnMenuUserSearch(wxCommandEvent& event)
+{
+
+}
+void Site::OnMenuLogView(wxCommandEvent& event)
+{
+
 }

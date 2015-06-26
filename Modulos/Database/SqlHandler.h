@@ -1,6 +1,8 @@
 #ifndef _SQLHandler_H
 #define _SQLHandler_H
 
+#include <string>
+#include <vector>
 //! \class SQLHandler
 //! \brief Gera comandos SQL.
 //! \details Cria strings que representam comandos SQL de inserção,

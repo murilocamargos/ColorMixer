@@ -23,6 +23,7 @@ void TankMix::SetLevel(float qty_c1, float qty_c2)
 
     this->btnLevel->SetSize(wxSize(26, 183 * perc));
     this->btnLevel->SetPosition(levelIniPos + wxPoint(0, 183 - this->btnLevel->GetSize().GetHeight()));
+
     this->lblLevel->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
 
     this->MixColors();
@@ -114,7 +115,7 @@ void Tank::Reset(float maxLevel, wxColour color)
 void Tank::SetLevel(float qty)
 {
     this->level += qty;
-    float perc = this->level/this->maxLevel;
+    float perc = (this->maxLevel == 0) ? 0 : this->level/this->maxLevel;
 
     this->btnLevel->SetBackgroundColour(this->btnColor->GetColor());
 

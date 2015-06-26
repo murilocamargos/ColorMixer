@@ -6,6 +6,7 @@
 
 #include "../Modulos/Taskbar/Taskbar.h"
 #include "../Modulos/Menu/MyMenu.h"
+#include "../Modulos/User/InsertUserScreen.h"
 
 #include "Config.h"
 
@@ -67,6 +68,11 @@ public:
         void OnMenuHelp(wxCommandEvent& event);
         void OnMenuHelpAbout(wxCommandEvent& event);
         void OnMenuSettingsPlant(wxCommandEvent& event);
+        void OnMenuUserNew(wxCommandEvent& event);
+        void OnMenuUserEdit(wxCommandEvent& event);
+        void OnMenuUserErase(wxCommandEvent& event);
+        void OnMenuUserSearch(wxCommandEvent& event);
+        void OnMenuLogView(wxCommandEvent& event);
 		//************************
 
 		enum {
@@ -76,6 +82,11 @@ public:
             MENU_FILE_SAVE,
             MENU_FILE_OPEN,
             MENU_FILE_QUIT,
+            MENU_USER_NEW,
+            MENU_USER_EDIT,
+            MENU_USER_ERASE,
+            MENU_USER_SEARCH,
+            MENU_LOG_VIEW,
             MENU_HELP,
             MENU_HELP_ABOUT,
             MENU_SETTINGS_CONFIG

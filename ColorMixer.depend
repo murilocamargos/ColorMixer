@@ -2012,7 +2012,7 @@
 	"../Modulos/Menu/MyMenu.h"
 	"../Modulos/User/InsertUserScreen.h"
 
-1435415220 source:c:\faculdade\pac\colormixer\app\site.cpp
+1435417223 source:c:\faculdade\pac\colormixer\app\site.cpp
 	"Includes.h"
 	"Site.h"
 	"../Modulos/Configs/SiteConfig.h"
@@ -3286,7 +3286,7 @@
 
 1435415761 c:\faculdade\pac\colormixer\app\config.h
 
-1435415506 source:c:\faculdade\pac\colormixer\app\config.cpp
+1435417219 source:c:\faculdade\pac\colormixer\app\config.cpp
 	"Includes.h"
 	"Config.h"
 	<wx/file.h>

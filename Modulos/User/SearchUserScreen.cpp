@@ -20,14 +20,14 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent, wxWindowID id, bool btn_e,
 	bSizer10 = new wxBoxSizer( wxHORIZONTAL );
 
 	bSizer10->SetMinSize( wxSize( 500,50 ) );
-	staticname = new wxStaticText( this, wxID_ANY, wxT("Username:"), wxDefaultPosition, wxDefaultSize, 0 );
+	staticname = new wxStaticText( this, wxID_ANY, _("Username:"), wxDefaultPosition, wxDefaultSize, 0 );
 	staticname->Wrap( -1 );
 	bSizer10->Add( staticname, 0, wxALL, 9 );
 
 	username = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 400,-1 ), 0 );
 	bSizer10->Add( username, 0, wxALL, 5 );
 
-	searchbtn = new wxButton( this, SEARCH, wxT("Search"), wxDefaultPosition, wxDefaultSize, 0 );
+	searchbtn = new wxButton( this, SEARCH, _("Search"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer10->Add( searchbtn, 0, wxALL, 5 );
 
 
@@ -54,15 +54,15 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent, wxWindowID id, bool btn_e,
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	edit = new wxButton( this, EDIT, wxT("Edit"), wxDefaultPosition, wxDefaultSize, 0 );
+	edit = new wxButton( this, EDIT, _("Edit"), wxDefaultPosition, wxDefaultSize, 0 );
 	edit->Enable(btn_e);
 	bSizer13->Add( edit, 0, wxALL, 5 );
 
-	del = new wxButton( this, DEL, wxT("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
+	del = new wxButton( this, DEL, _("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
 	del->Enable(btn_d);
 	bSizer13->Add( del, 0, wxALL, 5 );
 
-	cancel = new wxButton( this, CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	cancel = new wxButton( this, CANCEL, _("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer13->Add( cancel, 0, wxALL, 5 );
 
 

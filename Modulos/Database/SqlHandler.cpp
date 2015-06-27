@@ -9,8 +9,17 @@ SQLHandler::SQLHandler()
 
 SQLHandler* SQLHandler::Table(std::string tableName)
 {
+    this->Clear();
     this->_table = tableName;
     return this;
+}
+
+void SQLHandler::Clear()
+{
+    this->_table.clear();
+    this->_where.clear();
+    this->_column.clear();
+    this->_vars.clear();
 }
 
 SQLHandler* SQLHandler::Set(std::string column, std::string value)

@@ -79,6 +79,10 @@
 		<Unit filename="Modulos/SplashScreen/SplashScreen.h" />
 		<Unit filename="Modulos/TaskBar/TaskBar.cpp" />
 		<Unit filename="Modulos/TaskBar/TaskBar.h" />
+		<Unit filename="Modulos/User/InsertUserScreen.cpp" />
+		<Unit filename="Modulos/User/InsertUserScreen.h" />
+		<Unit filename="Modulos/User/SearchUserScreen.cpp" />
+		<Unit filename="Modulos/User/SearchUserScreen.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

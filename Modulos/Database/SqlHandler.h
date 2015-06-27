@@ -113,6 +113,9 @@ public:
     //! \return Uma string que representa o comando SQL de contagem.
     std::string Count();
 
+    //! \brief Limpa todos os atributos dessa classe
+    void Clear();
+
     //! \example SQLHandlerSet.cpp
     //! \example SQLHandlerWhere.cpp
     //! \example SQLHandlerColumn.cpp

@@ -21,6 +21,8 @@
 #include <wx/splash.h>
 #include <wx/taskbar.h>
 
+#include "../Modulos/Database/SQLiteHandler.h"
+#include "../Modulos/Database/SqlHandler.h"
 #include "Config.h"
 
 #endif

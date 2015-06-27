@@ -4,7 +4,7 @@
 
 SQLiteHandler::SQLiteHandler()
 {
-    this->isOpen = OpenDB("Databases/db_dev");
+    this->isOpen = OpenDB("Databases/db_dev.db3");
 }
 
 bool SQLiteHandler::OpenDB(std::string dbFile)

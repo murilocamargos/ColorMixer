@@ -8,8 +8,6 @@
 #include "../Modulos/Menu/MyMenu.h"
 #include "../Modulos/User/InsertUserScreen.h"
 
-#include "Config.h"
-
 class Site : public wxFrame
 {
 private:

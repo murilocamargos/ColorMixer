@@ -129,19 +129,11 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     leftPipe_valvOut3  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
     rightPipe_valvOut3 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
 
-    int vi1, vo1, vi2, vo2, vo3;
-    wxConfig config(this->app->GetAppName());
-    config.Read("vin1" , &vi1, 0);
-    config.Read("vout1", &vo1, 0);
-    config.Read("vin2" , &vi2, 0);
-    config.Read("vout2", &vo2, 0);
-    config.Read("vout3", &vo3, 0);
-
-    this->vin1  = new Valve(this, vi1, this->uid, "6");
-    this->vout1 = new Valve(this, vo1, this->uid, "8");
-    this->vin2  = new Valve(this, vi2, this->uid, "7");
-    this->vout2 = new Valve(this, vo2, this->uid, "9");
-    this->vout3 = new Valve(this, vo3, this->uid, "10");
+    this->vin1  = new Valve(this, this->cnf->vin1 , this->uid, "6");
+    this->vout1 = new Valve(this, this->cnf->vout1, this->uid, "8");
+    this->vin2  = new Valve(this, this->cnf->vin2 , this->uid, "7");
+    this->vout2 = new Valve(this, this->cnf->vout2, this->uid, "9");
+    this->vout3 = new Valve(this, this->cnf->vout3, this->uid, "10");
 
     this->t1 = new Tank(this, this->cnf->tank1Color, 0, this->cnf->tank1MaxVol);
     this->t2 = new Tank(this, this->cnf->tank2Color, 0, this->cnf->tank2MaxVol);
@@ -209,27 +201,14 @@ void Site::OnMenuSettingsPlant(wxCommandEvent& event)
 
 void Site::OnExit(wxCloseEvent& event)
 {
-    this->SaveValves();
+    this->cnf->SaveValves(this->vin1->value, this->vout1->value, this->vin2->value, this->vout2->value, this->vout3->value);
     this->taskbar->CloseParent();
 }
 
 void Site::OnMenuFileQuit(wxCommandEvent& event)
 {
-    this->SaveValves();
+    this->cnf->SaveValves(this->vin1->value, this->vout1->value, this->vin2->value, this->vout2->value, this->vout3->value);
     this->taskbar->CloseParent();
-}
-
-void Site::SaveValves()
-{
-    wxConfig config(this->app->GetAppName());
-
-    config.Write("vin1" , this->vin1->value);
-    config.Write("vout1", this->vout1->value);
-    config.Write("vin2" , this->vin2->value);
-    config.Write("vout2", this->vout2->value);
-    config.Write("vout3", this->vout3->value);
-
-    config.Flush();
 }
 
 void Site::OnMenuFileNew(wxCommandEvent& event)

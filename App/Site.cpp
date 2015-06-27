@@ -3,6 +3,7 @@
 #include "Site.h"
 
 #include "../Modulos/Configs/SiteConfig.h"
+#include "../Modulos/User/SearchUserScreen.h"
 
 BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_BUTTON(ADVANCE, Site::OnAdvanceTime)
@@ -264,23 +265,29 @@ void Site::OnMenuHelpAbout(wxCommandEvent & event)
 }
 void Site::OnMenuUserNew(wxCommandEvent& event)
 {
-    InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"), this);
+    InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"), wxEmptyString, wxEmptyString, this);
     ins->SetIcon(wxICON(ADDUS_IC));
     ins->Show(TRUE);
 }
 void Site::OnMenuUserEdit(wxCommandEvent& event)
 {
-
+    this->SearchUser(true,false);
 }
 void Site::OnMenuUserErase(wxCommandEvent& event)
 {
-
+    SearchUser(false,true);
 }
 void Site::OnMenuUserSearch(wxCommandEvent& event)
 {
-
+    SearchUser();
 }
 void Site::OnMenuLogView(wxCommandEvent& event)
 {
 
+}
+void Site::SearchUser(bool btn_e,bool btn_d)
+{
+    SearchUserScreen *sea = new SearchUserScreen(this, wxID_ANY, btn_e, btn_d, _("Search User"));
+    sea->SetIcon(wxICON(ADDUS_IC));
+    sea->Show(TRUE);
 }

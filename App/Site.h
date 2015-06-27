@@ -73,6 +73,7 @@ public:
         void OnMenuUserErase(wxCommandEvent& event);
         void OnMenuUserSearch(wxCommandEvent& event);
         void OnMenuLogView(wxCommandEvent& event);
+        void SearchUser(bool btn_e = true, bool btn_d = true);
 		//************************
 
 		enum {

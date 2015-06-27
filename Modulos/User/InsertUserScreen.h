@@ -14,7 +14,6 @@ class InsertUserScreen : public wxDialog
 private:
     std::map<std::string, std::string> levels;
     std::string uid;
-
 protected:
     wxStaticText* labelName;
     wxTextCtrl* inputName;
@@ -42,6 +41,8 @@ public:
     //! \details É no construtor que todos os campos e suas posições são inicializados.
     InsertUserScreen( std::string uid,
                       const wxString& title,
+                      const wxString& name,
+                      const wxString& login,
                       wxWindow* parent,
                       wxWindowID id = wxID_ANY,
                       const wxPoint& pos = wxDefaultPosition,

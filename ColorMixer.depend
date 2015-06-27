@@ -3089,7 +3089,7 @@
 
 1434751884 c:\users\luana\documents\estudos\faculdade\pac\colormixer\app\app.h
 
-1435266086 c:\users\luana\documents\estudos\faculdade\pac\colormixer\app\site.h
+1435374789 c:\users\luana\documents\estudos\faculdade\pac\colormixer\app\site.h
 	"../Controls/Valve.h"
 	"../Controls/Tank.h"
 	"../Modulos/Taskbar/Taskbar.h"
@@ -3102,10 +3102,11 @@
 1434891668 c:\users\luana\documents\estudos\faculdade\pac\colormixer\controls\tank.h
 	"ColorSelect.h"
 
-1435260597 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\app\site.cpp
+1435377160 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\app\site.cpp
 	"Includes.h"
 	"Site.h"
 	"../Modulos/Configs/SiteConfig.h"
+	"../Modulos/User/SearchUserScreen.h"
 
 1435185166 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\controls\tank.cpp
 	"../App/Includes.h"
@@ -3616,15 +3617,139 @@
 	"../../App/App.h"
 	"../Log/Log.h"
 
-1435261040 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\insertuserscreen.cpp
+1435377691 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\insertuserscreen.cpp
 	"InsertUserScreen.h"
 	"../Database/SQLiteHandler.h"
 	"../Database/SQLHandler.h"
 	"../Encryption/SHA256.h"
 	"../Log/Log.h"
 
-1435258087 c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\insertuserscreen.h
+1435377696 c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\insertuserscreen.h
 	<string>
 	<map>
 	<wx/wx.h>
+
+1435376323 c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\searchuserscreen.h
+	<wx/wx.h>
+	<wx/dataview.h>
+	"InsertUserScreen.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\dataview.h
+	"wx/defs.h"
+	"wx/textctrl.h"
+	"wx/headercol.h"
+	"wx/variant.h"
+	"wx/dnd.h"
+	"wx/dynarray.h"
+	"wx/icon.h"
+	"wx/itemid.h"
+	"wx/weakref.h"
+	"wx/vector.h"
+	"wx/dataobj.h"
+	"wx/withimages.h"
+	"wx/dvrenderers.h"
+	"wx/generic/dataview.h"
+	"wx/gtk/dataview.h"
+	"wx/osx/dataview.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\headercol.h
+	"wx/bitmap.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\dnd.h
+	"wx/defs.h"
+	"wx/dataobj.h"
+	"wx/cursor.h"
+	"wx/msw/ole/dropsrc.h"
+	"wx/msw/ole/droptgt.h"
+	"wx/motif/dnd.h"
+	"wx/x11/dnd.h"
+	"wx/gtk/dnd.h"
+	"wx/gtk1/dnd.h"
+	"wx/osx/dnd.h"
+	"wx/os2/dnd.h"
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\msw\ole\dropsrc.h
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\msw\ole\droptgt.h
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\motif\dnd.h
+	"wx/defs.h"
+	"wx/object.h"
+	"wx/string.h"
+	"wx/dataobj.h"
+	"wx/cursor.h"
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\x11\dnd.h
+	"wx/defs.h"
+	"wx/object.h"
+	"wx/string.h"
+	"wx/dataobj.h"
+	"wx/cursor.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\gtk\dnd.h
+	"wx/icon.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\gtk1\dnd.h
+	"wx/object.h"
+	"wx/string.h"
+	"wx/dataobj.h"
+	"wx/cursor.h"
+	"wx/icon.h"
+	"wx/gdicmn.h"
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\osx\dnd.h
+	"wx/defs.h"
+	"wx/object.h"
+	"wx/string.h"
+	"wx/string.h"
+	"wx/dataobj.h"
+	"wx/cursor.h"
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\os2\dnd.h
+	<os2.h>
+	<pmstddlg.h>
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\itemid.h
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\withimages.h
+	"wx/defs.h"
+	"wx/icon.h"
+	"wx/imaglist.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\dvrenderers.h
+	"wx/gtk/dvrenderer.h"
+	"wx/osx/dvrenderer.h"
+	"wx/generic/dvrenderer.h"
+	"wx/generic/dvrenderers.h"
+	"wx/gtk/dvrenderers.h"
+	"wx/osx/dvrenderers.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\gtk\dvrenderer.h
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\osx\dvrenderer.h
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\generic\dvrenderer.h
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\generic\dvrenderers.h
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\gtk\dvrenderers.h
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\osx\dvrenderers.h
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\generic\dataview.h
+	"wx/defs.h"
+	"wx/object.h"
+	"wx/list.h"
+	"wx/control.h"
+	"wx/scrolwin.h"
+	"wx/icon.h"
+	"wx/vector.h"
+
+1412649242 c:\wxwidgets-3.0.2\include\wx\gtk\dataview.h
+	"wx/list.h"
+
+1412649244 c:\wxwidgets-3.0.2\include\wx\osx\dataview.h
+
+1435377512 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\searchuserscreen.cpp
+	"SearchUserScreen.h"
 

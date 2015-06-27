@@ -10,10 +10,9 @@ BEGIN_EVENT_TABLE(InsertUserScreen, wxDialog)
     EVT_BUTTON(SAVE, InsertUserScreen::Save)
 END_EVENT_TABLE()
 
-InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, const wxString& name, const wxString& login, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
     this->uid = uid;
-
     this->levels["1"] = _("Admin");
     this->levels["2"] = _("Manager");
     this->levels["3"] = _("User");
@@ -27,7 +26,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, wxWi
     labelName->Wrap( -1 );
     bSizer1->Add( labelName, 0, wxALL, 10 );
 
-    inputName = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 371,-1 ), 0 );
+    inputName = new wxTextCtrl( this, wxID_ANY, name, wxDefaultPosition, wxSize( 371,-1 ), 0 );
     bSizer1->Add( inputName, 0, wxALL, 10 );
 
     wxGridSizer* gSizer1;
@@ -40,7 +39,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, wxWi
     labelLogin->Wrap( -1 );
     bSizer2->Add( labelLogin, 0, wxALL, 10 );
 
-    inputLogin = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 175,-1 ), 0 );
+    inputLogin = new wxTextCtrl( this, wxID_ANY, login, wxDefaultPosition, wxSize( 175,-1 ), 0 );
     bSizer2->Add( inputLogin, 0, wxALL, 10 );
 
 

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1435414223 source:c:\faculdade\pac\colormixer\app\app.cpp
+1435423695 source:c:\faculdade\pac\colormixer\app\app.cpp
 	"Includes.h"
 	"App.h"
 	"../Modulos/SplashScreen/SplashScreen.h"
@@ -3430,11 +3430,11 @@
 	<string>
 	<sstream>
 
-1435412166 source:c:\faculdade\pac\colormixer\modulos\database\sqlhandler.cpp
+1435423541 source:c:\faculdade\pac\colormixer\modulos\database\sqlhandler.cpp
 	"../../App/Includes.h"
 	"SQLHandler.h"
 
-1435411950 c:\faculdade\pac\colormixer\modulos\database\sqlhandler.h
+1435422061 c:\faculdade\pac\colormixer\modulos\database\sqlhandler.h
 	<string>
 	<vector>
 
@@ -3775,6 +3775,6 @@
 	"../Encryption/SHA256.h"
 	"../Log/Log.h"
 
-1435405708 source:c:\faculdade\pac\colormixer\modulos\user\searchuserscreen.cpp
+1435417539 source:c:\faculdade\pac\colormixer\modulos\user\searchuserscreen.cpp
 	"SearchUserScreen.h"
 

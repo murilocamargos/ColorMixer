@@ -57,6 +57,48 @@ std::string SQLHandler::DefineWhere(std::string column, std::string signal, std:
     return whr;
 }
 
+SQLHandler* SQLHandler::Where(where info)
+{
+    if (info.val_1 == "")
+        return this;
+
+    std::string format = "";
+    if (info.signal == "=")
+		format = "= '{1}'";
+	else if (info.signal == "!=")
+		format = "!= '{1}'";
+	else if (info.signal == ">")
+		format = "> {1}";
+	else if (info.signal == "<")
+		format = "< {1}";
+	else if (info.signal == ">=")
+		format = ">= {1}";
+	else if (info.signal == "<=")
+		format = "<= {1}";
+	else if (info.signal == "Between")
+		format = "BETWEEN {1} AND {2}";
+	else if (info.signal == "Contains")
+		format = "LIKE '%%{1}%%'";
+	else if (info.signal == "Begins with")
+		format = "LIKE '{1}%%'";
+	else if (info.signal == "Ends with")
+		format = "LIKE '%%{1}'";
+    else
+    	format = "= '{1}'";
+
+    std::string con = (info.connector == "AND") ? "AND " : "OR  ";
+    std::string val = format;
+
+    size_t v1 = val.find("{1}");
+    if (v1 != std::string::npos) val.replace(v1, 3, info.val_1);
+
+    size_t v2 = val.find("{2}");
+    if (v2 != std::string::npos) val.replace(v2, 3, info.val_2);
+
+    this->_where.push_back(con + info.name + " " + val);
+    return this;
+}
+
 SQLHandler* SQLHandler::Where(std::string column, std::string value)
 {
     this->_where.push_back("AND " + this->DefineWhere(column, "=", value));

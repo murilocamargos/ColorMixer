@@ -26,7 +26,33 @@ bool App::OnInit()
 
     SetTopWindow(login);
     */
+
     this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
+
+
+    /*
+    Exemplo de utilização do no SQLHandler
+    //////////////////////////////////////
+    SQLHandler *sql = new SQLHandler();
+    SQLiteHandler *db = new SQLiteHandler();
+
+    where ID, NAME;
+
+    ID.name = "user_id";
+    ID.signal = "Between";
+    ID.val_1 = "30";
+    ID.val_2 = "35";
+    ID.connector = "AND";
+
+    NAME.name = "nome";
+    NAME.signal = "Contains";
+    NAME.val_1 = "Lu";
+    NAME.val_2 = "";
+    NAME.connector = "OR";
+
+    wxLogMessage(wxString(sql->Table("usuarios")->Where(ID)->Where(NAME)->Select()));
+    //wxLogMessage(wxString::Format("%i", db->NumRows(sql->Table("usuarios")->Where(ID)->Where(NAME))));
+    */
 
     return true;
 

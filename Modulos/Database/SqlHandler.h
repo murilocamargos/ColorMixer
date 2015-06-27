@@ -3,6 +3,11 @@
 
 #include <string>
 #include <vector>
+
+typedef struct {
+  std::string name, signal, val_1, val_2, connector;
+} where;
+
 //! \class SQLHandler
 //! \brief Gera comandos SQL.
 //! \details Cria strings que representam comandos SQL de inserção,
@@ -38,6 +43,23 @@ public:
     //! \brief Obtém as colunas da lista.
     //! \return As colunas da lista separadas por vírgula.
     std::string GetColumn();
+
+    //! \brief Define o parâmetro <b>`where`</b> de uma consulta SQL.
+    //! \param info Informações do tipo <b>where</b>.
+    //! \return A própria instância.
+    //! \details Utiliza o novo tipo de dados <b>where</b> para adicionar
+    //! novos parâmetros <b>`where`</b> de uma consulta SQL. A vantagem de sua
+    //! utilização, está na adição de novos operadores para consultas, como
+    //! o Between, Contains, Begins With e o Ends With.
+    //!
+    //! O novo tipo <b>where</b> possui os atributos
+    //! - `nome`: nome da coluna do banco a que se refere.
+    //! - `signal`: tipo do operador a ser utilizado.
+    //! - `val_1`: valor a ser usado na comparação.
+    //! - `val_2`: segundo valor a ser usado na comparação, caso o usuário
+    //!            queira usar o Between.
+    //! - `connector`: O tipo de conexão entre predicados, AND ou OR.
+    SQLHandler* Where(where info);
 
     //! \brief Define o parâmetro <b>`where`</b> de uma consulta SQL.
     //! \param column Nome da coluna no banco.

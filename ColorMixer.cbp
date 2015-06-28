@@ -71,6 +71,8 @@
 		<Unit filename="Modulos/Encryption/SHA256.h" />
 		<Unit filename="Modulos/Log/Log.cpp" />
 		<Unit filename="Modulos/Log/Log.h" />
+		<Unit filename="Modulos/Log/LogScreen.cpp" />
+		<Unit filename="Modulos/Log/LogScreen.h" />
 		<Unit filename="Modulos/Login/LoginScreen.cpp" />
 		<Unit filename="Modulos/Login/LoginScreen.h" />
 		<Unit filename="Modulos/Menu/MyMenu.cpp" />

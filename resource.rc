@@ -1,4 +1,7 @@
 APP_ICON        ICON    "Images/Icons/icon.ico"
+LOG_ICON        ICON    "Images/Icons/log.ico"
+ADDUSER_ICON    ICON    "Images/Icons/add_user.ico"
+FIND_ICON       ICON    "Images/Icons/find.ico"
 CONFIG          ICON    "Images/Icons/config.ico"
 
 OPENED_VALVE    BITMAP  "Images/Site/opened_valve.bmp"

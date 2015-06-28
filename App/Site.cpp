@@ -4,6 +4,7 @@
 
 #include "../Modulos/Configs/SiteConfig.h"
 #include "../Modulos/User/SearchUserScreen.h"
+#include "../Modulos/Log/LogScreen.h"
 
 BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_BUTTON(ADVANCE, Site::OnAdvanceTime)
@@ -109,7 +110,7 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     this->menu->AddSubMenu(user, MENU_USER_SEARCH, _("Search User"), _("Search for user."));
     //}
     this->menu->AddMenu(logs);
-    this->menu->AddSubMenu(logs,MENU_LOG_VIEW, _("View Logs"), _("View users logs"));
+    this->menu->AddSubMenu(logs, MENU_LOG_VIEW, _("View Logs"), _("View system logs"));
 
     SetMenuBar(this->menu);
 	//**********
@@ -245,7 +246,7 @@ void Site::OnMenuHelpAbout(wxCommandEvent & event)
 void Site::OnMenuUserNew(wxCommandEvent& event)
 {
     InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"), wxEmptyString, wxEmptyString, this);
-    ins->SetIcon(wxICON(ADDUS_IC));
+    ins->SetIcon(wxICON(ADDUSER_ICON));
     ins->Show(TRUE);
 }
 void Site::OnMenuUserEdit(wxCommandEvent& event)
@@ -262,11 +263,13 @@ void Site::OnMenuUserSearch(wxCommandEvent& event)
 }
 void Site::OnMenuLogView(wxCommandEvent& event)
 {
-
+    LogScreen *sea = new LogScreen(this, wxID_ANY, _("Log Audition"));
+    sea->SetIcon(wxICON(LOG_ICON));
+    sea->Show(TRUE);
 }
 void Site::SearchUser(bool btn_e,bool btn_d)
 {
     SearchUserScreen *sea = new SearchUserScreen(this, wxID_ANY, btn_e, btn_d, _("Search User"));
-    sea->SetIcon(wxICON(ADDUS_IC));
+    sea->SetIcon(wxICON(FIND_ICON));
     sea->Show(TRUE);
 }

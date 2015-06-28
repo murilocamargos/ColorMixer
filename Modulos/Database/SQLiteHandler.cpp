@@ -68,6 +68,7 @@ int SQLiteHandler::Exec(std::string sql)
 
 int SQLiteHandler::Select(SQLHandler *sql)
 {
+    this->rows.clear();
     sqlite3_stmt *statement;
     std::string col_name, col_val;
 

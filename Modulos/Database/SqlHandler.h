@@ -5,7 +5,7 @@
 #include <vector>
 
 typedef struct {
-  std::string name, signal, val_1, val_2, connector;
+  std::string col, opr, val1, val2, con;
 } where;
 
 //! \class SQLHandler
@@ -27,6 +27,9 @@ private:
 
 public:
     SQLHandler();
+
+    SQLHandler* Join(std::string table, std::string where);
+    SQLHandler* NaturalJoin(std::string table);
 
     //! \brief Definição da tabela.
     //! \param tableName Nome da tabela a ser utilizada.

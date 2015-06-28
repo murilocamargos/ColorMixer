@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1435423695 source:c:\faculdade\pac\colormixer\app\app.cpp
+1435504378 source:c:\faculdade\pac\colormixer\app\app.cpp
 	"Includes.h"
 	"App.h"
 	"../Modulos/SplashScreen/SplashScreen.h"
 	"../Modulos/Login/LoginScreen.h"
 	"Site.h"
+	"../Modulos/Log/LogScreen.h"
 
 1435410233 c:\faculdade\pac\colormixer\app\includes.h
 	<string>
@@ -2012,13 +2013,14 @@
 	"../Modulos/Menu/MyMenu.h"
 	"../Modulos/User/InsertUserScreen.h"
 
-1435417223 source:c:\faculdade\pac\colormixer\app\site.cpp
+1435503478 source:c:\faculdade\pac\colormixer\app\site.cpp
 	"Includes.h"
 	"Site.h"
 	"../Modulos/Configs/SiteConfig.h"
 	"../Modulos/User/SearchUserScreen.h"
+	"../Modulos/Log/LogScreen.h"
 
-1435148358 source:c:\faculdade\pac\colormixer\resource.rc
+1435504261 source:c:\faculdade\pac\colormixer\resource.rc
 	"wx/msw/wx.rc"
 
 1412518750 c:\wxwidgets-3.0.2\include\wx\msw\wx.rc
@@ -3430,11 +3432,11 @@
 	<string>
 	<sstream>
 
-1435423541 source:c:\faculdade\pac\colormixer\modulos\database\sqlhandler.cpp
+1435504681 source:c:\faculdade\pac\colormixer\modulos\database\sqlhandler.cpp
 	"../../App/Includes.h"
 	"SQLHandler.h"
 
-1435422061 c:\faculdade\pac\colormixer\modulos\database\sqlhandler.h
+1435496089 c:\faculdade\pac\colormixer\modulos\database\sqlhandler.h
 	<string>
 	<vector>
 
@@ -3491,7 +3493,7 @@
 	<unicode/ubrk.h>
 	<unicode/utf16.h>
 
-1435410921 source:c:\faculdade\pac\colormixer\modulos\database\sqlitehandler.cpp
+1435492479 source:c:\faculdade\pac\colormixer\modulos\database\sqlitehandler.cpp
 	"../../App/Includes.h"
 	"SQLiteHandler.h"
 
@@ -3777,4 +3779,43 @@
 
 1435417539 source:c:\faculdade\pac\colormixer\modulos\user\searchuserscreen.cpp
 	"SearchUserScreen.h"
+
+1435501319 c:\faculdade\pac\colormixer\modulos\log\logscreen.h
+	<wx/datectrl.h>
+	<wx/dateevt.h>
+	<wx/dataview.h>
+	<wx/combo.h>
+
+1412518748 c:\wxwidgets-3.0.2\include\wx\datectrl.h
+	"wx/defs.h"
+	"wx/datetimectrl.h"
+	"wx/msw/datectrl.h"
+	"wx/osx/datectrl.h"
+	"wx/generic/datectrl.h"
+
+1412518748 c:\wxwidgets-3.0.2\include\wx\datetimectrl.h
+	"wx/defs.h"
+	"wx/control.h"
+	"wx/datetime.h"
+	"wx/msw/datetimectrl.h"
+	"wx/osx/datetimectrl.h"
+
+1412518750 c:\wxwidgets-3.0.2\include\wx\msw\datetimectrl.h
+	"wx/intl.h"
+
+1412518750 c:\wxwidgets-3.0.2\include\wx\msw\datectrl.h
+
+1412518750 c:\wxwidgets-3.0.2\include\wx\generic\datectrl.h
+	"wx/compositewin.h"
+
+1412518748 c:\wxwidgets-3.0.2\include\wx\dateevt.h
+	"wx/event.h"
+	"wx/datetime.h"
+	"wx/window.h"
+
+1435504249 source:c:\faculdade\pac\colormixer\modulos\log\logscreen.cpp
+	"../../App/Includes.h"
+	"LogScreen.h"
+	<wx/file.h>
+	"../../Controls/DirSelect.h"
 

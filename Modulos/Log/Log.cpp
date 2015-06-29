@@ -28,3 +28,10 @@ std::string Log::DateTimeNow()
     ss << now.GetTicks();
     return ss.str();
 }
+
+wxDateTime Log::ToDateTime(wxString datetime)
+{
+    unsigned long date;
+    datetime.ToULong(&date);
+    return wxDateTime(static_cast<time_t>(date));
+}

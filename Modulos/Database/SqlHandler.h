@@ -6,7 +6,8 @@
 #include <map>
 
 typedef struct {
-  std::string col, opr, val1, val2, con;
+  wxString col, val1, val2, con;
+  int opr;
 } where;
 
 //! \class SQLHandler
@@ -26,8 +27,15 @@ private:
     //!< Mapa que relaciona uma coluna com seu valor.
     std::map<std::string, std::string> _vars;
 
+    std::map<int, wxString> oprMap;
+
 public:
     SQLHandler();
+
+    wxString GetOpr(int i);
+    int GetOpr(wxString opr);
+
+    static where GetDateWhere(int opr, wxDateTime d1, wxDateTime d2);
 
     SQLHandler* Join(std::string table, std::string where);
     SQLHandler* NaturalJoin(std::string table);

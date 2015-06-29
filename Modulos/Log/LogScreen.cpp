@@ -227,8 +227,8 @@ void LogScreen::Find()
     }
 
     USER.col  = "u.user_id";
-    USER.opr  = std::string(uopr.mb_str());
-    USER.val1 = std::string(uid.mb_str());
+    USER.opr  = this->sql->GetOpr(uopr);
+    USER.val1 = uid;
     USER.val2 = "";
     USER.con  = "AND";
     /////////////////////////////////////////////////////////////
@@ -244,45 +244,22 @@ void LogScreen::Find()
     }
 
     TYPE.col  = "l.log_id";
-    TYPE.opr  = std::string(lopr.mb_str());
-    TYPE.val1 = std::string(lid.mb_str());
+    TYPE.opr  = this->sql->GetOpr(lopr);
+    TYPE.val1 = lid;
     TYPE.val2 = "";
-    TYPE.con  = std::string(lcon.mb_str());
+    TYPE.con  = lcon;
     /////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////
-    int dsopr = this->SFDOperator->GetSelection();
-    wxString d1s(""), d2s("");
+    wxString dopr = this->SFDOperator->GetString(this->SFDOperator->GetSelection());
     wxDateTime d1 = this->SFDatePicker1->GetValue(), d2 = this->SFDatePicker2->GetValue();
 
-    if (dsopr == 1 || dsopr == 2)
-    {
-        dsopr = 6 + dsopr;
-        d2 = d1;
-        d2.Add(wxTimeSpan::Hours(24));
-    }
-    else if (dsopr == 3 || dsopr == 6)
-    {
-        d1.Add(wxTimeSpan::Hours(24));
-    }
-    else if (dsopr == 7 || dsopr == 8)
-    {
-        d2.Add(wxTimeSpan::Hours(24));
-    }
+    DATE = this->sql->GetDateWhere(this->sql->GetOpr(dopr), d1, d2);
 
-    if (this->SFDOperator->GetSelection() != 0)
-        d1s = wxString::Format("%i", d1.GetTicks());
-    if (dsopr == 7 || dsopr == 8)
-        d2s = wxString::Format("%i", d2.GetTicks());
-
-    wxString dopr = this->SFDOperator->GetString(dsopr);
     wxString dcon = (this->SFConnector2->GetSelection() == 0) ? "AND" : "OR";
 
-    DATE.col  = "ocorrencia";
-    DATE.opr  = std::string(dopr.mb_str());
-    DATE.val1 = std::string(d1s.mb_str());
-    DATE.val2 = std::string(d2s.mb_str());
-    DATE.con  = std::string(dcon.mb_str());
+    DATE.col = "ocorrencia";
+    DATE.con = dcon;
     /////////////////////////////////////////////////////////////
 
     sql->Table("logs as l")
@@ -302,8 +279,9 @@ void LogScreen::Find()
 void LogScreen::OnChoiceOprDate(wxCommandEvent& event)
 {
     this->Find();
-    this->SFDatePicker1->Enable(this->SFDOperator->GetSelection() > 0);
-    this->SFDatePicker2->Enable(this->SFDOperator->GetSelection() == 7);
+    int opr = this->sql->GetOpr(this->SFDOperator->GetString(this->SFDOperator->GetSelection()));
+    this->SFDatePicker1->Enable(opr > 0);
+    this->SFDatePicker2->Enable((opr == 7 || opr == 8));
 }
 
 void LogScreen::OnChoice(wxCommandEvent& event)

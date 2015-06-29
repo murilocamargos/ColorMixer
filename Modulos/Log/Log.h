@@ -27,6 +27,10 @@ public:
     //! \return Uma string contendo o inteiro que representa o instante atual em formato UNIX.
     static std::string DateTimeNow();
 
+    //! \brief Retorna um objeto do tipo `wxDateTime` calculado a partir de uma `wxString` em formator UNIX.
+    //! \return Um Objeto do tipo `wxDateTime`.
+    static wxDateTime ToDateTime(wxString datetime);
+
     //! \example Log.cpp
 };
 

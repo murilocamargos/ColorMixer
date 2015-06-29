@@ -4,7 +4,67 @@
 
 SQLHandler::SQLHandler()
 {
+    this->oprMap[0] = _("Any");
+    this->oprMap[1] = "=";
+    this->oprMap[2] = "!=";
+    this->oprMap[3] = ">";
+    this->oprMap[4] = "<";
+    this->oprMap[5] = ">=";
+    this->oprMap[6] = "<=";
+    this->oprMap[7] = _("Between");
+    this->oprMap[8] = _("Not between");
+    this->oprMap[9] = _("Contains");
+    this->oprMap[10] = _("Begins with");
+    this->oprMap[11] = _("Ends with");
+}
 
+wxString SQLHandler::GetOpr(int i)
+{
+    if (this->oprMap.find(i) == this->oprMap.end())
+        return this->oprMap.at(0);
+    return this->oprMap.at(i);
+}
+
+int SQLHandler::GetOpr(wxString opr)
+{
+    std::map<int, wxString>::iterator it;
+    for (it = this->oprMap.begin(); it != this->oprMap.end(); ++it)
+        if (it->second == opr) return it->first;
+    return 0;
+}
+
+where SQLHandler::GetDateWhere(int opr, wxDateTime d1, wxDateTime d2)
+{
+    where DATE;
+
+    if (opr == 1 || opr == 2)
+    {
+        opr = 6 + opr;
+        d2 = d1;
+        d2.Add(wxTimeSpan::Hours(24));
+    }
+    else if (opr == 3 || opr == 6)
+    {
+        d1.Add(wxTimeSpan::Hours(24));
+    }
+    else if (opr == 7 || opr == 8)
+    {
+        d2.Add(wxTimeSpan::Hours(24));
+    }
+
+    wxString d1s(""), d2s("");
+    if (opr != 0)
+        d1s = wxString::Format("%i", d1.GetTicks());
+    if (opr == 7 || opr == 8)
+        d2s = wxString::Format("%i", d2.GetTicks());
+
+    DATE.col  = "";
+    DATE.opr  = opr;
+    DATE.val1 = d1s;
+    DATE.val2 = d2s;
+    DATE.con  = "";
+
+    return DATE;
 }
 
 SQLHandler* SQLHandler::Join(std::string table, std::string where)
@@ -75,27 +135,27 @@ SQLHandler* SQLHandler::Where(where info)
         return this;
 
     std::string format = "";
-    if (info.opr == "=")
+    if (info.opr == 1)
 		format = "= '{1}'";
-	else if (info.opr == "!=")
+	else if (info.opr == 2)
 		format = "!= '{1}'";
-	else if (info.opr == ">")
+	else if (info.opr == 3)
 		format = "> {1}";
-	else if (info.opr == "<")
+	else if (info.opr == 4)
 		format = "< {1}";
-	else if (info.opr == ">=")
+	else if (info.opr == 5)
 		format = ">= {1}";
-	else if (info.opr == "<=")
+	else if (info.opr == 6)
 		format = "<= {1}";
-	else if (info.opr == "Between")
+	else if (info.opr == 7)
 		format = "BETWEEN {1} AND {2}";
-    else if (info.opr == "Not between")
+    else if (info.opr == 8)
         format = "NOT BETWEEN {1} AND {2}";
-	else if (info.opr == "Contains")
+	else if (info.opr == 9)
 		format = "LIKE '%%{1}%%'";
-	else if (info.opr == "Begins with")
+	else if (info.opr == 10)
 		format = "LIKE '{1}%%'";
-	else if (info.opr == "Ends with")
+	else if (info.opr == 11)
 		format = "LIKE '%%{1}'";
     else
     	format = "= '{1}'";
@@ -109,7 +169,7 @@ SQLHandler* SQLHandler::Where(where info)
     size_t v2 = val.find("{2}");
     if (v2 != std::string::npos) val.replace(v2, 3, info.val2);
 
-    this->_where.push_back(con + info.col + " " + val);
+    this->_where.push_back(std::string((con + info.col + " " + val).mb_str()));
     return this;
 }
 

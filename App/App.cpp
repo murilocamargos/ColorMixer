@@ -30,12 +30,12 @@ bool App::OnInit()
     SetTopWindow(login);
     */
 
-    //this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
-    LogScreen *frame = new LogScreen(NULL, wxID_ANY, _("Log"));
+    this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
+    /*LogScreen *frame = new LogScreen(NULL, wxID_ANY, _("Log"));
     frame->SetIcon(wxICON(LOG_ICON));
     frame->Show(TRUE);
     SetTopWindow(frame);
-
+    */
     return true;
 
 }

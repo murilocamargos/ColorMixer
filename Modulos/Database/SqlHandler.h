@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 typedef struct {
   std::string col, opr, val1, val2, con;

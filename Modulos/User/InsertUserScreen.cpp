@@ -10,7 +10,7 @@ BEGIN_EVENT_TABLE(InsertUserScreen, wxDialog)
     EVT_BUTTON(SAVE, InsertUserScreen::Save)
 END_EVENT_TABLE()
 
-InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, const wxString& name, const wxString& login, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool flag, const wxString& name, const wxString& login, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
     this->uid = uid;
     this->levels["1"] = _("Admin");
@@ -136,6 +136,13 @@ void InsertUserScreen::Save(wxCommandEvent& event)
     std::string passwd  = std::string(this->inputPassword->GetLineText(0).mb_str());
     std::string passwd2 = std::string(this->inputPasswordAgain->GetLineText(0).mb_str());
     std::string level = "1";
+
+    if(flag) //true para deletar antigo;
+    {
+        sql ->Table("usuarios")
+            ->Where("login", login);
+        db->Exec(sql->Delete());
+    }
 
     for (std::map<std::string, std::string>::iterator it = this->levels.begin(); it != this->levels.end(); ++it)
     {

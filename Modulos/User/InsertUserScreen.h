@@ -14,6 +14,7 @@ class InsertUserScreen : public wxDialog
 private:
     std::map<std::string, std::string> levels;
     std::string uid;
+    bool flag;//true para deletar o login antigo e false para apenas salvar;
 protected:
     wxStaticText* labelName;
     wxTextCtrl* inputName;
@@ -41,6 +42,7 @@ public:
     //! \details É no construtor que todos os campos e suas posições são inicializados.
     InsertUserScreen( std::string uid,
                       const wxString& title,
+                      bool flag,
                       const wxString& name,
                       const wxString& login,
                       wxWindow* parent,

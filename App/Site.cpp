@@ -245,8 +245,8 @@ void Site::OnMenuHelpAbout(wxCommandEvent & event)
 }
 void Site::OnMenuUserNew(wxCommandEvent& event)
 {
-    InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"), wxEmptyString, wxEmptyString, this);
-    ins->SetIcon(wxICON(ADDUSER_ICON));
+    InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"),false, wxEmptyString, wxEmptyString, this);
+    ins->SetIcon(wxICON(ADDUS_IC));
     ins->Show(TRUE);
 }
 void Site::OnMenuUserEdit(wxCommandEvent& event)
@@ -259,7 +259,7 @@ void Site::OnMenuUserErase(wxCommandEvent& event)
 }
 void Site::OnMenuUserSearch(wxCommandEvent& event)
 {
-    SearchUser();
+    SearchUser(false,false);
 }
 void Site::OnMenuLogView(wxCommandEvent& event)
 {

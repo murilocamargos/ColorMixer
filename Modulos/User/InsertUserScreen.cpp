@@ -1,3 +1,5 @@
+#include "../../App/Includes.h"
+
 #include "InsertUserScreen.h"
 
 #include "../Database/SQLiteHandler.h"
@@ -6,22 +8,31 @@
 #include "../Log/Log.h"
 
 BEGIN_EVENT_TABLE(InsertUserScreen, wxDialog)
-    EVT_BUTTON(CANCEL, InsertUserScreen::Cancel)
+    EVT_CLOSE(InsertUserScreen::OnClose)
     EVT_BUTTON(SAVE, InsertUserScreen::Save)
 END_EVENT_TABLE()
 
-InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool flag, const wxString& name, const wxString& login, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, wxWindow* parent, std::string editId, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-    this->uid = uid;
-    this->flag = flag;
-    if(uid == "1")
+    this->sql = new SQLHandler();
+    this->db = new SQLiteHandler();
+
+    this->db->Select(this->sql->Table("usuarios")->Where("user_id", uid));
+    this->uidInfo = this->db->rows[0];
+
+    if (editId != "0")
     {
-        this->levels["1"] = _("Admin");
-        this->levels["2"] = _("User");
+        this->db->Select(this->sql->Table("usuarios")->Where("user_id", editId));
+        this->editInfo = this->db->rows[0];
     }
-    else
+
+    this->flag = (editId != "0");
+
+    this->levels["1"] = _("User");
+
+    if (this->uidInfo["nivel"] == "1")
     {
-        this->levels["1"] = _("User");
+        this->levels["2"] = _("Admin");
     }
 
     this->SetSizeHints( wxDefaultSize, wxDefaultSize );
@@ -29,7 +40,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     wxBoxSizer* bSizer1;
     bSizer1 = new wxBoxSizer( wxVERTICAL );
 
-    labelName = new wxStaticText( this, wxID_ANY, _("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelName = new wxStaticText( this, wxID_ANY, _("Name") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelName->Wrap( -1 );
     bSizer1->Add( labelName, 0, wxALL, 10 );
 
@@ -42,7 +53,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     wxBoxSizer* bSizer2;
     bSizer2 = new wxBoxSizer( wxVERTICAL );
 
-    labelLogin = new wxStaticText( this, wxID_ANY, _("Login:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelLogin = new wxStaticText( this, wxID_ANY, _("Login") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelLogin->Wrap( -1 );
     bSizer2->Add( labelLogin, 0, wxALL, 10 );
 
@@ -58,7 +69,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     wxBoxSizer* bSizer3;
     bSizer3 = new wxBoxSizer( wxVERTICAL );
 
-    labelLevel = new wxStaticText( this, wxID_ANY, _("Access Level:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelLevel = new wxStaticText( this, wxID_ANY, _("Access Level") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelLevel->Wrap( -1 );
     bSizer3->Add( labelLevel, 0, wxALL, 10 );
 
@@ -76,7 +87,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     wxBoxSizer* bSizer4;
     bSizer4 = new wxBoxSizer( wxVERTICAL );
 
-    labelPassword = new wxStaticText( this, wxID_ANY, _("Password:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelPassword = new wxStaticText( this, wxID_ANY, _("Password") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelPassword->Wrap( -1 );
     bSizer4->Add( labelPassword, 0, wxALL, 10 );
 
@@ -89,7 +100,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     wxBoxSizer* bSizer5;
     bSizer5 = new wxBoxSizer( wxVERTICAL );
 
-    labelPasswordAgain = new wxStaticText( this, wxID_ANY, _("Password Again:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelPasswordAgain = new wxStaticText( this, wxID_ANY, _("Password Again") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelPasswordAgain->Wrap( -1 );
     bSizer5->Add( labelPasswordAgain, 0, wxALL, 10 );
 
@@ -105,16 +116,22 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     wxBoxSizer* bSizer6;
     bSizer6 = new wxBoxSizer( wxHORIZONTAL );
 
-    buttonCancel = new wxButton( this, CANCEL, _("Erase"), wxDefaultPosition, wxDefaultSize, 0 );
-    buttonCancel->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 90, false, wxEmptyString ) );
-
-    bSizer6->Add( buttonCancel, 0, wxALIGN_BOTTOM|wxALL, 10 );
-
     buttonSave = new wxButton( this, SAVE, _("Save"), wxDefaultPosition, wxDefaultSize, 0 );
     bSizer6->Add( buttonSave, 0, wxALIGN_BOTTOM|wxALL, 10 );
 
 
     bSizer1->Add( bSizer6, 1, wxALIGN_RIGHT|wxRIGHT, 0 );
+
+    if (flag)
+    {
+        this->inputName->SetValue(this->editInfo["nome"]);
+
+        this->inputLogin->SetValue(this->editInfo["login"]);
+        this->inputLogin->Enable(this->uidInfo["nivel"] == "1");
+
+        int lvl = (this->editInfo["nivel"] == "2") ? 0 : 1;
+        this->inputLevel->SetSelection(lvl);
+    }
 
 
     this->SetSizer( bSizer1 );
@@ -127,13 +144,9 @@ InsertUserScreen::~InsertUserScreen()
 {
 }
 
-void InsertUserScreen::Cancel(wxCommandEvent& event)
+void InsertUserScreen::OnClose(wxCloseEvent& event)
 {
-    this->inputName->Clear();
-    this->inputLogin->Clear();
-    this->inputLevel->SetValue(this->levels["1"]);
-    this->inputPassword->Clear();
-    this->inputPasswordAgain->Clear();
+    Destroy();
 }
 
 void InsertUserScreen::Save(wxCommandEvent& event)
@@ -145,15 +158,8 @@ void InsertUserScreen::Save(wxCommandEvent& event)
     std::string login   = std::string(this->inputLogin->GetLineText(0).mb_str());
     std::string passwd  = std::string(this->inputPassword->GetLineText(0).mb_str());
     std::string passwd2 = std::string(this->inputPasswordAgain->GetLineText(0).mb_str());
-    std::string level = "1";
+    std::string level   = "2";
 
-    if(flag)//Deletar antigo, caso haja
-    {
-        sql ->Table("usuarios")
-            ->Where("login", login);
-        db->Exec(sql->Delete());
-
-    }
     for (std::map<std::string, std::string>::iterator it = this->levels.begin(); it != this->levels.end(); ++it)
     {
         if (it->second == inputLevel->GetValue())
@@ -176,50 +182,41 @@ void InsertUserScreen::Save(wxCommandEvent& event)
         dlg.ShowModal();
     }
     // Checar se login já não está cadastrado
-    else if (db->NumRows(sql->Table("usuarios")->Where("login", login)) > 0)
+    else if ((db->NumRows(sql->Table("usuarios")->Where("login", login)) > 0) && !flag)
     {
         wxMessageDialog dlg(this, _("This login is already registered!"), _("Warning"), wxICON_EXCLAMATION);
         dlg.ShowModal();
     }
     else
     {
-        std::string aux;
-        aux = login;
-        if(flag)//editando
+        sql = new SQLHandler();
+        sql->Table("usuarios")
+        ->Set("nome", name)
+        ->Set("login", login)
+        ->Set("senha", sha256(passwd))
+        ->Set("editado_em", Log::DateTimeNow())
+        ->Set("editado_por", this->uidInfo["user_id"])
+        ->Set("nivel", level);
+
+        if (flag)
         {
-            new Log("2", this->uid, aux);
-
-            sql = new SQLHandler();
-            sql->Table("usuarios")
-            ->Set("nome", name)
-            ->Set("login", login)
-            ->Set("senha", sha256(passwd))
-            ->Set("criado_em", Log::DateTimeNow())
-            ->Set("editado_em", Log::DateTimeNow())
-            ->Set("criado_por", this->uid)
-            ->Set("editado_por", this->uid)
-            ->Set("nivel", level);
-
-            db->Exec(sql->Insert());
+            new Log("2", this->uidInfo["user_id"], this->editInfo["login"] + " -> " + login);
+            sql->Where("user_id", this->editInfo["user_id"]);
+            db->Exec(sql->Update());
         }
         else
         {
-            new Log("1", this->uid, aux);
+            new Log("1", this->uidInfo["user_id"], login);
 
-            sql = new SQLHandler();
-            sql->Table("usuarios")
-            ->Set("nome", name)
-            ->Set("login", login)
-            ->Set("senha", sha256(passwd))
-            ->Set("criado_em", Log::DateTimeNow())
-            ->Set("editado_em", Log::DateTimeNow())
-            ->Set("criado_por", this->uid)
-            ->Set("editado_por", this->uid)
-            ->Set("nivel", level);
+            sql->Set("criado_por", this->uidInfo["user_id"])
+               ->Set("criado_em", Log::DateTimeNow());
 
             db->Exec(sql->Insert());
         }
-        wxMessageDialog dlg(this, _("The user was registered with success!"), _("Success"), wxICON_INFORMATION);
+
+        wxString msg = (this->flag) ? _("The user was edited with success!") : _("The user was registered with success!");
+
+        wxMessageDialog dlg(this, msg, _("Success"), wxICON_INFORMATION);
         dlg.ShowModal();
         Close(true);
     }

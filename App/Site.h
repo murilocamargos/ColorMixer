@@ -67,11 +67,9 @@ public:
         void OnMenuHelpAbout(wxCommandEvent& event);
         void OnMenuSettingsPlant(wxCommandEvent& event);
         void OnMenuUserNew(wxCommandEvent& event);
-        void OnMenuUserEdit(wxCommandEvent& event);
-        void OnMenuUserErase(wxCommandEvent& event);
         void OnMenuUserSearch(wxCommandEvent& event);
+        void OnMenuUserEdit(wxCommandEvent& event);
         void OnMenuLogView(wxCommandEvent& event);
-        void SearchUser(bool btn_e = true, bool btn_d = true);
 		//************************
 
 		enum {
@@ -82,9 +80,8 @@ public:
             MENU_FILE_OPEN,
             MENU_FILE_QUIT,
             MENU_USER_NEW,
-            MENU_USER_EDIT,
-            MENU_USER_ERASE,
             MENU_USER_SEARCH,
+            MENU_USER_EDIT,
             MENU_LOG_VIEW,
             MENU_HELP,
             MENU_HELP_ABOUT,

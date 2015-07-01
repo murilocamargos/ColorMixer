@@ -17,9 +17,8 @@ BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_MENU(MENU_FILE_OPEN, Site::OnMenuFileOpen)
     EVT_MENU(MENU_FILE_QUIT, Site::OnMenuFileQuit)
     EVT_MENU(MENU_USER_NEW, Site::OnMenuUserNew)
-    EVT_MENU(MENU_USER_EDIT, Site::OnMenuUserEdit)
-    //EVT_MENU(MENU_USER_ERASE, Site::OnMenuUserErase)
     EVT_MENU(MENU_USER_SEARCH, Site::OnMenuUserSearch)
+    EVT_MENU(MENU_USER_EDIT, Site::OnMenuUserEdit)
     EVT_MENU(MENU_LOG_VIEW, Site::OnMenuLogView)
     EVT_MENU(MENU_HELP, Site::OnMenuHelp)
     EVT_MENU(MENU_HELP_ABOUT, Site::OnMenuHelpAbout)
@@ -283,39 +282,26 @@ void Site::OnMenuHelpAbout(wxCommandEvent & event)
 }
 void Site::OnMenuUserNew(wxCommandEvent& event)
 {
-    InsertUserScreen *ins = new InsertUserScreen(uid, _("Insert User"),false, wxEmptyString, wxEmptyString, this);
-    ins->SetIcon(wxICON(ADDUS_IC));
+    InsertUserScreen *ins = new InsertUserScreen(uid, _("Insert User"), this);
+    ins->SetIcon(wxICON(ADDUSER_ICON));
     ins->Show(TRUE);
 }
 void Site::OnMenuUserEdit(wxCommandEvent& event)
 {
-    SQLHandler *sql = new SQLHandler();
-    SQLiteHandler *db = new SQLiteHandler();
-
-    sql->Table("usuarios")->Where("user_id", uid)->Column("nome")->Column("login");
-    db->Select(sql);
-
-    std::string name = db->rows[0]["nome"];
-    std::string login = db->rows[0]["login"];
-
-    InsertUserScreen *ins = new InsertUserScreen(uid, _("Insert User"), true, name, login, this);//**Falta acess level!
-    ins->SetIcon(wxICON(ADDUS_IC));
+    InsertUserScreen *ins = new InsertUserScreen(uid, _("Edit User"), this, uid);
+    ins->SetIcon(wxICON(ADDUSER_ICON));
     ins->Show(TRUE);
-    this->Close();
 }
 void Site::OnMenuUserSearch(wxCommandEvent& event)
 {
-    SearchUser(false,false);
+    SearchUserScreen *sea = new SearchUserScreen(this, uid, wxID_ANY, _("Search User"));
+    sea->SetIcon(wxICON(FIND_ICON));
+    sea->Show(TRUE);
 }
+
 void Site::OnMenuLogView(wxCommandEvent& event)
 {
     LogScreen *sea = new LogScreen(this, wxID_ANY, _("Log Audition"));
     sea->SetIcon(wxICON(LOG_ICON));
-    sea->Show(TRUE);
-}
-void Site::SearchUser(bool btn_e,bool btn_d)
-{
-    SearchUserScreen *sea = new SearchUserScreen(this, uid, wxID_ANY, btn_e, btn_d, _("Search User"));
-    sea->SetIcon(wxICON(FIND_ICON));
     sea->Show(TRUE);
 }

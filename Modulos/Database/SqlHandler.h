@@ -27,6 +27,8 @@ private:
     //!< Mapa que relaciona uma coluna com seu valor.
     std::map<std::string, std::string> _vars;
 
+    bool join;
+
     std::map<int, wxString> oprMap;
 
 public:

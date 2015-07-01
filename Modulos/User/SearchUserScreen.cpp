@@ -1,30 +1,28 @@
 #include "SearchUserScreen.h"
+#include "../Log/Log.h"
+
 #include <sstream>
 
 BEGIN_EVENT_TABLE(SearchUserScreen, wxDialog)
-    EVT_BUTTON(SEARCH, SearchUserScreen::Search)
     EVT_BUTTON(EDIT, SearchUserScreen::Edit)
     EVT_BUTTON(DEL, SearchUserScreen::Delete)
-    EVT_BUTTON(CANCEL, SearchUserScreen::Cancel)
-    EVT_CHOICE(ID, SearchUserScreen::Choice_ID)
-    EVT_CHOICE(ID2, SearchUserScreen::Choice_RDate)
+    EVT_CHOICE(CHOICE_ID_OPR, SearchUserScreen::OnChoiceIDOpr)
+    EVT_CHOICE(CHOICE_DATE_OPR, SearchUserScreen::OnChoiceDateOpr)
+    EVT_CHOICE(ALL_CHOICE, SearchUserScreen::OnChoice)
+    EVT_TEXT(ALL_TEXT_CHANGE, SearchUserScreen::OnTextChange)
+    EVT_DATE_CHANGED(ALL_DATE, SearchUserScreen::OnDate)
     EVT_DATAVIEW_SELECTION_CHANGED(DSC, SearchUserScreen::DataSelected)
 END_EVENT_TABLE()
 
 using namespace std;
 
-///Função para formatar dados para pesquisa em BD
-std::string str2str(std::string opc)
-{
-    if (opc == wxEmptyString)
-        return "";
-    return opc;
-}
-SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID id, bool btn_e, bool btn_d, const wxString& title,
+SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID id, const wxString& title,
                                    const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	this->Uid = uid;
+	//this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->uid = uid;
+	this->sql = new SQLHandler();
+	this->db = new SQLiteHandler();
 
 	wxBoxSizer* bSizer9;
 	bSizer9 = new wxBoxSizer( wxVERTICAL );
@@ -35,23 +33,23 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 	wxBoxSizer* bSizer6;
 	bSizer6 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText2 = new wxStaticText( this, wxID_ANY, wxT("ID:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2 = new wxStaticText( this, wxID_ANY, _("ID") + ":", wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2->Wrap( -1 );
 	bSizer6->Add( m_staticText2, 0, wxALL, 5 );
 
-	wxString choice_idChoices[] = { wxT("="), wxT("!="), wxT(">"), wxT("<"), wxT(">="), wxT("<="), wxT("Between") };
-	int choice_idNChoices = sizeof( choice_idChoices ) / sizeof( wxString );
-	choice_id = new wxChoice( this, ID, wxDefaultPosition, wxSize( 110,-1 ), choice_idNChoices, choice_idChoices, 0 );
+	int oprs1[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    wxArrayString choices1 = this->sql->GetOpr( oprs1, 8 );
+	choice_id = new wxChoice( this, CHOICE_ID_OPR, wxDefaultPosition, wxSize( 110,-1 ), choices1, 0 );
 	choice_id->SetSelection( 0 );
 	bSizer6->Add( choice_id, 0, wxALL, 5 );
 
 	wxBoxSizer* bSizer7;
 	bSizer7 = new wxBoxSizer( wxHORIZONTAL );
 
-	Input_id = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	Input_id = new wxTextCtrl( this, ALL_TEXT_CHANGE, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0, wxTextValidator(wxFILTER_NUMERIC) );
 	bSizer7->Add( Input_id, 0, wxALL, 5 );
 
-	Input_id2 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	Input_id2 = new wxTextCtrl( this, ALL_TEXT_CHANGE, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), 0, wxTextValidator(wxFILTER_NUMERIC) );
 	Input_id2->Enable(false);
 	bSizer7->Add( Input_id2, 0, wxALL, 5 );
 
@@ -67,9 +65,9 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 
 	bSizer20->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	wxString choice1Choices[] = { wxT("AND"), wxT("OR") };
+	wxString choice1Choices[] = { _("And"), _("Or") };
 	int choice1NChoices = sizeof( choice1Choices ) / sizeof( wxString );
-	choice1 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50,30 ), choice1NChoices, choice1Choices, 0 );
+	choice1 = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 50,30 ), choice1NChoices, choice1Choices, 0 );
 	choice1->SetSelection( 0 );
 	bSizer20->Add( choice1, 0, wxALL, 5 );
 
@@ -82,20 +80,20 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 	wxBoxSizer* bSizer61;
 	bSizer61 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText21 = new wxStaticText( this, wxID_ANY, wxT("Login:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText21 = new wxStaticText( this, wxID_ANY, _("Login") + ":", wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText21->Wrap( -1 );
 	bSizer61->Add( m_staticText21, 0, wxALL, 5 );
 
-	wxString choice_loginChoices[] = { wxT("="), wxT("!="), wxT("Contains"), wxT("Begins with"), wxT("Ends with") };
-	int choice_loginNChoices = sizeof( choice_loginChoices ) / sizeof( wxString );
-	choice_login = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 110,-1 ), choice_loginNChoices, choice_loginChoices, 0 );
+	int oprs2[] = {1, 2, 9, 10, 11};
+    wxArrayString choices2 = this->sql->GetOpr( oprs2, 5 );
+	choice_login = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 110,-1 ), choices2, 0 );
 	choice_login->SetSelection( 0 );
 	bSizer61->Add( choice_login, 0, wxALL, 5 );
 
 	wxBoxSizer* bSizer71;
 	bSizer71 = new wxBoxSizer( wxHORIZONTAL );
 
-	login = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 110,-1 ), 0 );
+	login = new wxTextCtrl( this, ALL_TEXT_CHANGE, wxEmptyString, wxDefaultPosition, wxSize( 110,-1 ), 0 );
 	bSizer71->Add( login, 0, wxALL, 5 );
 
 
@@ -110,9 +108,9 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 
 	bSizer201->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	wxString choice2Choices[] = { wxT("AND"), wxT("OR") };
+	wxString choice2Choices[] = { _("And"), _("Or") };
 	int choice2NChoices = sizeof( choice2Choices ) / sizeof( wxString );
-	choice2 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50,30 ), choice2NChoices, choice2Choices, 0 );
+	choice2 = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 50,30 ), choice2NChoices, choice2Choices, 0 );
 	choice2->SetSelection( 0 );
 	bSizer201->Add( choice2, 0, wxALL, 5 );
 
@@ -125,20 +123,20 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 	wxBoxSizer* bSizer611;
 	bSizer611 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText211 = new wxStaticText( this, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText211 = new wxStaticText( this, wxID_ANY, _("Name") + ":", wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText211->Wrap( -1 );
 	bSizer611->Add( m_staticText211, 0, wxALL, 5 );
 
-	wxString choice_nameChoices[] = { wxT("="), wxT("!="), wxT("Contains"), wxT("Begins with"), wxT("Ends with") };
-	int choice_nameNChoices = sizeof( choice_nameChoices ) / sizeof( wxString );
-	choice_name = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 110,-1 ), choice_nameNChoices, choice_nameChoices, 0 );
+	int oprs3[] = {1, 2, 9, 10, 11};
+    wxArrayString choices3 = this->sql->GetOpr( oprs3, 5 );
+	choice_name = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 110,-1 ), choices3, 0 );
 	choice_name->SetSelection( 0 );
 	bSizer611->Add( choice_name, 0, wxALL, 5 );
 
 	wxBoxSizer* bSizer711;
 	bSizer711 = new wxBoxSizer( wxHORIZONTAL );
 
-	username = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 110,-1 ), 0 );
+	username = new wxTextCtrl( this, ALL_TEXT_CHANGE, wxEmptyString, wxDefaultPosition, wxSize( 110,-1 ), 0 );
 	bSizer711->Add( username, 0, wxALL, 5 );
 
 
@@ -153,7 +151,7 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 
 	bSizer202->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	wxString choice3Choices[] = { wxT("AND"), wxT("OR") };
+	wxString choice3Choices[] = { _("And"), wxT("OR") };
 	int choice3NChoices = sizeof( choice3Choices ) / sizeof( wxString );
 	choice3 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50,30 ), choice3NChoices, choice3Choices, 0 );
 	choice3->SetSelection( 0 );
@@ -168,22 +166,22 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 	wxBoxSizer* bSizer6111;
 	bSizer6111 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText2111 = new wxStaticText( this, wxID_ANY, wxT("Access Level:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2111 = new wxStaticText( this, wxID_ANY, _("Access Level") + ":", wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2111->Wrap( -1 );
 	bSizer6111->Add( m_staticText2111, 0, wxALL, 5 );
 
-	wxString choice_alChoices[] = { wxT("="), wxT("!=") };
-	int choice_alNChoices = sizeof( choice_alChoices ) / sizeof( wxString );
-	choice_al = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 110,-1 ), choice_alNChoices, choice_alChoices, 0 );
+	int oprs4[] = {1, 2};
+    wxArrayString choices4 = this->sql->GetOpr( oprs4, 2 );
+	choice_al = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 110,-1 ), choices4, 0 );
 	choice_al->SetSelection( 0 );
 	bSizer6111->Add( choice_al, 0, wxALL, 5 );
 
 	wxBoxSizer* bSizer7111;
 	bSizer7111 = new wxBoxSizer( wxHORIZONTAL );
 
-	wxString acess_levelChoices[] = { wxT("All"), wxT("Admin"),  wxT("User") };
+	wxString acess_levelChoices[] = { _("All"), _("Admin"),  _("User") };
 	int acess_levelNChoices = sizeof( acess_levelChoices ) / sizeof( wxString );
-	access_level = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 110,-1 ), acess_levelNChoices, acess_levelChoices, 0 );
+	access_level = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 110,-1 ), acess_levelNChoices, acess_levelChoices, 0 );
 	access_level->SetSelection( 0 );
 	bSizer7111->Add( access_level, 0, wxALL, 5 );
 
@@ -199,9 +197,9 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 
 	bSizer203->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	wxString choice4Choices[] = { wxT("AND"), wxT("OR") };
+	wxString choice4Choices[] = { _("And"), _("Or") };
 	int choice4NChoices = sizeof( choice4Choices ) / sizeof( wxString );
-	choice4 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50,30 ), choice4NChoices, choice4Choices, 0 );
+	choice4 = new wxChoice( this, ALL_CHOICE, wxDefaultPosition, wxSize( 50,30 ), choice4NChoices, choice4Choices, 0 );
 	choice4->SetSelection( 0 );
 	bSizer203->Add( choice4, 0, wxALL, 5 );
 
@@ -214,23 +212,24 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 	wxBoxSizer* bSizer62;
 	bSizer62 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText22 = new wxStaticText( this, wxID_ANY, wxT("Registered in:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText22 = new wxStaticText( this, wxID_ANY, _("Registered in") + ":", wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	bSizer62->Add( m_staticText22, 0, wxALL, 5 );
 
-	wxString choice_riChoices[] = { wxT("="), wxT("!="), wxT(">"), wxT("<"), wxT(">="), wxT("<="), wxT("Between") };
-	int choice_riNChoices = sizeof( choice_riChoices ) / sizeof( wxString );
-	choice_ri = new wxChoice( this, ID2, wxDefaultPosition, wxSize( 180,-1 ), choice_riNChoices, choice_riChoices, 0 );
+    int oprs5[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    wxArrayString choices5 = this->sql->GetOpr( oprs5, 9 );
+	choice_ri = new wxChoice( this, CHOICE_DATE_OPR, wxDefaultPosition, wxSize( 180,-1 ), choices5, 0 );
 	choice_ri->SetSelection( 0 );
 	bSizer62->Add( choice_ri, 0, wxALL, 5 );
 
 	wxBoxSizer* bSizer72;
 	bSizer72 = new wxBoxSizer( wxHORIZONTAL );
 
-	rdate = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxSize( 85,-1 ), wxDP_DEFAULT );
+	rdate = new wxDatePickerCtrl( this, ALL_DATE, wxDefaultDateTime, wxDefaultPosition, wxSize( 85,-1 ), wxDP_DEFAULT|wxDP_DROPDOWN );
+	rdate->Enable( false );
 	bSizer72->Add( rdate, 0, wxALL, 5 );
 
-	rdate2 = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxSize( 85,-1 ), wxDP_DEFAULT );
+	rdate2 = new wxDatePickerCtrl( this, ALL_DATE, wxDefaultDateTime, wxDefaultPosition, wxSize( 85,-1 ), wxDP_DEFAULT|wxDP_DROPDOWN );
 	rdate2->Enable( false );
 	bSizer72->Add( rdate2, 0, wxALL, 5 );
 
@@ -247,10 +246,22 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 	bSizer11 = new wxBoxSizer( wxVERTICAL );
 
 	users_result = new wxDataViewListCtrl( this, DSC, wxDefaultPosition, wxSize( 900,300 ), 0 );
-    users_result->AppendTextColumn("User ID");
-	users_result->AppendTextColumn("Name");
-	users_result->AppendTextColumn("Login");
-	users_result->AppendTextColumn("Nivel de Acesso");
+    users_result->AppendTextColumn(_("ID"));
+	users_result->AppendTextColumn(_("Name"), wxDATAVIEW_CELL_INERT, 150);
+	users_result->AppendTextColumn(_("Login"), wxDATAVIEW_CELL_INERT, 150);
+	users_result->AppendTextColumn(_("Access level"));
+	users_result->AppendTextColumn(_("Registered in"), wxDATAVIEW_CELL_INERT, 150);
+	users_result->AppendTextColumn(_("Registered by"), wxDATAVIEW_CELL_INERT, 150);
+
+	this->Populate(sql->Table("usuarios u")
+                      ->Join("usuarios v", "u.criado_por = v.user_id")
+                      ->Column("u.user_id")
+                      ->Column("u.nome")
+                      ->Column("u.login")
+                      ->Column("u.criado_em")
+                      ->Column("u.nivel")
+                      ->Column("v.nome as criado_por"));
+
 	bSizer11->Add( users_result, 0, wxALL, 5 );
 
 
@@ -262,19 +273,13 @@ SearchUserScreen::SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID
 
 	bSizer12->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	sea = new wxButton( this, SEARCH, wxT("Search"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer12->Add( sea, 0, wxALL, 5 );
-
-	del = new wxButton( this, DEL, wxT("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
-	del->Enable(btn_d);
+	del = new wxButton( this, DEL, _("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
+	del->Enable(false);
 	bSizer12->Add( del, 0, wxALL, 5 );
 
-	edit = new wxButton( this, EDIT, wxT("Edit"), wxDefaultPosition, wxDefaultSize, 0 );
-	edit->Enable(btn_e);
+	edit = new wxButton( this, EDIT, _("Edit"), wxDefaultPosition, wxDefaultSize, 0 );
+	edit->Enable(false);
 	bSizer12->Add( edit, 0, wxALL, 5 );
-
-	cancel = new wxButton( this, CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer12->Add( cancel, 0, wxALL, 5 );
 
 
 	bSizer9->Add( bSizer12, 1, wxEXPAND, 5 );
@@ -290,126 +295,182 @@ SearchUserScreen::~SearchUserScreen()
 {
 }
 
-void SearchUserScreen::Search(wxCommandEvent& event)
+void SearchUserScreen::Find()
 {
+    where ID, LOGIN, NAME, LEVEL, DATE;
+
+    /////////////////////////////////////////////////////////////
+    wxString uid = this->Input_id->GetValue();
+    wxString uid2 = this->Input_id2->GetValue();
+    wxString uopr = this->choice_id->GetString(this->choice_id->GetSelection());
+
+    ID.col  = "u.user_id";
+    ID.opr  = this->sql->GetOpr(uopr);
+    ID.val1 = uid;
+    ID.val2 = uid2;
+    ID.con  = "AND";
+    /////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////
+    wxString lgn = this->login->GetValue();
+    wxString lopr = this->choice_login->GetString(this->choice_login->GetSelection());
+    wxString lcon = (this->choice1->GetSelection() == 0) ? "AND" : "OR";
+
+    LOGIN.col  = "u.login";
+    LOGIN.opr  = this->sql->GetOpr(lopr);
+    LOGIN.val1 = lgn;
+    LOGIN.val2 = "";
+    LOGIN.con  = lcon;
+    /////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////
+    wxString nome = this->username->GetValue();
+    wxString nopr = this->choice_name->GetString(this->choice_name->GetSelection());
+    wxString ncon = (this->choice2->GetSelection() == 0) ? "AND" : "OR";
+
+    NAME.col  = "u.nome";
+    NAME.opr  = this->sql->GetOpr(nopr);
+    NAME.val1 = nome;
+    NAME.val2 = "";
+    NAME.con  = ncon;
+    /////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////
+    wxString acs("");
+    if (this->access_level->GetSelection() > 0)
+        acs = wxString::Format("%i", this->access_level->GetSelection());
+    wxString alopr = this->choice_al->GetString(this->choice_al->GetSelection());
+    wxString alcon = (this->choice3->GetSelection() == 0) ? "AND" : "OR";
+
+    LEVEL.col  = "u.nivel";
+    LEVEL.opr  = this->sql->GetOpr(alopr);
+    LEVEL.val1 = acs;
+    LEVEL.val2 = "";
+    LEVEL.con  = alcon;
+    /////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////
+    wxString dopr = this->choice_ri->GetString(this->choice_ri->GetSelection());
+    wxDateTime d1 = this->rdate->GetValue(), d2 = this->rdate2->GetValue();
+
+    DATE = this->sql->GetDateWhere(this->sql->GetOpr(dopr), d1, d2);
+
+    wxString dcon = (this->choice4->GetSelection() == 0) ? "AND" : "OR";
+
+    DATE.col = "u.criado_em";
+    DATE.con = dcon;
+    /////////////////////////////////////////////////////////////
+
+    sql->Table("usuarios u")
+       ->Join("usuarios v", "u.criado_por = v.user_id")
+       ->Column("u.user_id")
+       ->Column("u.nome")
+       ->Column("u.login")
+       ->Column("u.criado_em")
+       ->Column("u.nivel")
+       ->Column("v.nome as criado_por")
+       ->Where(ID)
+       ->Where(LOGIN)
+       ->Where(NAME)
+       ->Where(LEVEL)
+       ->Where(DATE);
+
+    this->Populate(sql);
+}
+
+void SearchUserScreen::Populate(SQLHandler *sql)
+{
+    wxDateTime date;
+
     this->users_result->DeleteAllItems();
+
+    this->db->Select(sql);
     wxVector<wxVariant> data;
-    // Define a query sql a ser executada
-    SQLHandler *sql = new SQLHandler();
-    //sql->Clear();///Para evitar que sejam filtradas pesquisas a partir de dados desnecessários
-    SQLiteHandler *db = new SQLiteHandler();
-    where   wid,//id
-            wlogin,//login
-            wname,//name
-            wal,//access_level
-            wrd;//registered in
-    ///Montando campos de pesquisa do tipo 'where'
-    //ID
-    wid.val1 = str2str(string(this->Input_id->GetLineText(0).mb_str()));
-    if(this->Input_id2->IsEnabled())
+    std::map<std::string, wxString> levels;
+
+    levels["1"] = _("Admin");
+    levels["2"] = _("User");
+
+    for (unsigned int i = 0; i < this->db->rows.size(); i++)
     {
-        wid.val2 = str2str(string(this->Input_id2->GetLineText(0).mb_str()));
-    }
-    wid.opr = sql->GetOpr(this->choice_id->GetString(this->choice_id->GetCurrentSelection()));
-    wid.col = "user_id";
-    wid.con = "";
-    //Login
-    wlogin.val1 = str2str(string(this->login->GetLineText(0).mb_str()));
-    wlogin.val2 = "";
-    wlogin.col = "login";
-    wlogin.con = this->choice1->GetString(this->choice1->GetCurrentSelection());
-    wlogin.opr = sql->GetOpr(this->choice_login->GetString(this->choice_login->GetCurrentSelection()));
-    //Name
-    wname.val1 = str2str(string(this->username->GetLineText(0).mb_str()));
-    wname.val2 = "";
-    wname.col = "nome";
-    wname.con =this->choice2->GetString(this->choice2->GetCurrentSelection());
-    wname.opr = sql->GetOpr(this->choice_name->GetString(this->choice_name->GetCurrentSelection()));
-    //Access_level
-    wal.col = "nivel";
-    wal.con = this->choice3->GetString(this->choice3->GetCurrentSelection());
-    wal.opr = sql->GetOpr(this->choice_al->GetString(this->choice_al->GetCurrentSelection()));
+        date = Log::ToDateTime(wxString(this->db->rows[i]["criado_em"]));
 
-    std::stringstream convert; // stringstream used for the conversion
-    convert << this->access_level;//add the value of Number to the characters in the stream
-    wal.val1 = convert.str();
-    wal.val2 = "";
-    //Registered_in
-    wrd.opr = sql->GetOpr(this->choice_ri->GetString(this->choice_ri->GetCurrentSelection()));
-    wrd = sql->GetDateWhere(wrd.opr, rdate->GetValue(), rdate2->GetValue());
-    wrd.con = this->choice4->GetString(this->choice4->GetCurrentSelection());
-    wrd.col = "criado_em";
-
-    sql ->Table("usuarios")
-        ->Where(wid)
-        ->Where(wlogin)
-        ->Where(wname)
-        ->Where(wrd)
-        ->Column("user_id")
-        ->Column("nome")
-        ->Column("login")
-        ->Column("nivel");
-    db->Select(sql);
-
-    int nrows = db->NumRows(sql);
-    for (int i = 0;i<nrows;i++)
-    {
-        data.push_back(db->rows[i]["user_id"]);
-        data.push_back(db->rows[i]["nome"]);
-        data.push_back(db->rows[i]["login"]);
-        data.push_back(db->rows[i]["nivel"]);
-        this->users_result->AppendItem(data);
         data.clear();
+        data.push_back(wxVariant(wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["user_id"]))));
+        data.push_back(wxVariant(wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["nome"]))));
+        data.push_back(wxVariant(wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["login"]))));
+        data.push_back(wxVariant(levels[this->db->rows[i]["nivel"]]));
+        data.push_back(wxVariant(date.FormatISOCombined(' ')));
+        data.push_back(wxVariant(wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["criado_por"]))));
+        this->users_result->AppendItem(data);
     }
 }
+
+
+void SearchUserScreen::OnTextChange(wxCommandEvent& event)
+{
+    this->Find();
+}
+
 void SearchUserScreen::Edit(wxCommandEvent& event)
 {
-    InsertUserScreen *ins = new InsertUserScreen(Uid, _("Insert User"), true, uname, ulogin, this);//**Falta acess level!
-    ins->SetIcon(wxICON(ADDUS_IC));
+    std::string selectedUid = std::string(users_result->GetTextValue(users_result->GetSelectedRow(), 0).mb_str());
+    InsertUserScreen *ins = new InsertUserScreen(this->uid, _("Edit User"), this, selectedUid);
+    ins->SetIcon(wxICON(ADDUSER_ICON));
     ins->Show(TRUE);
     this->Close();
 }
+
 void SearchUserScreen::Delete(wxCommandEvent& event)
 {
-    // Define a query sql a ser executada
-    SQLHandler *sql = new SQLHandler();
-    SQLiteHandler *db = new SQLiteHandler();
-    //Deletar do bd
-    sql ->Table("usuarios")
-        ->Where("user_id", uid);
-    db->Exec(sql->Delete());
-    //Deletar da tabela de resposta à busca
-    this->users_result->DeleteItem(this->users_result->GetSelectedRow());
-}
-void SearchUserScreen::Cancel(wxCommandEvent& event)
-{
-    this->Input_id->Clear();
-    this->login->Clear();
-    this->username->Clear();
-    this->Close();
+    wxMessageDialog dlg(this, _("Do you really want to delete this user?"), _("Confirmation"), wxYES_NO);
+    int answer = dlg.ShowModal();
+
+    if (answer == wxID_YES)
+    {
+        std::string selectedUid = std::string(users_result->GetTextValue(users_result->GetSelectedRow(), 0).mb_str());
+        std::string selectedLogin = std::string(users_result->GetTextValue(users_result->GetSelectedRow(), 2).mb_str());
+
+        new Log("3", this->uid, selectedLogin);
+
+        this->sql->Table("usuarios")
+                 ->Where("user_id", selectedUid);
+
+        db->Exec(sql->Delete());
+
+        this->users_result->DeleteItem(this->users_result->GetSelectedRow());
+    }
 }
 
-void SearchUserScreen::Choice_ID(wxCommandEvent& event)
+void SearchUserScreen::OnChoiceIDOpr(wxCommandEvent& event)
 {
-    this->Input_id2->Enable(this->choice_id->GetCurrentSelection()== 6);
-    //Esse campo só será habilitado quando a escolha for "Between", onde ele é necessário.
+    this->Find();
+    int opr = this->sql->GetOpr(this->choice_id->GetString(this->choice_id->GetSelection()));
+    this->Input_id->Enable(opr > 0);
+    this->Input_id2->Enable((opr == 7 || opr == 8));
 }
-void SearchUserScreen::Choice_RDate(wxCommandEvent& event)
+
+void SearchUserScreen::OnChoiceDateOpr(wxCommandEvent& event)
 {
-    this->rdate2->Enable(this->choice_ri->GetCurrentSelection()== 6);
-    //Esse campo só será habilitado quando a escolha for "Between", onde ele é necessário.
+    this->Find();
+    int opr = this->sql->GetOpr(this->choice_ri->GetString(this->choice_ri->GetSelection()));
+    this->rdate->Enable(opr > 0);
+    this->rdate2->Enable((opr == 7 || opr == 8));
 }
+
+void SearchUserScreen::OnChoice(wxCommandEvent& event)
+{
+    this->Find();
+}
+
+void SearchUserScreen::OnDate(wxDateEvent& event)
+{
+    this->Find();
+}
+
 void SearchUserScreen::DataSelected(wxDataViewEvent &event)
 {
-    if(!edit->IsEnabled()&&!del->IsEnabled())
-    {
-        edit->Enable(true);
-        del->Enable(true);
-    }
-    int row = users_result->GetSelectedRow();
-    uid = users_result->GetTextValue(row,0);
-    uname = users_result->GetTextValue(row,1);
-    ulogin = users_result->GetTextValue(row,2);
-    ual = users_result->GetTextValue(row,3);
+    edit->Enable(true);
+    del->Enable(true);
 }
 

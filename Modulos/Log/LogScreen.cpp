@@ -89,17 +89,13 @@ LogScreen::LogScreen( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	SFConnectorBS2->Add( 0, 0, 1, wxEXPAND, 5 );
 
-    //wxArrayString choices = wxArrayString({_("And"), _("Or")});
-
 	wxString SFConnector2Choices[] = { _("And"), _("Or") };
 	int SFConnector2NChoices = sizeof( SFConnector2Choices ) / sizeof( wxString );
 	SFConnector2 = new wxChoice( this, ALL_CHOICES, wxDefaultPosition, wxSize( 50,30 ), SFConnector2NChoices, SFConnector2Choices, 0 );
 	SFConnector2->SetSelection( 0 );
 	SFConnectorBS2->Add( SFConnector2, 0, wxALL, 5 );
 
-
 	SFConnectorBS2->Add( 0, 0, 1, wxEXPAND, 5 );
-
 
 	searchFieldsBS->Add( SFConnectorBS2, 1, wxEXPAND, 5 );
 
@@ -111,9 +107,9 @@ LogScreen::LogScreen( wxWindow* parent, wxWindowID id, const wxString& title, co
 	SFDLabel->Wrap( -1 );
 	SFDateBS->Add( SFDLabel, 0, wxALL, 5 );
 
-	wxString SFDOperatorChoices[] = { _("Any"), "=", "!=", ">", "<", ">=", "<=", _("Between"), _("Not between") };
-	int SFDOperatorNChoices = sizeof( SFDOperatorChoices ) / sizeof( wxString );
-	SFDOperator = new wxChoice( this, CHOICE_DATE_OPR, wxDefaultPosition, wxSize( 180,-1 ), SFDOperatorNChoices, SFDOperatorChoices, 0 );
+	int oprs3[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    wxArrayString choices3 = this->sql->GetOpr( oprs3, 9 );
+	SFDOperator = new wxChoice( this, CHOICE_DATE_OPR, wxDefaultPosition, wxSize( 180,-1 ), choices3, 0 );
 	SFDOperator->SetSelection( 0 );
 	SFDateBS->Add( SFDOperator, 0, wxALL, 5 );
 

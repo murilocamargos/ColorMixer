@@ -16,6 +16,7 @@ SQLHandler::SQLHandler()
     this->oprMap[9] = _("Contains");
     this->oprMap[10] = _("Begins with");
     this->oprMap[11] = _("Ends with");
+    this->join = false;
 }
 
 wxString SQLHandler::GetOpr(int i)
@@ -81,6 +82,7 @@ SQLHandler* SQLHandler::Join(std::string table, std::string where)
 {
     this->_table += " JOIN " + table;
     this->_where.push_back("AND " + where);
+    this->join = true;
     return this;
 }
 SQLHandler* SQLHandler::NaturalJoin(std::string table)
@@ -217,10 +219,29 @@ std::string SQLHandler::GetWhere()
         return "";
     }
 
-    whr += this->_where[0].substr(4);
-    for (int i = 1; i < sz; i++)
+    int ini = (this->join) ? 1 : 0;
+
+    if (this->join)
     {
-        whr += " " + this->_where[i];
+        whr += this->_where[0].substr(4);
+        if (sz > 1)
+        {
+            whr += " AND (";
+        }
+    }
+
+    if (sz > ini)
+    {
+        whr += this->_where[ini].substr(4);
+        for (int i = ini+1; i < sz; i++)
+        {
+            whr += " " + this->_where[i];
+        }
+
+        if (this->join && sz > 1)
+        {
+            whr += ")";
+        }
     }
 
     return whr;

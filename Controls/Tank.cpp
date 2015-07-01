@@ -23,7 +23,7 @@ void TankMix::SetLevel(float qty_c1, float qty_c2)
     this->btnLevel->SetSize(wxSize(26, 183 * perc));
     this->btnLevel->SetPosition(levelIniPos + wxPoint(0, 183 - this->btnLevel->GetSize().GetHeight()));
 
-    this->lblLevel->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
+    this->lblLevel->SetLabel(_("Level") + ": " + wxString::Format("%.2f", perc * 100) + "%");
 
     this->MixColors();
     this->btnLevel->SetBackgroundColour(this->btnColor->GetColor());
@@ -72,7 +72,7 @@ Tank::Tank(wxWindow *parent, wxColour color, float level, float maxLevel, wxStri
     bmpTkLeft = new wxStaticBitmap( this, wxID_ANY, wxBitmap( "Images/Site/tkleft.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
     bmpTkRight = new wxStaticBitmap( this, wxID_ANY, wxBitmap( "Images/Site/tkright.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
 
-    lblLevel = new wxStaticText( this, wxID_ANY, _("Level: 0%"), wxDefaultPosition, wxSize( 95,17 ), 0 );
+    lblLevel = new wxStaticText( this, wxID_ANY, _("Level") + ": 0.00%", wxDefaultPosition, wxSize( 95,17 ), 0 );
 
     this->btnColor = new ColorSelect(this, wxSize(115, -1), color);
     this->btnColor->Enable(false);
@@ -139,5 +139,5 @@ void Tank::SetLevel(float qty)
 
     this->btnLevel->SetSize(wxSize(26, 183 * perc));
     this->btnLevel->SetPosition(levelIniPos + wxPoint(0, 183 - this->btnLevel->GetSize().GetHeight()));
-    this->lblLevel->SetLabel(_("Nível:") + " " + wxString::Format("%.2f", perc * 100) + "%");
+    this->lblLevel->SetLabel(_("Level") + ": " + wxString::Format("%.2f", perc * 100) + "%");
 }

@@ -32,15 +32,46 @@ private:
     std::map<int, wxString> oprMap;
 
 public:
+    //! \brief Define os tipos de operadoes padrão.
+    //! \details Os tipos definidos são:
+    //! Any, =, !=, >, <, >=, <=, Between, Not between, Contains, Begins with, Ends with.
     SQLHandler();
 
+    //! \brief Obtém um operador.
+    //! \param i Índice inteiro do operador na lista.
+    //! \return opr O operador em forma de string.
     wxString GetOpr(int i);
-    wxArrayString GetOpr(int oprs[], int size);
+
+    //! \brief Obtém um operador.
+    //! \param opr String que determina o operador.
+    //! \return i Ínidice inteiro do operador na lista.
     int GetOpr(wxString opr);
 
+    //! \brief Obtém uma lista de operadores.
+    //! \param oprs[] Array contendo os índices dos operadores.
+    //! \param size Tamanho do array.
+    //! \return oprs Uma Array de strings com todos os operadores pedidos.
+    wxArrayString GetOpr(int oprs[], int size);
+
+    //! \brief Define parâmetro where de duas datas relacionadas por um operador.
+    //! \param opr Índice inteiro do operador na lista de operadores.
+    //! \param d1 `wxDateTime` primeira data.
+    //! \param d2 `wxDateTime` segunda data.
+    //! \return where O where processado a partir do operador.
+    //! \details Os operadores gerais não funcionam da mesma forma com datas,
+    //! este método encapsula o processamento de duas datas quaisquer a partir
+    //! de um operador qualquer.
     static where GetDateWhere(int opr, wxDateTime d1, wxDateTime d2);
 
+    //! \brief Faz a junção de duas tabelas.
+    //! \param table Nome da tabela.
+    //! \param where Condição de junção.
+    //! \return A própria instância.
     SQLHandler* Join(std::string table, std::string where);
+
+    //! \brief Faz a junção natural de duas tabelas.
+    //! \param table Nome da tabela.
+    //! \return A própria instância.
     SQLHandler* NaturalJoin(std::string table);
 
     //! \brief Definição da tabela.
@@ -68,12 +99,12 @@ public:
     //! o Between, Contains, Begins With e o Ends With.
     //!
     //! O novo tipo <b>where</b> possui os atributos
-    //! - `nome`: nome da coluna do banco a que se refere.
-    //! - `signal`: tipo do operador a ser utilizado.
-    //! - `val_1`: valor a ser usado na comparação.
-    //! - `val_2`: segundo valor a ser usado na comparação, caso o usuário
+    //! - `col`: nome da coluna do banco a que se refere.
+    //! - `opr`: tipo do operador a ser utilizado.
+    //! - `val1`: valor a ser usado na comparação.
+    //! - `val2`: segundo valor a ser usado na comparação, caso o usuário
     //!            queira usar o Between.
-    //! - `connector`: O tipo de conexão entre predicados, AND ou OR.
+    //! - `con`: O tipo de conexão entre predicados, AND ou OR.
     SQLHandler* Where(where info);
 
     //! \brief Define o parâmetro <b>`where`</b> de uma consulta SQL.
@@ -157,6 +188,8 @@ public:
     //! \example SQLHandlerWhere.cpp
     //! \example SQLHandlerColumn.cpp
     //! \example SQLHandlerTable.cpp
+    //! \example SQLHandlerJoin.cpp
+    //! \example SQLHandlerNaturalJoin.cpp
 };
 
 #endif

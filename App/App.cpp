@@ -30,11 +30,11 @@ bool App::OnInit()
 int App::OnExit()
 {
     // Salva ultimo idioma utilizado pelo usuário
-    /*wxConfig config(GetAppName());
+    wxConfig config(GetAppName());
     long language = (this->locale->GetLanguage());
     config.Write(wxT("wxTranslation_Language"), language);
     config.Flush();
-    */
+
     return 1;
 }
 
@@ -42,10 +42,7 @@ long App::LoadLang()
 {
     wxConfig config(GetAppName());
     long language;
-    if(!config.Read(wxT("wxTranslation_Language"), &language, wxLANGUAGE_PORTUGUESE))
-    {
-        language = wxLANGUAGE_PORTUGUESE;
-    }
+    config.Read(wxT("wxTranslation_Language"), &language, wxLANGUAGE_PORTUGUESE);
     return language;
 }
 
@@ -58,9 +55,10 @@ bool App::SetLocale(long lang)
 
     // Busca pelos arquivos de tradução nos diretórios abaixo.
     this->locale->AddCatalogLookupPathPrefix(wxT("./Languages"));
+    this->locale->AddCatalogLookupPathPrefix(wxT("./../Languages"));
     this->locale->AddCatalogLookupPathPrefix(wxT("../../Languages"));
 
-    this->locale->AddCatalog(wxT("App"));
+    this->locale->AddCatalog("myapp");
 
     return this->locale->IsOk();
 }
@@ -69,7 +67,11 @@ bool App::OpenFrame(std::string uid, long lang)
 {
     this->SetLocale(lang);
 
-    Site *frame = new Site(_("ColorMixer"), this, uid);
+    int x = wxSystemSettings::GetMetric( wxSYS_SCREEN_X );
+    int y = wxSystemSettings::GetMetric( wxSYS_SCREEN_Y );
+    wxSize size = wxSize(MIN(1000, x), MIN(583, y));
+
+    Site *frame = new Site(_("ColorMixer"), this, uid, wxPoint(0, 0), size);
     frame->SetIcon(wxICON(APP_ICON));
     frame->Show(TRUE);
 

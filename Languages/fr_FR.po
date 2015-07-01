@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-05 00:43-0300\n"
+"PO-Revision-Date: 2015-06-07 08:59-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.7.7\n"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:176
+msgid "About"
+msgstr "A propôs"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:71
+msgid "About\tF2"
+msgstr "A propôs\tF2"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:54
+msgid "Access Level:"
+msgstr "Niveau d'accès"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:76
+msgid "Add User"
+msgstr "Ajouter un utilisateur"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:76
+msgid "Add a new user."
+msgstr "Ajouter un nouvel utilisateur."
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:19
+msgid "Admin"
+msgstr "Admin"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:102
+msgid "All files (*.*)|*.*"
+msgstr "Tous les fichiers(*.*)|*.*"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:120
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:94
+msgid "Cancel"
+msgstr "Annuler"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:120
+msgid "Close"
+msgstr "Fermer"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\TaskBar\TaskBar.cpp:15
+msgid "Close application"
+msgstr "Fermer l'application."
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\TaskBar\TaskBar.cpp:15
+msgid "Close window"
+msgstr "Fermer la fenêtre"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:118
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:176
+msgid ""
+"Developed by Luana Michelly and Murilo Camargos\n"
+"Computer Aided Project\n"
+"UNIMONTES"
+msgstr ""
+"Développé par Luana Michelly et Murilo Camargos\n"
+"Projet assistée par ordinateur\n"
+"UNIMONTES"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:118
+msgid "Do you really want to close the app?"
+msgstr "Voulez-vous vraiment quitter l'aplication?"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:24
+msgid "English"
+msgstr "Anglais"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:101
+msgid "Erase"
+msgstr "Effacer"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:58
+msgid "File"
+msgstr "Fichier"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:90
+msgid "File created"
+msgstr "Fichier créé"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:96
+msgid "File saved"
+msgstr "Fichier enregistré."
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:25
+msgid "French"
+msgstr "Français"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:50
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:70
+msgid "Get Help."
+msgstr "Obtenir  de l'aide"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:71
+msgid "Get to know us better!"
+msgstr "Apprendre à mieux nous connaître"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\Help\Help.cpp:9
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:59
+msgid "Help"
+msgstr "Aide"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:70
+msgid "Help\tF1"
+msgstr "Aide\tF1"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:111
+msgid "Insert User"
+msgstr "Insérer l'utilisateur"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:66
+msgid "Language:"
+msgstr "Langue :"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\App\MyApp.cpp:62
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:133
+msgid "Library"
+msgstr "Bibliothèque"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\App\MyApp.cpp:21
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:97
+msgid "Login"
+msgstr "Valider"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:41
+msgid "Login:"
+msgstr "Identifiant:"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:20
+msgid "Manager"
+msgstr "Manager"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:120
+msgid "Minimize"
+msgstr "Minimiser"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:28
+msgid "Name:"
+msgstr "Nom:"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:65
+msgid "New\tCtrl+N"
+msgstr "Nouveau\tControl+n"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:46
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:65
+msgid "New File."
+msgstr "Nouveau fichier"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:66
+msgid "Open\tCtrl+O"
+msgstr "Ouvrir\tControl+o"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:44
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:66
+msgid "Open File."
+msgstr "Ouvrir le fichier"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:85
+msgid "Password Again:"
+msgstr "Confirmez le mot de passe :"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:72
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:53
+msgid "Password:"
+msgstr "Mot de passe :"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:26
+msgid "Portuguese"
+msgstr "Portugais"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:69
+msgid "Quit\tCtrl+Q"
+msgstr "Quitter\tControl+Q"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:69
+msgid "Quit App."
+msgstr "Quitter l'application"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\TaskBar\TaskBar.cpp:14
+msgid "Reopen application"
+msgstr "Rouvrir l'application"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:106
+msgid "Save"
+msgstr "Enregistrer"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:67
+msgid "Save\tCtrl+S"
+msgstr "Enregistrer\tControl+S"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:48
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:67
+msgid "Save File."
+msgstr "Enregistrer le fichier"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:102
+msgid "Select a file"
+msgstr "Sélectionner la langue à l'application"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\TaskBar\TaskBar.cpp:14
+msgid "Show window"
+msgstr "Spectacle fenêtre"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:27
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:187
+msgid "Success"
+msgstr "Succès"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:161
+msgid "The passwords must be equal!"
+msgstr "Les mots de passes doivent être égaux !"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:187
+msgid "The user was registered with success!"
+msgstr "L'utilisateur a été enregistré avec succès !"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:163
+msgid "There is something wrong with your credentials!"
+msgstr "Il y a quelque chose de mal avec vos informations d'identification !"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:167
+msgid "This login is already registered!"
+msgstr "Cette identifiant est déjà inscrits !"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:21
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:60
+msgid "User"
+msgstr "Utilisateur"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:40
+msgid "Username:"
+msgstr "Nom d’utilisateur :"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:155
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:161
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:167
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LoginScreen.cpp:163
+msgid "Warning"
+msgstr "Avertissement"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:82
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:90
+msgid "You have created a new file!"
+msgstr "Vous avez créé un nouveau fichier!"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\InsertUserScreen.cpp:155
+msgid "You must fill all fields!"
+msgstr "Vous devez remplir tous les champs !"
+
+#: C:\Users\Luana\Documents\Estudos\Faculdade\PAC\pac-tpii\UserControl\LibraryScreen.cpp:96
+msgid "Your file was saved with success!"
+msgstr "Ton fichier a été enregistré avec succès!"
+
+#~ msgid "Change the app language to english!"
+#~ msgstr "Changer la langue à l'anglais"
+
+#~ msgid "Change the app language to french!"
+#~ msgstr "Changer la langue à le français!"
+
+#~ msgid "Change the app language to portuguese!"
+#~ msgstr "Changer la langue à le portugais!"
+
+#~ msgid "Change the app language."
+#~ msgstr "Changer la langue de l'application"
+
+#~ msgid "Languages"
+#~ msgstr "Language"
+
+#~ msgid "This language is already selected!"
+#~ msgstr "Cette langue est déjà sélectionné!"
+
+#~ msgid "This language is not supported by your system."
+#~ msgstr "Cette langue ne pas \"supported by your system\""

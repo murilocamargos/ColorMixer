@@ -86,13 +86,13 @@ void SiteLayout::OnAdvanceTime(wxCommandEvent& event)
         tankName = _("Tank") + " " + wxString::Format("%i", (i+1));
         if(perc[i] >= 0.85 && perc[i] < 0.95)
         {
-            wxMessageDialog dlg(this, tankName + _(" is filled with more than 85%!"), _("Warning"), wxICON_ERROR);
+            wxMessageDialog dlg(this, tankName + " " + _("is filled with more than") + " 85% " + _("of its maximum volume!"), _("Warning"), wxICON_ERROR);
             dlg.ShowModal();
         }
         if(perc[i] >= 0.95)
         {
             music->Play(filename, wxSOUND_SYNC);
-            wxMessageDialog dlg(this, tankName + _(" is filled with more than 95%!"), _("Warning"), wxICON_ERROR);
+            wxMessageDialog dlg(this, tankName + " " + _("is filled with more than") + " 95% " + _("of its maximum volume!"), _("Warning"), wxICON_ERROR);
             dlg.ShowModal();
         }
     }
@@ -175,78 +175,6 @@ SiteLayout::SiteLayout(wxWindow* parent, bool *operation, Config *cnf, std::stri
 	this->Layout();
     this->FitInside(); // ask the sizer about the needed size
     this->SetScrollRate(1,1);
-
-    /*this->operation = operation;
-    this->cnf = cnf;
-    this->uid = uid;
-
-    this->SetBackgroundColour(wxColour(228, 228, 228));
-
-    btnInitOpr = new wxButton(this, INITOPR, _("Start Operation"), wxDefaultPosition, wxDefaultSize, 0);
-	btnAdvance = new wxButton(this, ADVANCE, _("Advance Time"), wxDefaultPosition, wxDefaultSize, 0);
-
-	leftPipe_valvIn1  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-	rightPipe_valvIn1 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
-    leftPipe_valvIn2  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvIn2 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
-
-    leftPipe_valvOut1  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvOut1 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(CURVE_90), wxDefaultPosition, wxDefaultSize, 0);
-    leftPipe_valvOut2  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvOut2 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TEE), wxDefaultPosition, wxDefaultSize, 0);
-    leftPipe_valvOut3  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvOut3 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
-
-    this->vin1  = new Valve(this, this->cnf->vin1 , this->uid, "6");
-    this->vout1 = new Valve(this, this->cnf->vout1, this->uid, "8");
-    this->vin2  = new Valve(this, this->cnf->vin2 , this->uid, "7");
-    this->vout2 = new Valve(this, this->cnf->vout2, this->uid, "9");
-    this->vout3 = new Valve(this, this->cnf->vout3, this->uid, "10");
-
-    this->t1 = new Tank(this, this->cnf->tank1Color, 0, this->cnf->tank1MaxVol, "Tank1");
-    this->t2 = new Tank(this, this->cnf->tank2Color, 0, this->cnf->tank2MaxVol, "Tank2");
-    this->t3 = new TankMix(this, this->t1, this->t2, 0, this->cnf->tank3MaxVol, "Tank3");
-
-	wxFlexGridSizer *planta_grid = new wxFlexGridSizer(2, 11, 0, 0);
-	planta_grid->SetFlexibleDirection(wxBOTH);
-	planta_grid->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-
-	planta_grid->Add(leftPipe_valvIn1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vin1, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvIn1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->t1, 1, wxEXPAND, 0);
-	planta_grid->Add(leftPipe_valvOut1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vout1, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvOut1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
-	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
-	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
-
-
-	wxBoxSizer* sizerCtrl = new wxBoxSizer(wxVERTICAL);
-    sizerCtrl->Add(btnAdvance, 0, wxALL|wxEXPAND, 5);
-    sizerCtrl->Add(btnInitOpr, 0, wxALL|wxEXPAND, 5);
-
-	planta_grid->Add(sizerCtrl, 0, wxALL, 5);
-	planta_grid->Add(leftPipe_valvIn2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vin2, 1, wxALIGN_BOTTOM, 5);
-	planta_grid->Add(rightPipe_valvIn2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->t2, 1, wxEXPAND, 5);
-	planta_grid->Add(leftPipe_valvOut2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vout2, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvOut2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->t3, 1, wxEXPAND, 5);
-	planta_grid->Add(leftPipe_valvOut3, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vout3, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvOut3, 0, wxALIGN_BOTTOM|wxALL, 0);
-
-	this->SetSizer(planta_grid);
-	this->Layout();
-    this->FitInside(); // ask the sizer about the needed size
-    this->SetScrollRate(1,1);
-
-	this->btnAdvance->Enable(false);
-	*/
 }
 
 

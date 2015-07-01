@@ -73,6 +73,9 @@ public:
     //! Caso as informações fornecidas pelo usuário passe nos três testes,
     //! elas serão adicionadas ao banco. Uma entrada de Log também é adicionada.
     void Save(wxCommandEvent& event);
+
+    //! \brief Destrói a janela ao clicar no símbolo "x" padrão do windows.
+    //! \param event Evento de fechamento de janela.
     void OnClose(wxCloseEvent& event);
 
     DECLARE_EVENT_TABLE();

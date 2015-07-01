@@ -1,6 +1,6 @@
 Data de entrega
 ===============
-26/06
+01/07
 
 Divisão do Trabalho
 ===================
@@ -9,8 +9,8 @@ Divisão do Trabalho
 |-------------------------|-------------|----------------------------------|--------|-------------------------|--------|
 | Planta funcional        | Murilo      | Tanques e controles funcionais   | ok     |                         |        |
 | Configurações da planta | Murilo      | Unidades da planta               | ok     | Salvar/recuperar confs. | ok     |
-| Sistema de log          | Luana       | Verificação e exportação de logs |        |                         |        |
-| Sistema de usuários     | Luana       | Listagem, edição e exclusão      |        |                         |        |
+| Sistema de log          | Luana       | Verificação e exportação de logs | ok     |                         |        |
+| Sistema de usuários     | Luana       | Listagem, edição e exclusão      | ok     |                         |        |
 
 Obs: No item "Configurações da planta" vamos usar validators e wxFileDialog para salvar arquivos de configuração.
 
@@ -22,8 +22,8 @@ Reutilização do TPII
 | Splashscreen        | Luana       |  ok    |        |        |
 | Menu                | Luana       |  ok    |        |        |
 | Ícone na janela     | Murilo      |  ok    |        |        |
-| Internacionalização | Murilo      |        |        |        |
+| Internacionalização | Murilo      |  ok    |        |        |
 | Tela de login       | Luana       |  ok    |        |        |
 | Ícone na taskbar    | Luana       |  ok    |        |        |
 | Banco de Dados      | Murilo      |  ok    |        |        |
-| Ajuda               | Mur/Lu      |        |        |        |
+| Ajuda               | Mur/Lu      |  ok    |        |        |

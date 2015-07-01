@@ -173,7 +173,7 @@ void SiteConfig::ReloadLabels()
 {
     wxString newUnit = " (" + this->units->GetString(this->units->GetSelection()) + "):";
 
-    this->lblFlow->SetLabel(_("Flow at 100% open") + newUnit);
+    this->lblFlow->SetLabel(_("Valve maximum flow") + newUnit);
     this->lblVolMaxT1->SetLabelText(_("Maximum volume") + newUnit);
     this->lblVolMaxT2->SetLabelText(_("Maximum volume") + newUnit);
     this->lblVolMaxT3->SetLabelText(_("Maximum volume") + newUnit);

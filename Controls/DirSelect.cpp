@@ -7,6 +7,10 @@
 
 wxString DirSelect::PathDlg(wxString title, wxString defDir)
 {
+    if (title == "")
+    {
+        title = _("Choose directory");
+    }
     wxDirDialog dlg(NULL, title, defDir, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 
     if (dlg.ShowModal() == wxID_CANCEL)
@@ -17,6 +21,10 @@ wxString DirSelect::PathDlg(wxString title, wxString defDir)
 
 wxString DirSelect::FileDlg(wxString ext, wxString title, wxString defDir)
 {
+    if (title == "")
+    {
+        title = _("Choose file");
+    }
     wxFileDialog fd(NULL, title, defDir, "", ext, wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 
     if (fd.ShowModal() == wxID_CANCEL)

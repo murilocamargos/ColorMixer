@@ -1,7 +1,9 @@
-#include "SearchUserScreen.h"
-#include "../Log/Log.h"
+#include "../../App/Includes.h"
 
-#include <sstream>
+#include "SearchUserScreen.h"
+#include "InsertUserScreen.h"
+
+#include "../Log/Log.h"
 
 BEGIN_EVENT_TABLE(SearchUserScreen, wxDialog)
     EVT_BUTTON(EDIT, SearchUserScreen::Edit)

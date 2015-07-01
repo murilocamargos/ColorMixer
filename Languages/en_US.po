@@ -1,0 +1,686 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 16:47-0300\n"
+"PO-Revision-Date: 2015-07-01 16:48-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:323
+msgid "About"
+msgstr "About"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:232
+msgid "About\tF2"
+msgstr "About\tF2"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:72
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:171
+msgid "Access Level"
+msgstr "Access Level"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:254
+msgid "Access level"
+msgstr "Access level"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:238
+msgid "Add User"
+msgstr "Add User"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:238
+msgid "Add a new user."
+msgstr "Add a new user."
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:35
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:184
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:393
+msgid "Admin"
+msgstr "Admin"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:126
+msgid "Advance Time"
+msgstr "Advance Time"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:41
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:74
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:184
+msgid "All"
+msgstr "All"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:309
+msgid "All files (*.*)|*.*"
+msgstr "All files (*.*)|*.*"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:53
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:92
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:70
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:113
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:156
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:202
+msgid "And"
+msgstr "And"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Database\SqlHandler.cpp:7
+msgid "Any"
+msgstr "Any"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Database\SqlHandler.cpp:17
+msgid "Begins with"
+msgstr "Begins with"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Database\SqlHandler.cpp:14
+msgid "Between"
+msgstr "Between"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:92
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:45
+msgid "Cancel"
+msgstr "Cancel"
+
+#: C:\Faculdade\PAC\colormixer\Controls\DirSelect.cpp:12
+msgid "Choose directory"
+msgstr "Choose directory"
+
+#: C:\Faculdade\PAC\colormixer\Controls\DirSelect.cpp:26
+msgid "Choose file"
+msgstr "Choose file"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:45
+msgid "Close"
+msgstr "Close"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:16
+msgid "Close application"
+msgstr "Close application"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:16
+msgid "Close window"
+msgstr "Close window"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:73
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:97
+msgid "Color"
+msgstr "Color"
+
+#: C:\Faculdade\PAC\colormixer\App\App.cpp:76
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:277
+msgid "ColorMixer"
+msgstr "ColorMixer"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:277
+msgid "Configurations"
+msgstr "Configurations"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:234
+msgid "Configure the plant variables."
+msgstr "Configure the plant variables."
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:276
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:43
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:428
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Database\SqlHandler.cpp:16
+msgid "Contains"
+msgstr "Contains"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:106
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:143
+msgid "Date"
+msgstr "Date"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:278
+msgid "Delete"
+msgstr "Delete"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:323
+msgid ""
+"Developed by Luana Michelly and Murilo Camargos\n"
+"Computer Aided Project\n"
+"UNIMONTES"
+msgstr ""
+"Developed by Luana Michelly and Murilo Camargos\n"
+"Computer Aided Project\n"
+"UNIMONTES"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:276
+msgid "Do you really want to apply those changes?"
+msgstr "Do you really want to apply those changes?"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:43
+msgid "Do you really want to close the app?"
+msgstr "Do you really want to close the app?"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:428
+msgid "Do you really want to delete this user?"
+msgstr "Do you really want to delete this user?"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:282
+msgid "Edit"
+msgstr "Edit"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:247
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:334
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:420
+msgid "Edit User"
+msgstr "Edit User"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:247
+msgid "Edit current user."
+msgstr "Edit current user."
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Database\SqlHandler.cpp:18
+msgid "Ends with"
+msgstr "Ends with"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:22
+msgid "English"
+msgstr "English"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:271
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:298
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:303
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:319
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:324
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:294
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:303
+msgid "Error"
+msgstr "Error"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:136
+msgid "Export"
+msgstr "Export"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:159
+msgid "Export Log"
+msgstr "Export Log"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:215
+msgid "File"
+msgstr "File"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:297
+msgid "File created"
+msgstr "File created"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:303
+msgid "File saved"
+msgstr "File saved"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:55
+#, c-format
+msgid "Flow at 100% open"
+msgstr "Flow at 100% open"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:23
+msgid "French"
+msgstr "French"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:231
+msgid "Get Help."
+msgstr "Get Help."
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:232
+msgid "Get to know us better!"
+msgstr "Get to know us better!"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:218
+msgid "Help"
+msgstr "Help"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:231
+msgid "Help\tF1"
+msgstr "Help\tF1"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:38
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:251
+msgid "ID"
+msgstr "ID"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:137
+msgid "Import"
+msgstr "Import"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:142
+msgid "Info."
+msgstr "Info."
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:328
+msgid "Insert User"
+msgstr "Insert User"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:64
+msgid "Language"
+msgstr "Language"
+
+#: C:\Faculdade\PAC\colormixer\Controls\Tank.cpp:26
+#: C:\Faculdade\PAC\colormixer\Controls\Tank.cpp:75
+#: C:\Faculdade\PAC\colormixer\Controls\Tank.cpp:142
+msgid "Level"
+msgstr "Level"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:55
+msgid "Library"
+msgstr "Library"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:347
+msgid "Log Audition"
+msgstr "Log Audition"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:141
+msgid "Log Type"
+msgstr "Log Type"
+
+#: C:\Faculdade\PAC\colormixer\App\App.cpp:20
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:95
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:56
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:85
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:253
+msgid "Login"
+msgstr "Login"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:216
+msgid "Logs"
+msgstr "Logs"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:71
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:95
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:119
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:177
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:178
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:179
+msgid "Maximum volume"
+msgstr "Maximum volume"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:45
+msgid "Minimize"
+msgstr "Minimize"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:43
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:128
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:252
+msgid "Name"
+msgstr "Name"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:225
+msgid "New\tCtrl+N"
+msgstr "New\tCtrl+N"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:225
+msgid "New File."
+msgstr "New File."
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:277
+msgid "No"
+msgstr "No"
+
+#: C:\Faculdade\PAC\colormixer\Controls\ColorSelect.cpp:33
+msgid "None"
+msgstr "None"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Database\SqlHandler.cpp:15
+msgid "Not between"
+msgstr "Not between"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:226
+msgid "Open\tCtrl+O"
+msgstr "Open\tCtrl+O"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:226
+msgid "Open File."
+msgstr "Open File."
+
+#: C:\Faculdade\PAC\colormixer\Controls\Valve.cpp:39
+#: C:\Faculdade\PAC\colormixer\Controls\Valve.cpp:96
+msgid "Openness"
+msgstr "Openness"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:53
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:92
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:70
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:113
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:202
+msgid "Or"
+msgstr "Or"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:51
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:90
+msgid "Password"
+msgstr "Password"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:103
+msgid "Password Again"
+msgstr "Password Again"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:234
+msgid "Plant Config.\tf10"
+msgstr "Plant Config.\tf10"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:24
+msgid "Portuguese"
+msgstr "Portuguese"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:229
+msgid "Quit\tCtrl+Q"
+msgstr "Quit\tCtrl+Q"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:229
+msgid "Quit App."
+msgstr "Quit App."
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:256
+msgid "Registered by"
+msgstr "Registered by"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:217
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:255
+msgid "Registered in"
+msgstr "Registered in"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:15
+msgid "Reopen application"
+msgstr "Reopen application"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:135
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:119
+msgid "Save"
+msgstr "Save"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:227
+msgid "Save\tCtrl+S"
+msgstr "Save\tCtrl+S"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:227
+msgid "Save File."
+msgstr "Save File."
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:239
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:340
+msgid "Search User"
+msgstr "Search User"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:239
+msgid "Search for user."
+msgstr "Search for user."
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:309
+msgid "Select a file"
+msgstr "Select a file"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:219
+msgid "Settings"
+msgstr "Settings"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\TaskBar\TaskBar.cpp:15
+msgid "Show window"
+msgstr "Show window"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:25
+msgid "Spanish"
+msgstr "Spanish"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:45
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:122
+msgid "Start Operation"
+msgstr "Start Operation"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:40
+msgid "Stop Operation"
+msgstr "Stop Operation"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:286
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:329
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:318
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:212
+msgid "Success"
+msgstr "Success"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:86
+msgid "Tank"
+msgstr "Tank"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:88
+msgid "Tank 1"
+msgstr "Tank 1"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:112
+msgid "Tank 2"
+msgstr "Tank 2"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:129
+msgid "Tank 3"
+msgstr "Tank 3"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:329
+msgid "The configuration file was saved!"
+msgstr "The configuration file was saved!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:286
+msgid "The configuration was saved!"
+msgstr "The configuration was saved!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:318
+msgid "The log file was saved!"
+msgstr "The log file was saved!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:174
+msgid "The passwords must be equal!"
+msgstr "The passwords must be equal!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:210
+msgid "The user was edited with success!"
+msgstr "The user was edited with success!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:210
+msgid "The user was registered with success!"
+msgstr "The user was registered with success!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:158
+msgid "There is something wrong with your credentials!"
+msgstr "There is something wrong with your credentials!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:180
+msgid "This login is already registered!"
+msgstr "This login is already registered!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:66
+msgid "Type"
+msgstr "Type"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:49
+msgid "Units"
+msgstr "Units"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:217
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:33
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:140
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:31
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:184
+#: C:\Faculdade\PAC\colormixer\Modulos\User\SearchUserScreen.cpp:394
+msgid "User"
+msgstr "User"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:38
+msgid "Username"
+msgstr "Username"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:176
+msgid "Valve maximum flow"
+msgstr "Valve maximum flow"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:65
+msgid "Valves"
+msgstr "Valves"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:241
+msgid "View Logs"
+msgstr "View Logs"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:241
+msgid "View system logs"
+msgstr "View system logs"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:35
+msgid "Volume unit"
+msgstr "Volume unit"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:89
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:95
+#: C:\Faculdade\PAC\colormixer\Modulos\Login\LoginScreen.cpp:158
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:168
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:174
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:180
+msgid "Warning"
+msgstr "Warning"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:324
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:303
+msgid "We couldn't create the file in this directory!"
+msgstr "We couldn't create the file in this directory!"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:259
+msgid "Welcome"
+msgstr "Welcome"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:277
+msgid "Yes"
+msgstr "Yes"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:271
+msgid "You can not make any changes with the plant operating!"
+msgstr "You can not make any changes with the plant operating!"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:297
+msgid "You have created a new file!"
+msgstr "You have created a new file!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:303
+msgid "You have provided an invalid '.cnf' file!"
+msgstr "You have provided an invalid '.cnf' file!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\User\InsertUserScreen.cpp:168
+msgid "You must fill all fields!"
+msgstr "You must fill all fields!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:298
+msgid "You must select a '.cnf' file!"
+msgstr "You must select a '.cnf' file!"
+
+#: C:\Faculdade\PAC\colormixer\Modulos\Configs\SiteConfig.cpp:319
+#: C:\Faculdade\PAC\colormixer\Modulos\Log\LogScreen.cpp:294
+msgid "You must select a path to save the file!"
+msgstr "You must select a path to save the file!"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:303
+msgid "Your file was saved with success!"
+msgstr "Your file was saved with success!"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:89
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:95
+msgid "is filled with more than"
+msgstr "is filled with more than"
+
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:89
+#: C:\Faculdade\PAC\colormixer\App\Site.cpp:95
+msgid "of its maximum volume!"
+msgstr "of its maximum volume!"
+
+#~ msgid "is filled with more than 85%!"
+#~ msgstr "is filled with more than 85%!"
+
+#~ msgid "is filled with more than 95%!"
+#~ msgstr "is filled with more than 95%!"
+
+#~ msgid "Access Level:"
+#~ msgstr "Access Level:"
+
+#~ msgid "Erase"
+#~ msgstr "Erase"
+
+#~ msgid "Language:"
+#~ msgstr "Language:"
+
+#~ msgid "Login:"
+#~ msgstr "Login:"
+
+#~ msgid "Manager"
+#~ msgstr "Manager"
+
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#~ msgid "Password Again:"
+#~ msgstr "Password Again:"
+
+#~ msgid "Password:"
+#~ msgstr "Password:"
+
+#~ msgid "Username:"
+#~ msgstr "Username:"
+
+#~ msgid "Library Help"
+#~ msgstr "Library Help"
+
+#~ msgid "Welcome "
+#~ msgstr "Welcome "
+
+#~ msgid "Your application is here!"
+#~ msgstr "Your application is here!"
+
+#~ msgid "Change the app language to english!"
+#~ msgstr "Change the app language to english!"
+
+#~ msgid "Change the app language to french!"
+#~ msgstr "Change the app language to french!"
+
+#~ msgid "Change the app language to portuguese!"
+#~ msgstr "Change the app language to portuguese!"
+
+#~ msgid "Change the app language."
+#~ msgstr "Change the app language."
+
+#~ msgid "Languages"
+#~ msgstr "Languages"
+
+#~ msgid "This language is already selected!"
+#~ msgstr "This language is already selected!"
+
+#~ msgid "This language is not supported by your system."
+#~ msgstr "This language is not supported by your system."
+
+#~ msgid "About\tF1"
+#~ msgstr "About\tF1"
+
+#~ msgid "Change to english!"
+#~ msgstr "Change to english!"
+
+#~ msgid "Change to portuguese!"
+#~ msgstr "Change to portuguese!"
+
+#~ msgid "Get Help"
+#~ msgstr "Get Help"
+
+#~ msgid "New File"
+#~ msgstr "New File"
+
+#~ msgid "Open File"
+#~ msgstr "Open File"
+
+#~ msgid "Quit App"
+#~ msgstr "Quit App"
+
+#~ msgid "Save File"
+#~ msgstr "Save File"

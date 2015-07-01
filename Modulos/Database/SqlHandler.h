@@ -33,6 +33,7 @@ public:
     SQLHandler();
 
     wxString GetOpr(int i);
+    wxArrayString GetOpr(int oprs[], int size);
     int GetOpr(wxString opr);
 
     static where GetDateWhere(int opr, wxDateTime d1, wxDateTime d2);

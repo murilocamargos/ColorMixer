@@ -19,89 +19,77 @@ LogScreen::LogScreen( wxWindow* parent, wxWindowID id, const wxString& title, co
     this->db  = new SQLiteHandler();
     this->sql = new SQLHandler();
 
+    #define POP(cmb, tbl, key, val) this->db->Select(this->sql->Table(std::string(tbl))->Column(std::string(key) + " as key")->Column(std::string(val) + " as val"));\
+	for (unsigned int i = 0; i < this->db->rows.size(); i++)\
+        cmb->Append(this->db->rows[i]["key"] + ". " + wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["val"])));
+
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
-	wxBoxSizer* parentBS;
-	parentBS = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* parentBS = new wxBoxSizer( wxVERTICAL );
 
-	wxBoxSizer* searchFieldsBS;
-	searchFieldsBS = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* searchFieldsBS = new wxBoxSizer( wxHORIZONTAL );
 
-	wxBoxSizer* SFUsersBS;
-	SFUsersBS = new wxBoxSizer( wxVERTICAL );
-
+    // ===================== FIELD 1 (USERS) ===================== //
 	SFULabel = new wxStaticText( this, wxID_ANY, _("User") + ":", wxDefaultPosition, wxDefaultSize, 0 );
-	SFULabel->Wrap( -1 );
-	SFUsersBS->Add( SFULabel, 0, wxALL, 5 );
 
-	wxString SFUOperatorChoices[] = { "=", "!=" };
-	int SFUOperatorNChoices = sizeof( SFUOperatorChoices ) / sizeof( wxString );
-	SFUOperator = new wxChoice( this, ALL_CHOICES, wxDefaultPosition, wxSize( 120,-1 ), SFUOperatorNChoices, SFUOperatorChoices, 0 );
+    int oprs1[] = {1, 2};
+    wxArrayString choices1 = this->sql->GetOpr( oprs1, 2 );
+	SFUOperator = new wxChoice( this, ALL_CHOICES, wxDefaultPosition, wxSize( 120,-1 ), choices1, 0 );
 	SFUOperator->SetSelection( 0 );
-	SFUsersBS->Add( SFUOperator, 0, wxALL, 5 );
 
 	SFUsers = new wxComboBox( this, ALL_COMBO, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), 0, NULL, 0 );
-
 	SFUsers->Append(_("All"));
-	this->db->Select(this->sql->Table("usuarios")->Column("user_id")->Column("nome"));
-	for (unsigned int i = 0; i < this->db->rows.size(); i++)
-        SFUsers->Append(this->db->rows[i]["user_id"] + ". " + wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["nome"])));
+    POP(SFUsers, "usuarios", "user_id", "nome");
 	SFUsers->SetSelection(0);
 
+    wxBoxSizer* SFUsersBS = new wxBoxSizer( wxVERTICAL );
+    SFUsersBS->Add( SFULabel, 0, wxALL, 5 );
+	SFUsersBS->Add( SFUOperator, 0, wxALL, 5 );
 	SFUsersBS->Add( SFUsers, 0, wxALL, 5 );
-
 
 	searchFieldsBS->Add( SFUsersBS, 1, wxEXPAND, 5 );
 
-	wxBoxSizer* SFConnectorBS1;
-	SFConnectorBS1 = new wxBoxSizer( wxVERTICAL );
-
-
-	SFConnectorBS1->Add( 0, 0, 1, wxEXPAND, 5 );
-
+    // ===================== CONNECTOR 1 ===================== //
 	wxString SFConnector1Choices[] = { _("And"), _("Or") };
 	int SFConnector1NChoices = sizeof( SFConnector1Choices ) / sizeof( wxString );
 	SFConnector1 = new wxChoice( this, ALL_CHOICES, wxDefaultPosition, wxSize( 50,30 ), SFConnector1NChoices, SFConnector1Choices, 0 );
 	SFConnector1->SetSelection( 0 );
-	SFConnectorBS1->Add( SFConnector1, 0, wxALL, 5 );
 
+	wxBoxSizer* SFConnectorBS1 = new wxBoxSizer( wxVERTICAL );
 
 	SFConnectorBS1->Add( 0, 0, 1, wxEXPAND, 5 );
-
-
+	SFConnectorBS1->Add( SFConnector1, 0, wxALL, 5 );
+	SFConnectorBS1->Add( 0, 0, 1, wxEXPAND, 5 );
 	searchFieldsBS->Add( SFConnectorBS1, 1, wxEXPAND, 5 );
 
-	wxBoxSizer* SFTypeBS;
-	SFTypeBS = new wxBoxSizer( wxVERTICAL );
-
+    // ===================== FIELD 2 (TYPES) ===================== //
 	SFTLabel = new wxStaticText( this, wxID_ANY, _("Type") + ":", wxDefaultPosition, wxDefaultSize, 0 );
-	SFTLabel->Wrap( -1 );
-	SFTypeBS->Add( SFTLabel, 0, wxALL, 5 );
 
-	wxString SFTOperatorChoices[] = { "=", "!=" };
-	int SFTOperatorNChoices = sizeof( SFTOperatorChoices ) / sizeof( wxString );
-	SFTOperator = new wxChoice( this, ALL_CHOICES, wxDefaultPosition, wxSize( 120,-1 ), SFTOperatorNChoices, SFTOperatorChoices, 0 );
+	int oprs2[] = {1, 2};
+    wxArrayString choices2 = this->sql->GetOpr( oprs2, 2 );
+	SFTOperator = new wxChoice( this, ALL_CHOICES, wxDefaultPosition, wxSize( 120,-1 ), choices2, 0 );
 	SFTOperator->SetSelection( 0 );
-	SFTypeBS->Add( SFTOperator, 0, wxALL, 5 );
 
 	SFTypes = new wxComboBox( this, ALL_COMBO, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), 0, NULL, 0 );
-
 	SFTypes->Append(_("All"));
-	this->db->Select(this->sql->Table("log_desc")->Column("log_id")->Column("descricao"));
-	for (unsigned int i = 0; i < this->db->rows.size(); i++)
-        SFTypes->Append(this->db->rows[i]["log_id"] + ". " + wxString::FromUTF8Unchecked(wxString(this->db->rows[i]["descricao"])));
+	POP(SFTypes, "log_desc", "log_id", "descricao");
 	SFTypes->SetSelection(0);
 
+    wxBoxSizer* SFTypeBS = new wxBoxSizer( wxVERTICAL );
+	SFTypeBS->Add( SFTLabel, 0, wxALL, 5 );
+	SFTypeBS->Add( SFTOperator, 0, wxALL, 5 );
 	SFTypeBS->Add( SFTypes, 0, wxALL, 5 );
-
 
 	searchFieldsBS->Add( SFTypeBS, 1, wxEXPAND, 5 );
 
+    // ===================== CONNECTOR 2 ===================== //
 	wxBoxSizer* SFConnectorBS2;
 	SFConnectorBS2 = new wxBoxSizer( wxVERTICAL );
 
 
 	SFConnectorBS2->Add( 0, 0, 1, wxEXPAND, 5 );
+
+    //wxArrayString choices = wxArrayString({_("And"), _("Or")});
 
 	wxString SFConnector2Choices[] = { _("And"), _("Or") };
 	int SFConnector2NChoices = sizeof( SFConnector2Choices ) / sizeof( wxString );
@@ -115,6 +103,7 @@ LogScreen::LogScreen( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	searchFieldsBS->Add( SFConnectorBS2, 1, wxEXPAND, 5 );
 
+	// ===================== FIELD 3 (DATE) ===================== //
 	wxBoxSizer* SFDateBS;
 	SFDateBS = new wxBoxSizer( wxVERTICAL );
 
@@ -149,6 +138,7 @@ LogScreen::LogScreen( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	parentBS->Add( searchFieldsBS, 1, wxEXPAND, 5 );
 
+	// ===================== FIELD 4 (TABLE) ===================== //
 	logsTable = new wxDataViewListCtrl( this, wxID_ANY, wxDefaultPosition, wxSize( 570,300 ), 0 );
 
 	logsTable->AppendTextColumn(_("User"));

@@ -33,6 +33,16 @@ int SQLHandler::GetOpr(wxString opr)
     return 0;
 }
 
+wxArrayString SQLHandler::GetOpr(int oprs[], int size)
+{
+    wxArrayString choices;
+    for ( int i = 0; i < size; i++ )
+    {
+        choices.Add( this->GetOpr( oprs[i] ) );
+    }
+    return choices;
+}
+
 where SQLHandler::GetDateWhere(int opr, wxDateTime d1, wxDateTime d2)
 {
     where DATE;

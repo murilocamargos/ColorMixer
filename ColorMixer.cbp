@@ -69,6 +69,8 @@
 		<Unit filename="Modulos/Database/sqlite3.h" />
 		<Unit filename="Modulos/Encryption/SHA256.cpp" />
 		<Unit filename="Modulos/Encryption/SHA256.h" />
+		<Unit filename="Modulos/Help/Help.cpp" />
+		<Unit filename="Modulos/Help/Help.h" />
 		<Unit filename="Modulos/Log/Log.cpp" />
 		<Unit filename="Modulos/Log/Log.h" />
 		<Unit filename="Modulos/Log/LogScreen.cpp" />

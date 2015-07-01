@@ -7,6 +7,7 @@
 #include "../Modulos/Taskbar/Taskbar.h"
 #include "../Modulos/Menu/MyMenu.h"
 #include "../Modulos/User/InsertUserScreen.h"
+#include "../Modulos/Help/Help.h"
 
 class SiteLayout : public wxScrolledWindow
 {

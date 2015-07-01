@@ -387,7 +387,8 @@ void Site::OnMenuFileOpen(wxCommandEvent& event)
 
 void Site::OnMenuHelp(wxCommandEvent& event)
 {
-    //help->ShowHelp();
+    Help *help = new Help();
+    help->ShowHelp();
 }
 
 void Site::OnMenuHelpAbout(wxCommandEvent & event)

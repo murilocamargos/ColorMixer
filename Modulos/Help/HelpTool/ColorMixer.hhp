@@ -1,0 +1,57 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=ColorMixer.chm
+Contents file=ColorMixer.hhc
+Display compile progress=No
+Language=0x416 Português (Brasil)
+
+
+[FILES]
+AdmDeletarUsuario.htm
+AdmEditarUsuario.htm
+Login.htm
+Menu.htm
+Menu1.htm
+Menu2.htm
+Menu3.htm
+Menu4.htm
+Menu5.htm
+Menu6.htm
+Menu7.htm
+Menu8.htm
+Menu9.htm
+Menu10.htm
+Menu11.htm
+Planta.htm
+Taskbar.htm
+Taskbar1.htm
+Taskbar2.htm
+Taskbar3.htm
+
+[ALIAS]
+10001=Menu.htm
+10002=Taskbar.htm
+10003=Planta.htm
+10004=Login.htm
+10005=Menu1.htm
+10006=Menu2.htm
+10007=Menu3.htm
+10008=Menu4.htm
+10009=Menu5.htm
+10010=Menu6.htm
+10011=Menu7.htm
+10012=Menu8.htm
+10013=Menu9.htm
+10014=Menu10.htm
+10015=Menu11.htm
+10016=Taskbar1.htm
+10017=Taskbar2.htm
+10018=Taskbar3.htm
+10019=AdmEditarUsuario.htm
+10020=AdmDeletarUsuario.htm
+
+[MAP]
+#include helpmap.h
+
+[INFOTYPES]
+

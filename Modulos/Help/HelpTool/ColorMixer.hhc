@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Login">
+		<param name="Local" value="Login.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Menu">
+		<param name="Local" value="Menu.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Adicionar Novo Arquivo">
+			<param name="Local" value="Menu1.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Abrir Arquivo">
+			<param name="Local" value="Menu2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Salvar Arquivo">
+			<param name="Local" value="Menu3.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Sair do Aplicativo">
+			<param name="Local" value="Menu4.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Mudar Configura&ccedil;&otilde;es da Planta">
+			<param name="Local" value="Menu5.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Abrir Livro de Ajuda">
+			<param name="Local" value="Menu6.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Informa&ccedil;&otilde;es dos Autores">
+			<param name="Local" value="Menu7.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Adicionar Usu&aacute;rio">
+			<param name="Local" value="Menu8.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Buscar Usu&aacute;rio">
+			<param name="Local" value="Menu9.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Editar Usu&aacute;rio">
+			<param name="Local" value="Menu10.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Visualiza&ccedil;&atilde;o de Logs">
+			<param name="Local" value="Menu11.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Edi&ccedil;&atilde;o e Dele&ccedil;&atilde;o de Usu&aacute;rio por Adm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Edi&ccedil;&atilde;o de Usu&aacute;rio por Administrador">
+			<param name="Local" value="AdmEditarUsuario.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Dele&ccedil;&atilde;o Usu&aacute;rio por Administrador">
+			<param name="Local" value="AdmDeletarUsuario.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Planta">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Descri&ccedil;&atilde;o de Funcionamento">
+			<param name="Local" value="Planta.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Taskbar">
+		<param name="Local" value="Taskbar.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Minimizar para Taskbar">
+			<param name="Local" value="Taskbar1.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Reabrir da Taskbar">
+			<param name="Local" value="Taskbar2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Fechar aplica&ccedil;&atilde;o pela Taskbar">
+			<param name="Local" value="Taskbar3.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

@@ -3,20 +3,8 @@ LOG_ICON        ICON    "Images/Icons/log.ico"
 ADDUSER_ICON    ICON    "Images/Icons/add_user.ico"
 FIND_ICON       ICON    "Images/Icons/find.ico"
 CONFIG          ICON    "Images/Icons/config.ico"
+LOGIN_ICON      ICON    "Images/Icons/login.ico"
 
-OPENED_VALVE    BITMAP  "Images/Site/opened_valve.bmp"
-CLOSED_VALVE    BITMAP  "Images/Site/closed_valve.bmp"
-
-TANK_TOP        BITMAP  "Images/Site/tank_top.bmp"
-TANK_BOTTOM     BITMAP  "Images/Site/tank_bottom.bmp"
-TANK_LEFT       BITMAP  "Images/Site/tank_left.bmp"
-TANK_RIGHT      BITMAP  "Images/Site/tank_right.bmp"
-
-CURVE_90        BITMAP  "Images/Site/curve_90.bmp"
-PIPE_LEFT       BITMAP  "Images/Site/pipe_left.bmp"
-PIPE_RIGHT      BITMAP  "Images/Site/pipe_right.bmp"
-TEE             BITMAP  "Images/Site/tee.bmp"
-
-SPLBMP          BITMAP  "Images/Icons/splash.bmp"
+SPLBMP          BITMAP  "Images/splash.bmp"
 
 #include "wx/msw/wx.rc"

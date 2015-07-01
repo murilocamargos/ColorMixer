@@ -34,16 +34,19 @@ public:
 class Valve : public wxPanel
 {
 private:
+    wxStaticBitmap* bmpTop, *bmpLeft, *bmpRight, *bmpBottom, *bmpMiddle;
+    wxStaticText *emptyLabel1, *emptyLabel2;
 
     Slider *slider;
     wxBitmapButton *valve;
+    wxString name;
 
 public:
     int value;
     wxStaticText* label;
     std::string uid, log_id;
 
-    Valve(wxWindow *parent, int value, std::string uid, std::string log_id = "0");
+    Valve(wxWindow *parent, int value, std::string uid, std::string log_id = "0", wxString name = "ValveIn1");
 
     void SetValve(int value);
 

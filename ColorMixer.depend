@@ -1,11 +1,10 @@
 # depslib dependency file v1.0
-1435754359 source:c:\faculdade\pac\colormixer\app\app.cpp
+1435761648 source:c:\faculdade\pac\colormixer\app\app.cpp
 	"Includes.h"
 	"App.h"
 	"../Modulos/SplashScreen/SplashScreen.h"
 	"../Modulos/Login/LoginScreen.h"
 	"Site.h"
-	"../Modulos/Log/LogScreen.h"
 
 1435597414 c:\faculdade\pac\colormixer\app\includes.h
 	<string>
@@ -2006,22 +2005,23 @@
 
 1434636159 c:\faculdade\pac\colormixer\app\app.h
 
-1435749681 c:\faculdade\pac\colormixer\app\site.h
+1435764656 c:\faculdade\pac\colormixer\app\site.h
 	"../Controls/Valve.h"
 	"../Controls/Tank.h"
 	"../Modulos/Taskbar/Taskbar.h"
 	"../Modulos/Menu/MyMenu.h"
 	"../Modulos/User/InsertUserScreen.h"
 
-1435754453 source:c:\faculdade\pac\colormixer\app\site.cpp
+1435764693 source:c:\faculdade\pac\colormixer\app\site.cpp
 	"Includes.h"
 	"Site.h"
 	"../Modulos/Configs/SiteConfig.h"
 	"../Modulos/User/SearchUserScreen.h"
 	"../Modulos/Log/LogScreen.h"
+	"../Modulos/Login/LoginScreen.h"
 	<wx/sound.h>
 
-1435504261 source:c:\faculdade\pac\colormixer\resource.rc
+1435761620 source:c:\faculdade\pac\colormixer\resource.rc
 	"wx/msw/wx.rc"
 
 1412518750 c:\wxwidgets-3.0.2\include\wx\msw\wx.rc
@@ -2041,17 +2041,17 @@
 
 1412518750 c:\wxwidgets-3.0.2\include\wx\msw\rcdefs.h
 
-1435156271 c:\faculdade\pac\colormixer\controls\valve.h
+1435757506 c:\faculdade\pac\colormixer\controls\valve.h
 
-1435156408 source:c:\faculdade\pac\colormixer\controls\valve.cpp
+1435757961 source:c:\faculdade\pac\colormixer\controls\valve.cpp
 	"../App/Includes.h"
 	"../Modulos/Log/Log.h"
 	"Valve.h"
 
-1434840040 c:\faculdade\pac\colormixer\controls\tank.h
+1435757544 c:\faculdade\pac\colormixer\controls\tank.h
 	"ColorSelect.h"
 
-1435405708 source:c:\faculdade\pac\colormixer\controls\tank.cpp
+1435761310 source:c:\faculdade\pac\colormixer\controls\tank.cpp
 	"../App/Includes.h"
 	"Tank.h"
 	<wx/colourdata.h>
@@ -3523,10 +3523,9 @@
 	"../Database/SQLHandler.h"
 	"../Database/SQLiteHandler.h"
 
-1435148357 source:c:\faculdade\pac\colormixer\modulos\login\loginscreen.cpp
+1435763834 source:c:\faculdade\pac\colormixer\modulos\login\loginscreen.cpp
+	"../../App/Includes.h"
 	"LoginScreen.h"
-	"../Database/SQLiteHandler.h"
-	"../Database/SQLHandler.h"
 	"../Encryption/SHA256.h"
 	"../../App/App.h"
 	"../Log/Log.h"
@@ -3782,7 +3781,7 @@
 1435544185 source:c:\users\luana\documents\estudos\faculdade\pac\colormixer\modulos\user\searchuserscreen.cpp
 	"SearchUserScreen.h"
 
-1435753862 c:\faculdade\pac\colormixer\modulos\user\insertuserscreen.h
+1435762538 c:\faculdade\pac\colormixer\modulos\user\insertuserscreen.h
 	<wx/combobox.h>
 
 1435754258 c:\faculdade\pac\colormixer\modulos\user\searchuserscreen.h
@@ -3806,13 +3805,12 @@
 	"../Database/SQLHandler.h"
 	"InsertUserScreen.h"
 
-1435754506 source:c:\faculdade\pac\colormixer\modulos\user\insertuserscreen.cpp
+1435764362 source:c:\faculdade\pac\colormixer\modulos\user\insertuserscreen.cpp
 	"../../App/Includes.h"
 	"InsertUserScreen.h"
-	"../Database/SQLiteHandler.h"
-	"../Database/SQLHandler.h"
 	"../Encryption/SHA256.h"
 	"../Log/Log.h"
+	"../../App/Site.h"
 
 1435754336 source:c:\faculdade\pac\colormixer\modulos\user\searchuserscreen.cpp
 	"SearchUserScreen.h"

@@ -5,12 +5,16 @@
 #include "../Modulos/Configs/SiteConfig.h"
 #include "../Modulos/User/SearchUserScreen.h"
 #include "../Modulos/Log/LogScreen.h"
+#include "../Modulos/Login/LoginScreen.h"
 
 #include <wx/sound.h>
 
+BEGIN_EVENT_TABLE(SiteLayout, wxScrolledWindow)
+    EVT_BUTTON(ADVANCE, SiteLayout::OnAdvanceTime)
+    EVT_BUTTON(INITOPR, SiteLayout::OnInitOperation)
+END_EVENT_TABLE()
+
 BEGIN_EVENT_TABLE(Site, wxFrame)
-    EVT_BUTTON(ADVANCE, Site::OnAdvanceTime)
-    EVT_BUTTON(INITOPR, Site::OnInitOperation)
     EVT_CLOSE(Site::OnExit)
     EVT_MENU(MENU_FILE_NEW, Site::OnMenuFileNew)
     EVT_MENU(MENU_FILE_SAVE, Site::OnMenuFileSave)
@@ -25,22 +29,24 @@ BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_MENU(MENU_SETTINGS_CONFIG, Site::OnMenuSettingsPlant)
 END_EVENT_TABLE()
 
-void Site::OnInitOperation(wxCommandEvent& event)
+void SiteLayout::OnInitOperation(wxCommandEvent& event)
 {
-    this->operation = !this->operation;
+    *this->operation = !(*this->operation);
     this->btnAdvance->Enable(!this->btnAdvance->IsEnabled());
 
-    if (this->operation)
+    if (*this->operation)
     {
-        this->btnInitOpr->SetLabel(_("Stop Operation"));
+        this->btnInitOpr->SetBitmap(wxBitmap( "Images/Site/stop.bmp", wxBITMAP_TYPE_ANY ));
+        this->btnInitOpr->SetToolTip(_("Stop Operation"));
     }
     else
     {
-        this->btnInitOpr->SetLabel(_("Start Operation"));
+        this->btnInitOpr->SetBitmap(wxBitmap( "Images/Site/play.bmp", wxBITMAP_TYPE_ANY ));
+        this->btnInitOpr->SetToolTip(_("Start Operation"));
     }
 }
 
-void Site::OnAdvanceTime(wxCommandEvent& event)
+void SiteLayout::OnAdvanceTime(wxCommandEvent& event)
 {
     // Entrada do tanque 1
     this->t1->SetLevel(this->cnf->valveMaxFlow * this->vin1->value/100);
@@ -65,7 +71,8 @@ void Site::OnAdvanceTime(wxCommandEvent& event)
         float tinta2 = this->t3->Percent(2) * this->vout3->value/100 * this->cnf->valveMaxFlow;
         this->t3->SetLevel((-1)*MIN(this->t3->lvl_c1, tinta1), (-1)*MIN(this->t3->lvl_c2, tinta2));
     }
-        wxString filename("Controls/alarm.wav");
+
+    wxString filename("Controls/alarm.wav");
     wxSound *music = new wxSound(filename);
     music->Create(filename);
 
@@ -91,6 +98,170 @@ void Site::OnAdvanceTime(wxCommandEvent& event)
     }
 }
 
+void SiteLayout::Reload()
+{
+    this->t1->Reset(this->cnf->tank1MaxVol, this->cnf->tank1Color);
+    this->t2->Reset(this->cnf->tank2MaxVol, this->cnf->tank2Color);
+    this->t3->Reset(this->cnf->tank3MaxVol);
+}
+
+void SiteLayout::SaveValves()
+{
+    this->cnf->SaveValves(this->vin1->value, this->vout1->value, this->vin2->value, this->vout2->value, this->vout3->value);
+}
+
+SiteLayout::SiteLayout(wxWindow* parent, bool *operation, Config *cnf, std::string uid, wxWindowID id) : wxScrolledWindow(parent, id)
+{
+    this->operation = operation;
+    this->cnf = cnf;
+    this->uid = uid;
+
+    this->SetBackgroundColour(wxColour(228, 228, 228));
+
+    btnInitOpr = new wxBitmapButton( this, INITOPR, wxBitmap( "Images/Site/play.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW|wxNO_BORDER );
+    btnInitOpr->SetToolTip(_("Start Operation"));
+
+    btnAdvance = new wxBitmapButton( this, ADVANCE, wxBitmap( "Images/Site/advenabled.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW|wxNO_BORDER );
+	btnAdvance->SetBitmapDisabled( wxBitmap( "Images/Site/advdisabled.bmp", wxBITMAP_TYPE_ANY ) );
+	btnAdvance->SetToolTip(_("Advance Time"));
+	this->btnAdvance->Enable(false);
+
+	top = new wxStaticBitmap( this, wxID_ANY, wxBitmap( "Images/Site/topo.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bottom = new wxStaticBitmap( this, wxID_ANY, wxBitmap( "Images/Site/bottom.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+
+    this->vin1  = new Valve(this, this->cnf->vin1 , this->uid, "6", "ValveIn1");
+    this->vout1 = new Valve(this, this->cnf->vout1, this->uid, "8", "ValveOut1");
+    this->vin2  = new Valve(this, this->cnf->vin2 , this->uid, "7", "ValveIn2");
+    this->vout2 = new Valve(this, this->cnf->vout2, this->uid, "9", "ValveOut2");
+    this->vout3 = new Valve(this, this->cnf->vout3, this->uid, "10", "ValveOut");
+
+    this->t1 = new Tank(this, this->cnf->tank1Color, 0, this->cnf->tank1MaxVol, "Tank1");
+    this->t2 = new Tank(this, this->cnf->tank2Color, 0, this->cnf->tank2MaxVol, "Tank2");
+    this->t3 = new TankMix(this, this->t1, this->t2, 0, this->cnf->tank3MaxVol, "Tank3");
+
+    /// -------------------------------------------------------------------------------------------
+    wxFlexGridSizer *topo = new wxFlexGridSizer(1, 3, 0, 0);
+    topo->SetFlexibleDirection(wxBOTH);
+	topo->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+    topo->Add( btnInitOpr, 0, wxALL, 0 );
+	topo->Add( top, 0, wxALL, 0 );
+	topo->Add( btnAdvance, 0, wxALL, 0 );
+
+
+	wxFlexGridSizer *site = new wxFlexGridSizer(1, 8, 0, 0);
+    site->SetFlexibleDirection(wxBOTH);
+	site->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+    site->Add( vin1, 0, wxALL, 0 );
+	site->Add( t1, 0, wxALL, 0 );
+	site->Add( vin2, 0, wxALL, 0 );
+	site->Add( t2, 0, wxALL, 0 );
+	site->Add( vout1, 0, wxALL, 0 );
+	site->Add( vout2, 0, wxALL, 0 );
+	site->Add( t3, 0, wxALL, 0 );
+	site->Add( vout3, 0, wxALL, 0 );
+
+
+    wxFlexGridSizer *container = new wxFlexGridSizer(3, 1, 0, 0);
+    container->SetFlexibleDirection(wxBOTH);
+	container->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+	container->Add( topo, 0, wxALL, 0 );
+	container->Add( site, 0, wxALL, 0 );
+	container->Add( bottom, 0, wxALL, 0 );
+
+	this->SetSizer( container );
+	this->Layout();
+    this->FitInside(); // ask the sizer about the needed size
+    this->SetScrollRate(1,1);
+
+    /*this->operation = operation;
+    this->cnf = cnf;
+    this->uid = uid;
+
+    this->SetBackgroundColour(wxColour(228, 228, 228));
+
+    btnInitOpr = new wxButton(this, INITOPR, _("Start Operation"), wxDefaultPosition, wxDefaultSize, 0);
+	btnAdvance = new wxButton(this, ADVANCE, _("Advance Time"), wxDefaultPosition, wxDefaultSize, 0);
+
+	leftPipe_valvIn1  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
+	rightPipe_valvIn1 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
+    leftPipe_valvIn2  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
+    rightPipe_valvIn2 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
+
+    leftPipe_valvOut1  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
+    rightPipe_valvOut1 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(CURVE_90), wxDefaultPosition, wxDefaultSize, 0);
+    leftPipe_valvOut2  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
+    rightPipe_valvOut2 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TEE), wxDefaultPosition, wxDefaultSize, 0);
+    leftPipe_valvOut3  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
+    rightPipe_valvOut3 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
+
+    this->vin1  = new Valve(this, this->cnf->vin1 , this->uid, "6");
+    this->vout1 = new Valve(this, this->cnf->vout1, this->uid, "8");
+    this->vin2  = new Valve(this, this->cnf->vin2 , this->uid, "7");
+    this->vout2 = new Valve(this, this->cnf->vout2, this->uid, "9");
+    this->vout3 = new Valve(this, this->cnf->vout3, this->uid, "10");
+
+    this->t1 = new Tank(this, this->cnf->tank1Color, 0, this->cnf->tank1MaxVol, "Tank1");
+    this->t2 = new Tank(this, this->cnf->tank2Color, 0, this->cnf->tank2MaxVol, "Tank2");
+    this->t3 = new TankMix(this, this->t1, this->t2, 0, this->cnf->tank3MaxVol, "Tank3");
+
+	wxFlexGridSizer *planta_grid = new wxFlexGridSizer(2, 11, 0, 0);
+	planta_grid->SetFlexibleDirection(wxBOTH);
+	planta_grid->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+	planta_grid->Add(leftPipe_valvIn1, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->vin1, 1, wxALIGN_BOTTOM, 0);
+	planta_grid->Add(rightPipe_valvIn1, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->t1, 1, wxEXPAND, 0);
+	planta_grid->Add(leftPipe_valvOut1, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->vout1, 1, wxALIGN_BOTTOM, 0);
+	planta_grid->Add(rightPipe_valvOut1, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
+	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
+	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
+
+
+	wxBoxSizer* sizerCtrl = new wxBoxSizer(wxVERTICAL);
+    sizerCtrl->Add(btnAdvance, 0, wxALL|wxEXPAND, 5);
+    sizerCtrl->Add(btnInitOpr, 0, wxALL|wxEXPAND, 5);
+
+	planta_grid->Add(sizerCtrl, 0, wxALL, 5);
+	planta_grid->Add(leftPipe_valvIn2, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->vin2, 1, wxALIGN_BOTTOM, 5);
+	planta_grid->Add(rightPipe_valvIn2, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->t2, 1, wxEXPAND, 5);
+	planta_grid->Add(leftPipe_valvOut2, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->vout2, 1, wxALIGN_BOTTOM, 0);
+	planta_grid->Add(rightPipe_valvOut2, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->t3, 1, wxEXPAND, 5);
+	planta_grid->Add(leftPipe_valvOut3, 0, wxALIGN_BOTTOM|wxALL, 0);
+	planta_grid->Add(this->vout3, 1, wxALIGN_BOTTOM, 0);
+	planta_grid->Add(rightPipe_valvOut3, 0, wxALIGN_BOTTOM|wxALL, 0);
+
+	this->SetSizer(planta_grid);
+	this->Layout();
+    this->FitInside(); // ask the sizer about the needed size
+    this->SetScrollRate(1,1);
+
+	this->btnAdvance->Enable(false);
+	*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& pos, const wxSize& size, long style):
     wxFrame((wxFrame*) NULL, wxID_ANY, title, pos, size, style)
 {
@@ -110,7 +281,6 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     this->user_info = db->rows[0];
 
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
-	this->SetBackgroundColour(wxColour(228, 228, 228));
 
 	///Menu
     menu = new MyMenu();
@@ -152,70 +322,17 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     SetMenuBar(this->menu);
 	//**********
 
-	btnInitOpr = new wxButton(this, INITOPR, _("Start Operation"), wxDefaultPosition, wxDefaultSize, 0);
-	btnAdvance = new wxButton(this, ADVANCE, _("Advance Time"), wxDefaultPosition, wxDefaultSize, 0);
+    this->SetSizeHints( wxSize( 1000, 583 ), wxSize( 1000, 583 ) );
+    wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+    this->layout = new SiteLayout(this, &operation, cnf, uid);
+    sizer->Add(this->layout, 1, wxEXPAND);
 
-	leftPipe_valvIn1  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-	rightPipe_valvIn1 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
-    leftPipe_valvIn2  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvIn2 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
+    //StatusBar
+    wxString msg = _("Welcome") + " " + wxString(user_info["nome"]) + " :)";
+    CreateStatusBar(2);
+    SetStatusText(msg, 1);
 
-    leftPipe_valvOut1  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvOut1 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(CURVE_90), wxDefaultPosition, wxDefaultSize, 0);
-    leftPipe_valvOut2  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvOut2 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TEE), wxDefaultPosition, wxDefaultSize, 0);
-    leftPipe_valvOut3  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-    rightPipe_valvOut3 = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(PIPE_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
-
-    this->vin1  = new Valve(this, this->cnf->vin1 , this->uid, "6");
-    this->vout1 = new Valve(this, this->cnf->vout1, this->uid, "8");
-    this->vin2  = new Valve(this, this->cnf->vin2 , this->uid, "7");
-    this->vout2 = new Valve(this, this->cnf->vout2, this->uid, "9");
-    this->vout3 = new Valve(this, this->cnf->vout3, this->uid, "10");
-
-    this->t1 = new Tank(this, this->cnf->tank1Color, 0, this->cnf->tank1MaxVol);
-    this->t2 = new Tank(this, this->cnf->tank2Color, 0, this->cnf->tank2MaxVol);
-    this->t3 = new TankMix(this, this->t1, this->t2, 0, this->cnf->tank3MaxVol);
-
-	wxFlexGridSizer *planta_grid = new wxFlexGridSizer(2, 11, 0, 0);
-	planta_grid->SetFlexibleDirection(wxBOTH);
-	planta_grid->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-
-	planta_grid->Add(leftPipe_valvIn1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vin1, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvIn1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->t1, 1, wxEXPAND, 0);
-	planta_grid->Add(leftPipe_valvOut1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vout1, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvOut1, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
-	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
-	planta_grid->Add(0, 0, 1, wxEXPAND, 0);
-
-
-	wxBoxSizer* sizerCtrl = new wxBoxSizer(wxVERTICAL);
-    sizerCtrl->Add(btnAdvance, 0, wxALL|wxEXPAND, 5);
-    sizerCtrl->Add(btnInitOpr, 0, wxALL|wxEXPAND, 5);
-
-	planta_grid->Add(sizerCtrl, 0, wxALL, 5);
-	planta_grid->Add(leftPipe_valvIn2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vin2, 1, wxALIGN_BOTTOM, 5);
-	planta_grid->Add(rightPipe_valvIn2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->t2, 1, wxEXPAND, 5);
-	planta_grid->Add(leftPipe_valvOut2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vout2, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvOut2, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->t3, 1, wxEXPAND, 5);
-	planta_grid->Add(leftPipe_valvOut3, 0, wxALIGN_BOTTOM|wxALL, 0);
-	planta_grid->Add(this->vout3, 1, wxALIGN_BOTTOM, 0);
-	planta_grid->Add(rightPipe_valvOut3, 0, wxALIGN_BOTTOM|wxALL, 0);
-
-	this->SetSizer(planta_grid);
-	this->Layout();
-
-	this->Centre(wxBOTH);
-
-	this->btnAdvance->Enable(false);
+    this->SetSizer(sizer);
 }
 
 Site::~Site()
@@ -224,9 +341,7 @@ Site::~Site()
 
 void Site::Reload()
 {
-    this->t1->Reset(this->cnf->tank1MaxVol, this->cnf->tank1Color);
-    this->t2->Reset(this->cnf->tank2MaxVol, this->cnf->tank2Color);
-    this->t3->Reset(this->cnf->tank3MaxVol);
+    this->layout->Reload();
 }
 
 void Site::OnMenuSettingsPlant(wxCommandEvent& event)
@@ -239,13 +354,13 @@ void Site::OnMenuSettingsPlant(wxCommandEvent& event)
 
 void Site::OnExit(wxCloseEvent& event)
 {
-    this->cnf->SaveValves(this->vin1->value, this->vout1->value, this->vin2->value, this->vout2->value, this->vout3->value);
+    this->layout->SaveValves();
     this->taskbar->CloseParent();
 }
 
 void Site::OnMenuFileQuit(wxCommandEvent& event)
 {
-    this->cnf->SaveValves(this->vin1->value, this->vout1->value, this->vin2->value, this->vout2->value, this->vout3->value);
+    this->layout->SaveValves();
     this->taskbar->CloseParent();
 }
 

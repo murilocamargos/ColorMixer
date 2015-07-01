@@ -2,10 +2,10 @@
 
 #include "InsertUserScreen.h"
 
-#include "../Database/SQLiteHandler.h"
-#include "../Database/SQLHandler.h"
 #include "../Encryption/SHA256.h"
 #include "../Log/Log.h"
+
+#include "../../App/Site.h"
 
 BEGIN_EVENT_TABLE(InsertUserScreen, wxDialog)
     EVT_CLOSE(InsertUserScreen::OnClose)
@@ -117,6 +117,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, wxWi
     bSizer6 = new wxBoxSizer( wxHORIZONTAL );
 
     buttonSave = new wxButton( this, SAVE, _("Save"), wxDefaultPosition, wxDefaultSize, 0 );
+    buttonSave->SetDefault();
     bSizer6->Add( buttonSave, 0, wxALIGN_BOTTOM|wxALL, 10 );
 
 
@@ -127,7 +128,6 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, wxWi
         this->inputName->SetValue(this->editInfo["nome"]);
 
         this->inputLogin->SetValue(this->editInfo["login"]);
-        this->inputLogin->Enable(this->uidInfo["nivel"] == "1");
 
         int lvl = (this->editInfo["nivel"] == "2") ? 0 : 1;
         this->inputLevel->SetSelection(lvl);
@@ -146,6 +146,8 @@ InsertUserScreen::~InsertUserScreen()
 
 void InsertUserScreen::OnClose(wxCloseEvent& event)
 {
+    Site *prt = (Site*) this->GetParent();
+    prt->Raise();
     Destroy();
 }
 
@@ -158,16 +160,7 @@ void InsertUserScreen::Save(wxCommandEvent& event)
     std::string login   = std::string(this->inputLogin->GetLineText(0).mb_str());
     std::string passwd  = std::string(this->inputPassword->GetLineText(0).mb_str());
     std::string passwd2 = std::string(this->inputPasswordAgain->GetLineText(0).mb_str());
-    std::string level   = "2";
-
-    for (std::map<std::string, std::string>::iterator it = this->levels.begin(); it != this->levels.end(); ++it)
-    {
-        if (it->second == inputLevel->GetValue())
-        {
-            level = it->first;
-            break;
-        }
-    }
+    std::string level   = (inputLevel->GetValue() == "Admin") ? "1" : "2";
 
     // Checar se todos os campos foram preenchidos
     if (name == "" || login == "" || passwd == "" || passwd2 == "")
@@ -182,7 +175,7 @@ void InsertUserScreen::Save(wxCommandEvent& event)
         dlg.ShowModal();
     }
     // Checar se login já não está cadastrado
-    else if ((db->NumRows(sql->Table("usuarios")->Where("login", login)) > 0) && !flag)
+    else if ((db->NumRows(sql->Table("usuarios")->Where("login", login)) > 0) && (login != editInfo["login"]))
     {
         wxMessageDialog dlg(this, _("This login is already registered!"), _("Warning"), wxICON_EXCLAMATION);
         dlg.ShowModal();
@@ -218,7 +211,7 @@ void InsertUserScreen::Save(wxCommandEvent& event)
 
         wxMessageDialog dlg(this, msg, _("Success"), wxICON_INFORMATION);
         dlg.ShowModal();
-        Close(true);
+        this->Close(true);
     }
 
 }

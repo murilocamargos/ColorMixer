@@ -1,10 +1,8 @@
-
+#include "../../App/Includes.h"
 #include "LoginScreen.h"
-/*
-#include "../Database/SQLiteHandler.h"
-#include "../Database/SQLHandler.h"
+
 #include "../Encryption/SHA256.h"
-*/
+
 #include "../../App/App.h"
 #include "../Log/Log.h"
 
@@ -37,7 +35,7 @@ LoginScreen::LoginScreen(const wxString& title, wxApp *app, wxWindow* parent, wx
     wxBoxSizer* usernameSizer;
     usernameSizer = new wxBoxSizer( wxVERTICAL );
 
-    labelUsername = new wxStaticText( this, wxID_ANY, _("Username:"), wxPoint( -1,-1 ), wxSize( -1,-1 ), 0 );
+    labelUsername = new wxStaticText( this, wxID_ANY, _("Username") + ":", wxPoint( -1,-1 ), wxSize( -1,-1 ), 0 );
     labelUsername->Wrap( -1 );
     usernameSizer->Add( labelUsername, 0, wxALL, 5 );
 
@@ -50,7 +48,7 @@ LoginScreen::LoginScreen(const wxString& title, wxApp *app, wxWindow* parent, wx
     wxBoxSizer* passwordSizer;
     passwordSizer = new wxBoxSizer( wxVERTICAL );
 
-    labelPassword = new wxStaticText( this, wxID_ANY, _("Password:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelPassword = new wxStaticText( this, wxID_ANY, _("Password") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelPassword->Wrap( -1 );
     passwordSizer->Add( labelPassword, 0, wxALL, 5 );
 
@@ -63,7 +61,7 @@ LoginScreen::LoginScreen(const wxString& title, wxApp *app, wxWindow* parent, wx
     wxBoxSizer* languageSizer;
     languageSizer = new wxBoxSizer( wxVERTICAL );
 
-    labelLanguage = new wxStaticText( this, wxID_ANY, _("Language:"), wxDefaultPosition, wxDefaultSize, 0 );
+    labelLanguage = new wxStaticText( this, wxID_ANY, _("Language") + ":", wxDefaultPosition, wxDefaultSize, 0 );
     labelLanguage->Wrap( -1 );
     languageSizer->Add( labelLanguage, 0, wxALL, 5 );
 
@@ -127,11 +125,11 @@ void LoginScreen::Cancel(wxCommandEvent& event)
 void LoginScreen::Login(wxCommandEvent& event)
 {
     // Define a query sql a ser executada
-    //SQLHandler *sql = new SQLHandler();
+    SQLHandler *sql = new SQLHandler();
     std::string username = std::string(inputUsername->GetLineText(0).mb_str());
     std::string password = std::string(inputPassword->GetLineText(0).mb_str());
 
-    //sql->Table("usuarios")->Where("login", username)->Where("senha", sha256(password))->Column("user_id");
+    sql->Table("usuarios")->Where("login", username)->Where("senha", sha256(password))->Column("user_id");
 
     // Obtem o idioma escolhido pelo usu�rio
     long choosenLang = -1;
@@ -147,15 +145,12 @@ void LoginScreen::Login(wxCommandEvent& event)
         choosenLang = wxLANGUAGE_ENGLISH;
     }
 
-    /// Executa a query
-    //SQLiteHandler *db = new SQLiteHandler();
-    //db->Select(sql);
-/*
+    SQLiteHandler *db = new SQLiteHandler();
+    db->Select(sql);
+
     if (db->rows.size() > 0)
     {
-        Log("4", db->rows[0]["user_id"]);
-
-        ((MyApp*)app)->OpenFrame(db->rows[0]["user_id"], choosenLang);
+        ((App*)app)->OpenFrame(db->rows[0]["user_id"], choosenLang);
         Destroy();
     }
     else
@@ -163,5 +158,4 @@ void LoginScreen::Login(wxCommandEvent& event)
         wxMessageDialog dlg(this, _("There is something wrong with your credentials!"), _("Warning"), wxICON_ERROR);
         dlg.ShowModal();
     }
-    */
 }

@@ -4,13 +4,12 @@
 #include <wx/colourdata.h>
 #include <wx/colordlg.h>
 
-TankMix::TankMix(wxWindow *parent, Tank *t1, Tank *t2, float level, float maxLevel)
-    : Tank(parent, wxNullColour, level, maxLevel)
+TankMix::TankMix(wxWindow *parent, Tank *t1, Tank *t2, float level, float maxLevel, wxString name)
+    : Tank(parent, wxNullColour, level, maxLevel, name)
 {
     this->t1 = t1;
     this->t2 = t2;
     this->lvl_c1 = this->lvl_c2 = 0;
-    this->btnColor->Enable(false);
 }
 
 void TankMix::SetLevel(float qty_c1, float qty_c2)
@@ -58,46 +57,65 @@ float TankMix::Percent(int ink)
     return -1;
 }
 
-Tank::Tank(wxWindow *parent, wxColour color, float level, float maxLevel) : wxPanel(parent)
+Tank::Tank(wxWindow *parent, wxColour color, float level, float maxLevel, wxString name) : wxPanel(parent)
 {
     this->level = level;
     this->maxLevel = maxLevel;
 
+    wxString path = "Images/Site/" + name + "/";
+
+	bmpTop = new wxStaticBitmap( this, wxID_ANY, wxBitmap( path + "top.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bmpLeft = new wxStaticBitmap( this, wxID_ANY, wxBitmap( path + "left.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bmpRight = new wxStaticBitmap( this, wxID_ANY, wxBitmap( path + "right.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bmpMiddle = new wxStaticBitmap( this, wxID_ANY, wxBitmap( path + "middle.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bmpLevelBottom = new wxStaticBitmap( this, wxID_ANY, wxBitmap( path + "level.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bmpTkLeft = new wxStaticBitmap( this, wxID_ANY, wxBitmap( "Images/Site/tkleft.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+    bmpTkRight = new wxStaticBitmap( this, wxID_ANY, wxBitmap( "Images/Site/tkright.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+
+    lblLevel = new wxStaticText( this, wxID_ANY, _("Level: 0%"), wxDefaultPosition, wxSize( 95,17 ), 0 );
+
     this->btnColor = new ColorSelect(this, wxSize(115, -1), color);
+    this->btnColor->Enable(false);
 
 	this->btnLevel = new wxButton(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 | wxNO_BORDER);
 	this->btnLevel->SetMinSize(wxSize(26, 0));
 	this->btnLevel->SetBackgroundColour(color);
 
-	this->lblLevel = new wxStaticText(this, wxID_ANY, _("Nível:") + " 0.00%", wxDefaultPosition, wxSize(105, -1), 5);
 
-	this->tankTop    = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TANK_TOP), wxDefaultPosition, wxDefaultSize, 0);
-    this->tankBottom = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TANK_BOTTOM), wxDefaultPosition, wxDefaultSize, 0);
-    this->tankLeft   = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TANK_LEFT), wxDefaultPosition, wxDefaultSize, 0);
-	this->tankRight  = new wxStaticBitmap(this, wxID_ANY, wxBITMAP(TANK_RIGHT), wxDefaultPosition, wxDefaultSize, 0);
+    wxFlexGridSizer *levelCont = new wxFlexGridSizer(1, 3, 0, 0);
+    levelCont->SetFlexibleDirection(wxBOTH);
+	levelCont->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-
-	wxFlexGridSizer *container_ins = new wxFlexGridSizer(1, 3, 0, 0);
-	container_ins->SetFlexibleDirection(wxBOTH);
-	container_ins->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-
-	container_ins->Add(this->tankLeft, 0, wxALIGN_BOTTOM | wxALL, 0);
-	container_ins->Add(this->btnLevel, 0, wxALIGN_BOTTOM | wxALL, 0);
-	container_ins->Add(this->tankRight, 0, wxALIGN_BOTTOM | wxALL, 0);
+	levelCont->Add( bmpLeft, 0, wxALL, 0 );
+	levelCont->Add( lblLevel, 0, wxALL, 2 );
+	levelCont->Add( bmpRight, 0, wxALL, 0 );
 
 
+	wxFlexGridSizer *tank = new wxFlexGridSizer(1, 3, 0, 0);
+    tank->SetFlexibleDirection(wxBOTH);
+	tank->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    wxFlexGridSizer* container = new wxFlexGridSizer(6, 1, 0, 0);
-	container->SetFlexibleDirection(wxBOTH);
+    tank->Add( bmpTkLeft, 0, wxALL, 0 );
+	tank->Add( btnLevel, 0, wxALL, 0 );
+	tank->Add( bmpTkRight, 0, wxALL, 0 );
+
+
+    wxFlexGridSizer *container = new wxFlexGridSizer(7, 1, 0, 0);
+    container->SetFlexibleDirection(wxBOTH);
 	container->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    // Espaço de 25 pixels na parte de cima do container
-	container->Add(0, 25, 1, wxEXPAND, 5);
-    container->Add(this->btnColor, 0, wxALL, 0);
-	container->Add(this->lblLevel, 0, wxALL, 5);
-	container->Add(this->tankTop, 0, wxALIGN_BOTTOM | wxALL, 0);
-	container->Add(container_ins, 1, wxEXPAND, 0);
-    container->Add(this->tankBottom, 0, wxALIGN_BOTTOM | wxALL, 0);
+    container->Add( bmpTop, 0, wxALL, 0 );
+    container->Add( levelCont, 0, wxALL, 0 );
+    container->Add( bmpLevelBottom, 0, wxALL, 0 );
+    container->Add( btnColor, 0, wxALL, 0 );
+    container->Add( bmpMiddle, 0, wxALL, 0 );
+    container->Add( tank, 0, wxALL, 0 );
+
+    if (wxFileExists(path + "bottom.bmp"))
+    {
+        bmpBottom = new wxStaticBitmap( this, wxID_ANY, wxBitmap( path + "bottom.bmp", wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+        container->Add( bmpBottom, 0, wxALL, 0 );
+    }
 
     this->SetSizer(container);
     this->Layout();

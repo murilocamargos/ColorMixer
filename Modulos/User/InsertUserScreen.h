@@ -31,7 +31,6 @@ protected:
     wxTextCtrl* inputPassword;
     wxStaticText* labelPasswordAgain;
     wxTextCtrl* inputPasswordAgain;
-    wxButton* buttonCancel;
     wxButton* buttonSave;
 
 public:

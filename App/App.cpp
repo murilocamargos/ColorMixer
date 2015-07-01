@@ -4,40 +4,27 @@
 #include "../Modulos/Login/LoginScreen.h"
 #include "Site.h"
 
-
-#include "../Modulos/Log/LogScreen.h"
-
 IMPLEMENT_APP(App)
 
 bool App::OnInit()
 {
     this->SetLocale(this->LoadLang());
 
-    /*
     ///SplashScreen
     SplashScreen *splash = new SplashScreen();
     splash->LoadImage(wxBITMAP(SPLBMP));
     splash->SetTime(2000);
     splash->Show();
-    */
-    /*
+
     /// Tela de login
     LoginScreen *login = new LoginScreen(_("Login"), this);
 
-    login->SetIcon(wxICON(LOGIN_IC));
+    login->SetIcon(wxICON(LOGIN_ICON));
     login->Show(TRUE);
 
     SetTopWindow(login);
-    */
 
-    this->OpenFrame("1", wxLANGUAGE_PORTUGUESE);
-    /*LogScreen *frame = new LogScreen(NULL, wxID_ANY, _("Log"));
-    frame->SetIcon(wxICON(LOG_ICON));
-    frame->Show(TRUE);
-    SetTopWindow(frame);
-    */
     return true;
-
 }
 
 int App::OnExit()
@@ -85,7 +72,6 @@ bool App::OpenFrame(std::string uid, long lang)
     Site *frame = new Site(_("ColorMixer"), this, uid);
     frame->SetIcon(wxICON(APP_ICON));
     frame->Show(TRUE);
-    frame->Maximize();
 
     SetTopWindow(frame);
 

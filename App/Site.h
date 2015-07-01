@@ -16,7 +16,7 @@ private:
     wxApp *app;
     Config *cnf;
     std::string uid;
-
+    std::map<std::string, std::string> user_info;
 protected:
     wxStaticBitmap *leftPipe_valvIn1;
     wxStaticBitmap *rightPipe_valvIn1;

@@ -15,6 +15,8 @@ private:
     std::map<std::string, std::string> levels;
     std::string uid;
     bool flag;//true para deletar o login antigo e false para apenas salvar;
+    wxString name;
+    wxString login;
 protected:
     wxStaticText* labelName;
     wxTextCtrl* inputName;

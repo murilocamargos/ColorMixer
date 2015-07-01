@@ -13,9 +13,16 @@ END_EVENT_TABLE()
 InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool flag, const wxString& name, const wxString& login, wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
     this->uid = uid;
-    this->levels["1"] = _("Admin");
-    this->levels["2"] = _("Manager");
-    this->levels["3"] = _("User");
+    this->flag = flag;
+    if(uid == "1")
+    {
+        this->levels["1"] = _("Admin");
+        this->levels["2"] = _("User");
+    }
+    else
+    {
+        this->levels["1"] = _("User");
+    }
 
     this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
@@ -26,7 +33,7 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     labelName->Wrap( -1 );
     bSizer1->Add( labelName, 0, wxALL, 10 );
 
-    inputName = new wxTextCtrl( this, wxID_ANY, name, wxDefaultPosition, wxSize( 371,-1 ), 0 );
+    inputName = new wxTextCtrl( this, wxID_ANY, name, wxDefaultPosition, wxSize( 371,-1 ), 0, wxTextValidator(wxFILTER_ALPHA));
     bSizer1->Add( inputName, 0, wxALL, 10 );
 
     wxGridSizer* gSizer1;
@@ -39,7 +46,10 @@ InsertUserScreen::InsertUserScreen( std::string uid, const wxString& title, bool
     labelLogin->Wrap( -1 );
     bSizer2->Add( labelLogin, 0, wxALL, 10 );
 
-    inputLogin = new wxTextCtrl( this, wxID_ANY, login, wxDefaultPosition, wxSize( 175,-1 ), 0 );
+    wxTextValidator text_v(wxFILTER_EMPTY|wxFILTER_EXCLUDE_CHAR_LIST);
+    text_v.SetCharExcludes(" ");
+
+    inputLogin = new wxTextCtrl( this, wxID_ANY, login, wxDefaultPosition, wxSize( 175,-1 ), 0, text_v);
     bSizer2->Add( inputLogin, 0, wxALL, 10 );
 
 
@@ -137,13 +147,13 @@ void InsertUserScreen::Save(wxCommandEvent& event)
     std::string passwd2 = std::string(this->inputPasswordAgain->GetLineText(0).mb_str());
     std::string level = "1";
 
-    if(flag) //true para deletar antigo;
+    if(flag)//Deletar antigo, caso haja
     {
         sql ->Table("usuarios")
             ->Where("login", login);
         db->Exec(sql->Delete());
-    }
 
+    }
     for (std::map<std::string, std::string>::iterator it = this->levels.begin(); it != this->levels.end(); ++it)
     {
         if (it->second == inputLevel->GetValue())
@@ -174,22 +184,41 @@ void InsertUserScreen::Save(wxCommandEvent& event)
     else
     {
         std::string aux;
-        aux = "User created:" + login;
-        new Log("1", this->uid, aux);
+        aux = login;
+        if(flag)//editando
+        {
+            new Log("2", this->uid, aux);
 
-        sql = new SQLHandler();
-        sql->Table("usuarios")
-        ->Set("nome", name)
-        ->Set("login", login)
-        ->Set("senha", sha256(passwd))
-        ->Set("criado_em", Log::DateTimeNow())
-        ->Set("editado_em", Log::DateTimeNow())
-        ->Set("criado_por", this->uid)
-        ->Set("editado_por", this->uid)
-        ->Set("nivel", level);
+            sql = new SQLHandler();
+            sql->Table("usuarios")
+            ->Set("nome", name)
+            ->Set("login", login)
+            ->Set("senha", sha256(passwd))
+            ->Set("criado_em", Log::DateTimeNow())
+            ->Set("editado_em", Log::DateTimeNow())
+            ->Set("criado_por", this->uid)
+            ->Set("editado_por", this->uid)
+            ->Set("nivel", level);
 
-        db->Exec(sql->Insert());
+            db->Exec(sql->Insert());
+        }
+        else
+        {
+            new Log("1", this->uid, aux);
 
+            sql = new SQLHandler();
+            sql->Table("usuarios")
+            ->Set("nome", name)
+            ->Set("login", login)
+            ->Set("senha", sha256(passwd))
+            ->Set("criado_em", Log::DateTimeNow())
+            ->Set("editado_em", Log::DateTimeNow())
+            ->Set("criado_por", this->uid)
+            ->Set("editado_por", this->uid)
+            ->Set("nivel", level);
+
+            db->Exec(sql->Insert());
+        }
         wxMessageDialog dlg(this, _("The user was registered with success!"), _("Success"), wxICON_INFORMATION);
         dlg.ShowModal();
         Close(true);

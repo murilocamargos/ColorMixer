@@ -29,6 +29,7 @@ private:
         std::string uid = "";//User ID
         std::string ual = "";//User Acess Level
         std::string ulogin = "";//User Login
+        std::string Uid;
 protected:
 		wxStaticText* m_staticText2;
 		wxChoice* choice_id;
@@ -45,12 +46,12 @@ protected:
 		wxChoice* choice3;
 		wxStaticText* m_staticText2111;
 		wxChoice* choice_al;
-		wxChoice* acess_level;
+		wxChoice* access_level;
 		wxChoice* choice4;
 		wxStaticText* m_staticText22;
 		wxChoice* choice_ri;
 		wxDatePickerCtrl* rdate;
-		wxDatePickerCtrl* m_datePicker2;
+		wxDatePickerCtrl* rdate2;
 		wxDataViewListCtrl* users_result;
 		wxButton* sea;
 		wxButton* del;
@@ -59,7 +60,7 @@ protected:
 
 public:
     //Os botões 'Edit' e 'Delete' são habilitados por padrão
-    SearchUserScreen( wxWindow* parent, wxWindowID id = wxID_ANY, bool btn_e = true, bool btn_d = true, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 913,464 ), long style = wxDEFAULT_DIALOG_STYLE );
+    SearchUserScreen( wxWindow* parent,std::string uid, wxWindowID id = wxID_ANY, bool btn_e = true, bool btn_d = true, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 913,464 ), long style = wxDEFAULT_DIALOG_STYLE );
     ~SearchUserScreen();
 
     void Search(wxCommandEvent& event);
@@ -68,6 +69,7 @@ public:
     void Cancel(wxCommandEvent& event);
 
     void Choice_ID(wxCommandEvent& event);
+    void Choice_RDate(wxCommandEvent& event);
     void DataSelected(wxDataViewEvent &event);
 
     enum
@@ -77,6 +79,7 @@ public:
         DEL,
         CANCEL,
         ID,
+        ID2,
         DSC
     };
 

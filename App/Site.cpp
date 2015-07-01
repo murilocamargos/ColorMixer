@@ -6,6 +6,8 @@
 #include "../Modulos/User/SearchUserScreen.h"
 #include "../Modulos/Log/LogScreen.h"
 
+#include <wx/sound.h>
+
 BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_BUTTON(ADVANCE, Site::OnAdvanceTime)
     EVT_BUTTON(INITOPR, Site::OnInitOperation)
@@ -16,7 +18,7 @@ BEGIN_EVENT_TABLE(Site, wxFrame)
     EVT_MENU(MENU_FILE_QUIT, Site::OnMenuFileQuit)
     EVT_MENU(MENU_USER_NEW, Site::OnMenuUserNew)
     EVT_MENU(MENU_USER_EDIT, Site::OnMenuUserEdit)
-    EVT_MENU(MENU_USER_ERASE, Site::OnMenuUserErase)
+    //EVT_MENU(MENU_USER_ERASE, Site::OnMenuUserErase)
     EVT_MENU(MENU_USER_SEARCH, Site::OnMenuUserSearch)
     EVT_MENU(MENU_LOG_VIEW, Site::OnMenuLogView)
     EVT_MENU(MENU_HELP, Site::OnMenuHelp)
@@ -64,8 +66,31 @@ void Site::OnAdvanceTime(wxCommandEvent& event)
         float tinta2 = this->t3->Percent(2) * this->vout3->value/100 * this->cnf->valveMaxFlow;
         this->t3->SetLevel((-1)*MIN(this->t3->lvl_c1, tinta1), (-1)*MIN(this->t3->lvl_c2, tinta2));
     }
-}
+        wxString filename("Controls/alarm.wav");
+    wxSound *music = new wxSound(filename);
+    music->Create(filename);
 
+    wxString tankName("");
+    float perc[3] = { this->t1->level / this->t1->maxLevel,
+                      this->t2->level / this->t2->maxLevel,
+                      this->t3->level / this->t3->maxLevel };
+
+    for (int i = 0; i < 3; i++)
+    {
+        tankName = _("Tank") + " " + wxString::Format("%i", (i+1));
+        if(perc[i] >= 0.85 && perc[i] < 0.95)
+        {
+            wxMessageDialog dlg(this, tankName + _(" is filled with more than 85%!"), _("Warning"), wxICON_ERROR);
+            dlg.ShowModal();
+        }
+        if(perc[i] >= 0.95)
+        {
+            music->Play(filename, wxSOUND_SYNC);
+            wxMessageDialog dlg(this, tankName + _(" is filled with more than 95%!"), _("Warning"), wxICON_ERROR);
+            dlg.ShowModal();
+        }
+    }
+}
 
 Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& pos, const wxSize& size, long style):
     wxFrame((wxFrame*) NULL, wxID_ANY, title, pos, size, style)
@@ -75,6 +100,15 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     this->uid = uid;
     this->cnf = new Config(app);
     this->operation = false;
+
+    // Obtém informações do usuário que fez o login
+    SQLHandler *sql = new SQLHandler();
+    SQLiteHandler *db = new SQLiteHandler();
+
+    sql->Table("usuarios")->Where("user_id", uid);
+    db->Select(sql);
+
+    this->user_info = db->rows[0];
 
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 	this->SetBackgroundColour(wxColour(228, 228, 228));
@@ -101,16 +135,20 @@ Site::Site(const wxString& title, wxApp* app, std::string uid, const wxPoint& po
     this->menu->AddSubMenu(help, MENU_HELP_ABOUT, _("About\tF2"), _("Get to know us better!"));
 
     this->menu->AddSubMenu(settings, MENU_SETTINGS_CONFIG, _("Plant Config.\tf10"), _("Configure the plant variables."));
-    //if usuario atual for gerente
-    //{
-    this->menu->AddMenu(user);
-    this->menu->AddSubMenu(user, MENU_USER_NEW, _("Add User"), _("Add a new user."));
-    this->menu->AddSubMenu(user, MENU_USER_EDIT, _("Edit User"), _("Edit an user."));
-    this->menu->AddSubMenu(user, MENU_USER_ERASE, _("Delete User"), _("Delete an user."));
-    this->menu->AddSubMenu(user, MENU_USER_SEARCH, _("Search User"), _("Search for user."));
-    //}
-    this->menu->AddMenu(logs);
-    this->menu->AddSubMenu(logs, MENU_LOG_VIEW, _("View Logs"), _("View system logs"));
+    if (this->user_info["nivel"] == "1")
+    {
+        this->menu->AddMenu(user);
+        this->menu->AddSubMenu(user, MENU_USER_NEW, _("Add User"), _("Add a new user."));
+        this->menu->AddSubMenu(user, MENU_USER_SEARCH, _("Search User"), _("Search for user."));
+        this->menu->AddMenu(logs);
+        this->menu->AddSubMenu(logs, MENU_LOG_VIEW, _("View Logs"), _("View system logs"));
+
+    }
+    else
+    {
+        this->menu->AddMenu(user);
+        this->menu->AddSubMenu(user, MENU_USER_EDIT, _("Edit User"), _("Edit current user."));
+    }
 
     SetMenuBar(this->menu);
 	//**********
@@ -245,17 +283,25 @@ void Site::OnMenuHelpAbout(wxCommandEvent & event)
 }
 void Site::OnMenuUserNew(wxCommandEvent& event)
 {
-    InsertUserScreen *ins = new InsertUserScreen("1", _("Insert User"),false, wxEmptyString, wxEmptyString, this);
+    InsertUserScreen *ins = new InsertUserScreen(uid, _("Insert User"),false, wxEmptyString, wxEmptyString, this);
     ins->SetIcon(wxICON(ADDUS_IC));
     ins->Show(TRUE);
 }
 void Site::OnMenuUserEdit(wxCommandEvent& event)
 {
-    this->SearchUser(true,false);
-}
-void Site::OnMenuUserErase(wxCommandEvent& event)
-{
-    SearchUser(false,true);
+    SQLHandler *sql = new SQLHandler();
+    SQLiteHandler *db = new SQLiteHandler();
+
+    sql->Table("usuarios")->Where("user_id", uid)->Column("nome")->Column("login");
+    db->Select(sql);
+
+    std::string name = db->rows[0]["nome"];
+    std::string login = db->rows[0]["login"];
+
+    InsertUserScreen *ins = new InsertUserScreen(uid, _("Insert User"), true, name, login, this);//**Falta acess level!
+    ins->SetIcon(wxICON(ADDUS_IC));
+    ins->Show(TRUE);
+    this->Close();
 }
 void Site::OnMenuUserSearch(wxCommandEvent& event)
 {
@@ -269,7 +315,7 @@ void Site::OnMenuLogView(wxCommandEvent& event)
 }
 void Site::SearchUser(bool btn_e,bool btn_d)
 {
-    SearchUserScreen *sea = new SearchUserScreen(this, wxID_ANY, btn_e, btn_d, _("Search User"));
+    SearchUserScreen *sea = new SearchUserScreen(this, uid, wxID_ANY, btn_e, btn_d, _("Search User"));
     sea->SetIcon(wxICON(FIND_ICON));
     sea->Show(TRUE);
 }

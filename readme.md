@@ -4,7 +4,7 @@ Terceiro trabalho prático da disciplina de Projeto Assistido por Computador
 
 Engenharia de Sistemas - Unimontes
 
-Documentação gerada pelo doxygen: http://murilocamargos.bitbucket.org/pac-tpiii
+Documentação gerada pelo doxygen: http://murilocamargos.bitbucket.io/pac-tpiii
 
 Divisão do Trabalho
 ===================
